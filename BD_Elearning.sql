@@ -8,21 +8,21 @@ SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0;
 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='TRADITIONAL,ALLOW_INVALID_DATES';
 
 -- -----------------------------------------------------
--- Schema BD_Elearnig
+-- Schema BD_Elearning
 -- -----------------------------------------------------
 
 -- -----------------------------------------------------
--- Schema BD_Elearnig
+-- Schema BD_Elearning
 -- -----------------------------------------------------
-CREATE SCHEMA IF NOT EXISTS `BD_Elearnig` DEFAULT CHARACTER SET latin1 ;
-USE `BD_Elearnig` ;
+CREATE SCHEMA IF NOT EXISTS `BD_Elearning` DEFAULT CHARACTER SET latin1 ;
+USE `BD_Elearning` ;
 
 -- -----------------------------------------------------
--- Table `BD_Elearnig`.`tb_Genero`
+-- Table `BD_Elearning`.`tb_Genero`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `BD_Elearnig`.`tb_Genero` ;
+DROP TABLE IF EXISTS `BD_Elearning`.`tb_Genero` ;
 
-CREATE TABLE IF NOT EXISTS `BD_Elearnig`.`tb_Genero` (
+CREATE TABLE IF NOT EXISTS `BD_Elearning`.`tb_Genero` (
   `Id_Genero` INT(11) NOT NULL AUTO_INCREMENT,
   `Descripcion` VARCHAR(45) NOT NULL,
   PRIMARY KEY (`Id_Genero`))
@@ -32,11 +32,11 @@ DEFAULT CHARACTER SET = latin1;
 
 
 -- -----------------------------------------------------
--- Table `BD_Elearnig`.`tb_Usuario`
+-- Table `BD_Elearning`.`tb_Usuario`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `BD_Elearnig`.`tb_Usuario` ;
+DROP TABLE IF EXISTS `BD_Elearning`.`tb_Usuario` ;
 
-CREATE TABLE IF NOT EXISTS `BD_Elearnig`.`tb_Usuario` (
+CREATE TABLE IF NOT EXISTS `BD_Elearning`.`tb_Usuario` (
   `Id_Usuario` INT(11) NOT NULL AUTO_INCREMENT,
   `Identificacion` INT(11) NOT NULL,
   `Nombre` VARCHAR(45) NOT NULL,
@@ -54,7 +54,7 @@ CREATE TABLE IF NOT EXISTS `BD_Elearnig`.`tb_Usuario` (
   INDEX `fk_tb_Usuario_01_idx` (`Id_Genero` ASC),
   CONSTRAINT `fk_tb_Usuario_tb_Genero`
     FOREIGN KEY (`Id_Genero`)
-    REFERENCES `BD_Elearnig`.`tb_Genero` (`Id_Genero`)
+    REFERENCES `BD_Elearning`.`tb_Genero` (`Id_Genero`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB
@@ -63,11 +63,11 @@ DEFAULT CHARACTER SET = latin1;
 
 
 -- -----------------------------------------------------
--- Table `BD_Elearnig`.`tb_Tipo_Colaboracion`
+-- Table `BD_Elearning`.`tb_Tipo_Colaboracion`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `BD_Elearnig`.`tb_Tipo_Colaboracion` ;
+DROP TABLE IF EXISTS `BD_Elearning`.`tb_Tipo_Colaboracion` ;
 
-CREATE TABLE IF NOT EXISTS `BD_Elearnig`.`tb_Tipo_Colaboracion` (
+CREATE TABLE IF NOT EXISTS `BD_Elearning`.`tb_Tipo_Colaboracion` (
   `Id_Tipo_Colaboracion` INT(11) NOT NULL AUTO_INCREMENT,
   `Nombre` VARCHAR(45) NOT NULL,
   PRIMARY KEY (`Id_Tipo_Colaboracion`))
@@ -77,11 +77,11 @@ DEFAULT CHARACTER SET = latin1;
 
 
 -- -----------------------------------------------------
--- Table `BD_Elearnig`.`tb_Curso`
+-- Table `BD_Elearning`.`tb_Curso`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `BD_Elearnig`.`tb_Curso` ;
+DROP TABLE IF EXISTS `BD_Elearning`.`tb_Curso` ;
 
-CREATE TABLE IF NOT EXISTS `BD_Elearnig`.`tb_Curso` (
+CREATE TABLE IF NOT EXISTS `BD_Elearning`.`tb_Curso` (
   `Id_Curso` INT NOT NULL AUTO_INCREMENT,
   `Nombre` VARCHAR(45) NOT NULL,
   `Duracion` INT NOT NULL,
@@ -94,11 +94,11 @@ DEFAULT CHARACTER SET = latin1;
 
 
 -- -----------------------------------------------------
--- Table `BD_Elearnig`.`tb_Tarea`
+-- Table `BD_Elearning`.`tb_Tarea`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `BD_Elearnig`.`tb_Tarea` ;
+DROP TABLE IF EXISTS `BD_Elearning`.`tb_Tarea` ;
 
-CREATE TABLE IF NOT EXISTS `BD_Elearnig`.`tb_Tarea` (
+CREATE TABLE IF NOT EXISTS `BD_Elearning`.`tb_Tarea` (
   `Id_Tarea` INT NOT NULL AUTO_INCREMENT,
   `Id_Curso` INT NOT NULL,
   `Descripcion` VARCHAR(300) NOT NULL,
@@ -110,7 +110,7 @@ CREATE TABLE IF NOT EXISTS `BD_Elearnig`.`tb_Tarea` (
   INDEX `fk_tb_Tarea_tb_Curso_idx` (`Id_Curso` ASC),
   CONSTRAINT `fk_tb_Tarea_tb_Curso`
     FOREIGN KEY (`Id_Curso`)
-    REFERENCES `BD_Elearnig`.`tb_Curso` (`Id_Curso`)
+    REFERENCES `BD_Elearning`.`tb_Curso` (`Id_Curso`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB
@@ -119,11 +119,11 @@ DEFAULT CHARACTER SET = latin1;
 
 
 -- -----------------------------------------------------
--- Table `BD_Elearnig`.`tb_Colaboracion`
+-- Table `BD_Elearning`.`tb_Colaboracion`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `BD_Elearnig`.`tb_Colaboracion` ;
+DROP TABLE IF EXISTS `BD_Elearning`.`tb_Colaboracion` ;
 
-CREATE TABLE IF NOT EXISTS `BD_Elearnig`.`tb_Colaboracion` (
+CREATE TABLE IF NOT EXISTS `BD_Elearning`.`tb_Colaboracion` (
   `Id_Colaboracion` INT(11) NOT NULL AUTO_INCREMENT,
   `Id_Usuario` INT(11) NOT NULL,
   `Id_Tipo_Colaboracion` INT(11) NOT NULL,
@@ -139,17 +139,17 @@ CREATE TABLE IF NOT EXISTS `BD_Elearnig`.`tb_Colaboracion` (
   INDEX `fk_tb_Colaboracion_tb_Tarea_idx` (`Id_Tarea` ASC),
   CONSTRAINT `fk_tb_Colaboracion_tb_Usuario`
     FOREIGN KEY (`Id_Usuario`)
-    REFERENCES `BD_Elearnig`.`tb_Usuario` (`Id_Usuario`)
+    REFERENCES `BD_Elearning`.`tb_Usuario` (`Id_Usuario`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_tb_Colaboracion_tb_Tipo_Colaboracion`
     FOREIGN KEY (`Id_Tipo_Colaboracion`)
-    REFERENCES `BD_Elearnig`.`tb_Tipo_Colaboracion` (`Id_Tipo_Colaboracion`)
+    REFERENCES `BD_Elearning`.`tb_Tipo_Colaboracion` (`Id_Tipo_Colaboracion`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_tb_Colaboracion_tb_Tarea`
     FOREIGN KEY (`Id_Tarea`)
-    REFERENCES `BD_Elearnig`.`tb_Tarea` (`Id_Tarea`)
+    REFERENCES `BD_Elearning`.`tb_Tarea` (`Id_Tarea`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB
@@ -158,11 +158,11 @@ DEFAULT CHARACTER SET = latin1;
 
 
 -- -----------------------------------------------------
--- Table `BD_Elearnig`.`tb_Matricula`
+-- Table `BD_Elearning`.`tb_Matricula`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `BD_Elearnig`.`tb_Matricula` ;
+DROP TABLE IF EXISTS `BD_Elearning`.`tb_Matricula` ;
 
-CREATE TABLE IF NOT EXISTS `BD_Elearnig`.`tb_Matricula` (
+CREATE TABLE IF NOT EXISTS `BD_Elearning`.`tb_Matricula` (
   `Id_Matricula` INT(11) NOT NULL AUTO_INCREMENT,
   `Id_Usuario` INT(11) NOT NULL,
   `Id_Curso` INT(11) NOT NULL,
@@ -173,12 +173,12 @@ CREATE TABLE IF NOT EXISTS `BD_Elearnig`.`tb_Matricula` (
   INDEX `fk_tb_Matricula_tb_Curso_idx` (`Id_Curso` ASC),
   CONSTRAINT `fk_tb_Matricula_tb_Usuario`
     FOREIGN KEY (`Id_Usuario`)
-    REFERENCES `BD_Elearnig`.`tb_Usuario` (`Id_Usuario`)
+    REFERENCES `BD_Elearning`.`tb_Usuario` (`Id_Usuario`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_tb_Matricula_tb_Curso`
     FOREIGN KEY (`Id_Curso`)
-    REFERENCES `BD_Elearnig`.`tb_Curso` (`Id_Curso`)
+    REFERENCES `BD_Elearning`.`tb_Curso` (`Id_Curso`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB
@@ -187,11 +187,11 @@ DEFAULT CHARACTER SET = latin1;
 
 
 -- -----------------------------------------------------
--- Table `BD_Elearnig`.`tb_Semana`
+-- Table `BD_Elearning`.`tb_Semana`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `BD_Elearnig`.`tb_Semana` ;
+DROP TABLE IF EXISTS `BD_Elearning`.`tb_Semana` ;
 
-CREATE TABLE IF NOT EXISTS `BD_Elearnig`.`tb_Semana` (
+CREATE TABLE IF NOT EXISTS `BD_Elearning`.`tb_Semana` (
   `Id_Semana` INT NOT NULL AUTO_INCREMENT,
   `Id_Curso` INT NOT NULL,
   `Fecha_Inicio` DATE NOT NULL,
@@ -200,7 +200,7 @@ CREATE TABLE IF NOT EXISTS `BD_Elearnig`.`tb_Semana` (
   INDEX `fk_tb_Semana_tb_Curso_idx` (`Id_Curso` ASC),
   CONSTRAINT `fk_tb_Semana_tb_Curso`
     FOREIGN KEY (`Id_Curso`)
-    REFERENCES `BD_Elearnig`.`tb_Curso` (`Id_Curso`)
+    REFERENCES `BD_Elearning`.`tb_Curso` (`Id_Curso`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB
@@ -209,22 +209,22 @@ DEFAULT CHARACTER SET = latin1;
 
 
 -- -----------------------------------------------------
--- Table `BD_Elearnig`.`tb_Tipo_Recurso`
+-- Table `BD_Elearning`.`tb_Tipo_Recurso`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `BD_Elearnig`.`tb_Tipo_Recurso` ;
+DROP TABLE IF EXISTS `BD_Elearning`.`tb_Tipo_Recurso` ;
 
-CREATE TABLE IF NOT EXISTS `BD_Elearnig`.`tb_Tipo_Recurso` (
+CREATE TABLE IF NOT EXISTS `BD_Elearning`.`tb_Tipo_Recurso` (
   `Id_Tipo_Recurso` INT NOT NULL AUTO_INCREMENT,
   `Nombre` VARCHAR(30) NOT NULL,
   PRIMARY KEY (`Id_Tipo_Recurso`));
 
 
 -- -----------------------------------------------------
--- Table `BD_Elearnig`.`tb_Recurso`
+-- Table `BD_Elearning`.`tb_Recurso`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `BD_Elearnig`.`tb_Recurso` ;
+DROP TABLE IF EXISTS `BD_Elearning`.`tb_Recurso` ;
 
-CREATE TABLE IF NOT EXISTS `BD_Elearnig`.`tb_Recurso` (
+CREATE TABLE IF NOT EXISTS `BD_Elearning`.`tb_Recurso` (
   `Id_Recurso` INT NOT NULL AUTO_INCREMENT,
   `Id_Tipo_Recurso` INT NOT NULL,
   `Recurso_Padre` INT NOT NULL,
@@ -239,7 +239,7 @@ CREATE TABLE IF NOT EXISTS `BD_Elearnig`.`tb_Recurso` (
   INDEX `fk_tb_Recurso_tb_Tipo_Recurso_idx` (`Id_Tipo_Recurso` ASC),
   CONSTRAINT `fk_tb_Recurso_tb_Tipo_Recurso`
     FOREIGN KEY (`Id_Tipo_Recurso`)
-    REFERENCES `BD_Elearnig`.`tb_Tipo_Recurso` (`Id_Tipo_Recurso`)
+    REFERENCES `BD_Elearning`.`tb_Tipo_Recurso` (`Id_Tipo_Recurso`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB
@@ -248,11 +248,11 @@ DEFAULT CHARACTER SET = latin1;
 
 
 -- -----------------------------------------------------
--- Table `BD_Elearnig`.`tb_Rol`
+-- Table `BD_Elearning`.`tb_Rol`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `BD_Elearnig`.`tb_Rol` ;
+DROP TABLE IF EXISTS `BD_Elearning`.`tb_Rol` ;
 
-CREATE TABLE IF NOT EXISTS `BD_Elearnig`.`tb_Rol` (
+CREATE TABLE IF NOT EXISTS `BD_Elearning`.`tb_Rol` (
   `Id_Rol` INT NOT NULL AUTO_INCREMENT,
   `Nombre` VARCHAR(30) NOT NULL,
   `Estado` BIT NOT NULL,
@@ -263,11 +263,11 @@ DEFAULT CHARACTER SET = latin1;
 
 
 -- -----------------------------------------------------
--- Table `BD_Elearnig`.`tb_Usuario_Rol`
+-- Table `BD_Elearning`.`tb_Usuario_Rol`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `BD_Elearnig`.`tb_Usuario_Rol` ;
+DROP TABLE IF EXISTS `BD_Elearning`.`tb_Usuario_Rol` ;
 
-CREATE TABLE IF NOT EXISTS `BD_Elearnig`.`tb_Usuario_Rol` (
+CREATE TABLE IF NOT EXISTS `BD_Elearning`.`tb_Usuario_Rol` (
   `Id_Usuario_Rol` INT NOT NULL AUTO_INCREMENT,
   `Id_Usuario` INT NOT NULL,
   `Id_Rol` INT NOT NULL,
@@ -277,12 +277,12 @@ CREATE TABLE IF NOT EXISTS `BD_Elearnig`.`tb_Usuario_Rol` (
   INDEX `fk_tb_Usuario_Rol_tb_Rol_idx` (`Id_Rol` ASC),
   CONSTRAINT `fk_tb_Usuario_Rol_tb_Usuario`
     FOREIGN KEY (`Id_Usuario`)
-    REFERENCES `BD_Elearnig`.`tb_Usuario` (`Id_Usuario`)
+    REFERENCES `BD_Elearning`.`tb_Usuario` (`Id_Usuario`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_tb_Usuario_Rol_tb_Rol`
     FOREIGN KEY (`Id_Rol`)
-    REFERENCES `BD_Elearnig`.`tb_Rol` (`Id_Rol`)
+    REFERENCES `BD_Elearning`.`tb_Rol` (`Id_Rol`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB
@@ -291,11 +291,11 @@ DEFAULT CHARACTER SET = latin1;
 
 
 -- -----------------------------------------------------
--- Table `BD_Elearnig`.`tb_Curso_Rol`
+-- Table `BD_Elearning`.`tb_Curso_Rol`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `BD_Elearnig`.`tb_Curso_Rol` ;
+DROP TABLE IF EXISTS `BD_Elearning`.`tb_Curso_Rol` ;
 
-CREATE TABLE IF NOT EXISTS `BD_Elearnig`.`tb_Curso_Rol` (
+CREATE TABLE IF NOT EXISTS `BD_Elearning`.`tb_Curso_Rol` (
   `Id_Curso_Rol` INT NOT NULL AUTO_INCREMENT,
   `Id_Rol` INT NOT NULL,
   `Id_Curso` INT NOT NULL,
@@ -304,12 +304,12 @@ CREATE TABLE IF NOT EXISTS `BD_Elearnig`.`tb_Curso_Rol` (
   INDEX `fk_tb_Curso_Rol_tb_Curso_idx` (`Id_Curso` ASC),
   CONSTRAINT `fk_tb_Curso_Rol_tb_Rol`
     FOREIGN KEY (`Id_Rol`)
-    REFERENCES `BD_Elearnig`.`tb_Rol` (`Id_Rol`)
+    REFERENCES `BD_Elearning`.`tb_Rol` (`Id_Rol`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_tb_Curso_Rol_tb_Curso`
     FOREIGN KEY (`Id_Curso`)
-    REFERENCES `BD_Elearnig`.`tb_Curso` (`Id_Curso`)
+    REFERENCES `BD_Elearning`.`tb_Curso` (`Id_Curso`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB
@@ -318,11 +318,11 @@ DEFAULT CHARACTER SET = latin1;
 
 
 -- -----------------------------------------------------
--- Table `BD_Elearnig`.`tb_Recurso_Rol`
+-- Table `BD_Elearning`.`tb_Recurso_Rol`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `BD_Elearnig`.`tb_Recurso_Rol` ;
+DROP TABLE IF EXISTS `BD_Elearning`.`tb_Recurso_Rol` ;
 
-CREATE TABLE IF NOT EXISTS `BD_Elearnig`.`tb_Recurso_Rol` (
+CREATE TABLE IF NOT EXISTS `BD_Elearning`.`tb_Recurso_Rol` (
   `Id_Recurso_Rol` INT NOT NULL AUTO_INCREMENT,
   `Id_Recurso` INT NOT NULL,
   `Id_Rol` INT NOT NULL,
@@ -332,22 +332,22 @@ CREATE TABLE IF NOT EXISTS `BD_Elearnig`.`tb_Recurso_Rol` (
   INDEX `fk_tb_Recurso_Rol_tb_Rol_idx` (`Id_Rol` ASC),
   CONSTRAINT `fk_tb_Recurso_Rol_tb_Recurso`
     FOREIGN KEY (`Id_Recurso`)
-    REFERENCES `BD_Elearnig`.`tb_Recurso` (`Id_Recurso`)
+    REFERENCES `BD_Elearning`.`tb_Recurso` (`Id_Recurso`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_tb_Recurso_Rol_tb_Rol`
     FOREIGN KEY (`Id_Rol`)
-    REFERENCES `BD_Elearnig`.`tb_Rol` (`Id_Rol`)
+    REFERENCES `BD_Elearning`.`tb_Rol` (`Id_Rol`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION);
 
 
 -- -----------------------------------------------------
--- Table `BD_Elearnig`.`tb_Curso_Usuario`
+-- Table `BD_Elearning`.`tb_Curso_Usuario`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `BD_Elearnig`.`tb_Curso_Usuario` ;
+DROP TABLE IF EXISTS `BD_Elearning`.`tb_Curso_Usuario` ;
 
-CREATE TABLE IF NOT EXISTS `BD_Elearnig`.`tb_Curso_Usuario` (
+CREATE TABLE IF NOT EXISTS `BD_Elearning`.`tb_Curso_Usuario` (
   `Id_Curso_Usuario` INT NOT NULL,
   `Id_Curso` INT NOT NULL,
   `Id_Usuario` INT NOT NULL,
@@ -356,12 +356,12 @@ CREATE TABLE IF NOT EXISTS `BD_Elearnig`.`tb_Curso_Usuario` (
   INDEX `fk_tb_Curso_Usuario_tb_Usuario_idx` (`Id_Usuario` ASC),
   CONSTRAINT `fk_tb_Curso_Usuario_tb_Curso`
     FOREIGN KEY (`Id_Curso`)
-    REFERENCES `BD_Elearnig`.`tb_Curso` (`Id_Curso`)
+    REFERENCES `BD_Elearning`.`tb_Curso` (`Id_Curso`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_tb_Curso_Usuario_tb_Usuario`
     FOREIGN KEY (`Id_Usuario`)
-    REFERENCES `BD_Elearnig`.`tb_Usuario` (`Id_Usuario`)
+    REFERENCES `BD_Elearning`.`tb_Usuario` (`Id_Usuario`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;

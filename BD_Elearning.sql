@@ -28,7 +28,8 @@ USE `BD_Elearnig`;
 -- Estructura de tabla para la tabla `tb_Colaboracion`
 --
 
-CREATE TABLE IF NOT EXISTS `tb_Colaboracion` (
+CREATE TABLE IF NOT EXISTS `tb_Colaboracion`
+(
   `Id_Colaboracion` int(11) NOT NULL AUTO_INCREMENT,
   `Id_Usuario` int(11) NOT NULL,
   `Id_Tipo_Colaboracion` int(11) NOT NULL,
@@ -47,7 +48,8 @@ CREATE TABLE IF NOT EXISTS `tb_Colaboracion` (
 -- Estructura de tabla para la tabla `tb_Genero`
 --
 
-CREATE TABLE IF NOT EXISTS `tb_Genero` (
+CREATE TABLE IF NOT EXISTS `tb_Genero`
+(
   `Id_Genero` int(11) NOT NULL AUTO_INCREMENT,
   `Descripcion` varchar(45) NOT NULL,
   PRIMARY KEY (`Id_Genero`)
@@ -59,7 +61,8 @@ CREATE TABLE IF NOT EXISTS `tb_Genero` (
 -- Estructura de tabla para la tabla `tb_Matricula`
 --
 
-CREATE TABLE IF NOT EXISTS `tb_Matricula` (
+CREATE TABLE IF NOT EXISTS `tb_Matricula`
+(
   `Id_Matricula` int(11) NOT NULL AUTO_INCREMENT,
   `Id_Usuario` int(11) NOT NULL,
   `Id_Curso` int(11) NOT NULL,
@@ -74,7 +77,8 @@ CREATE TABLE IF NOT EXISTS `tb_Matricula` (
 -- Estructura de tabla para la tabla `tb_Tipo_Colaboracion`
 --
 
-CREATE TABLE IF NOT EXISTS `tb_Tipo_Colaboracion` (
+CREATE TABLE IF NOT EXISTS `tb_Tipo_Colaboracion`
+(
   `Id_Tipo_Colaboracion` int(11) NOT NULL AUTO_INCREMENT,
   `Nombre` varchar(45) NOT NULL,
   PRIMARY KEY (`Id_Tipo_Colaboracion`)
@@ -86,7 +90,8 @@ CREATE TABLE IF NOT EXISTS `tb_Tipo_Colaboracion` (
 -- Estructura de tabla para la tabla `tb_Usuario`
 --
 
-CREATE TABLE IF NOT EXISTS `tb_Usuario` (
+CREATE TABLE IF NOT EXISTS `tb_Usuario`
+(
   `Id_Usuario` int(11) NOT NULL AUTO_INCREMENT,
   `Identificacion` int(11) NOT NULL,
   `Nombre` varchar(45) NOT NULL,
@@ -135,7 +140,7 @@ CREATE TABLE IF NOT EXISTS `tb_Tarea`
 `Fecha_Entrega` Date NOT NULL,
 `Puntaje` int NOT NULL,
 CONSTRAINT pk_Tarea PRIMARY KEY (Id_Tarea),
-CONSTRAINT fk_Tarea_Curso FOREIGN KEY (Id_Curso) REFERENCES tb_Curso (Id_Curso)
+--CONSTRAINT fk_Tarea_Curso FOREIGN KEY (Id_Curso) REFERENCES tb_Curso (Id_Curso)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
@@ -151,8 +156,22 @@ CREATE TABLE IF NOT EXISTS `tb_Semana`
 `Fecha_Inicio` Date NOT NULL,
 `Fecha_Final` Date NOT NULL,
 CONSTRAINT pk_Semana PRIMARY KEY (Id_Semana),
-CONSTRAINT fk_Semana_Curso FOREIGN KEY (Id_Curso) REFERENCES tb_Curso (Id_Curso)
+--CONSTRAINT fk_Semana_Curso FOREIGN KEY (Id_Curso) REFERENCES tb_Curso (Id_Curso)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `tb_Tipo_Recurso`
+--
+
+CREATE TABLE IF NOT EXISTS `tb_Tipo_Recurso`
+(
+`Id_Tipo_Recurso` int NOT NULL AUTO_INCREMENT,
+`Nombre` varchar(30) NOT NULL,
+
+CONSTRAINT pk_Tipo_Recurso PRIMARY KEY (Id_Tipo_Recurso)
+);
 
 -- --------------------------------------------------------
 
@@ -173,9 +192,78 @@ CREATE TABLE IF NOT EXISTS `tb_Recurso`
 `Estado` bit NOT NULL,
 `Semana` int NOT NULL,
 CONSTRAINT pk_Recurso PRIMARY KEY (Id_Recurso),
-CONSTRAINT fk_Recurso_Tipo_Recurso FOREIGN KEY (Id_Tipo_Recurso) REFERENCES tb_Tipo_Recurso (Id_Tipo_Recurso),
-CONSTRAINT fk_Recurso_Padre FOREIGN KEY (Recurso_Padre) REFERENCES tb_Recurso (Id_Recurso)
+--CONSTRAINT fk_Recurso_Tipo_Recurso FOREIGN KEY (Id_Tipo_Recurso) REFERENCES tb_Tipo_Recurso (Id_Tipo_Recurso),
+--CONSTRAINT fk_Recurso_Padre FOREIGN KEY (Recurso_Padre) REFERENCES tb_Recurso (Id_Recurso)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `tb_Usuario_Rol`
+--
+
+CREATE TABLE IF NOT EXISTS `tb_Usuario_Rol`
+(
+`Id_Usuario_Rol` int NOT NULL AUTO_INCREMENT,
+`Id_Usuario` int NOT NULL,
+`Id_Rol` int NOT NULL,
+`Estado` bit NOT NULL,
+
+CONSTRAINT pk_Usuario_Rol PRIMARY KEY (Id_Usuario_Rol),
+--CONSTRAINT fk_Usuario_Rol FOREIGN KEY (Id_Usuario) REFERENCES tb_Usuario(Id_Usuario),
+--CONSTRAINT fk_Usuario_Rol FOREIGN KEY (Id_Rol) REFERENCES tb_Rol(Id_Rol)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `tb_Curso_Rol`
+--
+
+CREATE TABLE IF NOT EXISTS `tb_Curso_Rol`
+(
+`Id_Curso_Rol` int NOT NULL AUTO_INCREMENT,
+`Id_Rol` int NOT NULL,
+`Id_Curso` int NOT NULL,
+
+CONSTRAINT pk_Curso_Rol PRIMARY KEY (Id_Curso_Rol),
+--CONSTRAINT fk_Curso_Rol1 FOREIGN KEY (Id_Rol) REFERENCES tb_Rol(Id_Rol),
+--CONSTRAINT fk_Curso_Rol2 FOREIGN KEY (Id_Curso) REFERENCES tb_Curso(Id_Curso)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `tb_Rol`
+--
+
+CREATE TABLE IF NOT EXISTS `tb_Rol`
+(
+`Id_Rol` int NOT NULL AUTO_INCREMENT,
+`Nombre` varchar(30) NOT NULL,
+`Estado` bit NOT NULL,
+
+CONSTRAINT pk_Rol PRIMARY KEY (Id_Rol)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `tb_Recurso_Rol`
+--
+
+CREATE TABLE IF NOT EXISTS `tb_Recurso_Rol`
+(
+`Id_Recurso_Rol` int NOT NULL AUTO_INCREMENT,
+`Id_Recurso` int NOT NULL,
+`Id_Rol` int NOT NULL,
+`Estado` bit NOT NULL,
+
+CONSTRAINT pk_Recurso_Rol PRIMARY KEY (Id_Recurso_Rol),
+--CONSTRAINT fk_Recurso_Rol1 FOREIGN KEY (Id_Recurso) REFERENCES tb_Recurso(Id_Recurso),
+--CONSTRAINT fk_Recurso_Rol2 FOREIGN KEY (Id_Rol) REFERENCES tb_Rol(Id_Rol)
+);
+
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;

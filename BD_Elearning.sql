@@ -214,8 +214,8 @@ DEFAULT CHARACTER SET = latin1;
 DROP TABLE IF EXISTS `BD_Elearning`.`tb_Tipo_Recurso` ;
 
 CREATE TABLE IF NOT EXISTS `BD_Elearning`.`tb_Tipo_Recurso` (
-  `Id_Tipo_Recurso` INT NOT NULL AUTO_INCREMENT,
-  `Nombre` VARCHAR(30) NOT NULL,
+  `Id_Tipo_Recurso` INT(10) NOT NULL AUTO_INCREMENT,
+  `Nombre` VARCHAR(100) NOT NULL,
   PRIMARY KEY (`Id_Tipo_Recurso`));
 
 
@@ -225,16 +225,16 @@ CREATE TABLE IF NOT EXISTS `BD_Elearning`.`tb_Tipo_Recurso` (
 DROP TABLE IF EXISTS `BD_Elearning`.`tb_Recurso` ;
 
 CREATE TABLE IF NOT EXISTS `BD_Elearning`.`tb_Recurso` (
-  `Id_Recurso` INT NOT NULL AUTO_INCREMENT,
-  `Id_Tipo_Recurso` INT NOT NULL,
-  `Recurso_Padre` INT NOT NULL,
+  `Id_Recurso` INT(10) NOT NULL AUTO_INCREMENT,
+  `Id_Tipo_Recurso` INT(10) NOT NULL,
+  `Recurso_Padre` INT(10) NOT NULL,
   `Nombre` VARCHAR(30) NOT NULL,
-  `Url` VARCHAR(50) NOT NULL,
-  `Visible` BIT NOT NULL,
-  `Secuencia` INT NOT NULL,
-  `Notas` FLOAT NOT NULL,
+  `Url` VARCHAR(255) NOT NULL,
+  `Visible` INT(10) NOT NULL,
+  `Secuencia` INT(10) NOT NULL,
+  `Notas` VARCHAR(100) NOT NULL,
   `Estado` BIT NOT NULL,
-  `Semana` INT NOT NULL,
+  `Semana` INT(10) NOT NULL,
   PRIMARY KEY (`Id_Recurso`),
   INDEX `fk_tb_Recurso_tb_Tipo_Recurso_idx` (`Id_Tipo_Recurso` ASC),
   CONSTRAINT `fk_tb_Recurso_tb_Tipo_Recurso`
@@ -253,7 +253,7 @@ DEFAULT CHARACTER SET = latin1;
 DROP TABLE IF EXISTS `BD_Elearning`.`tb_Rol` ;
 
 CREATE TABLE IF NOT EXISTS `BD_Elearning`.`tb_Rol` (
-  `Id_Rol` INT NOT NULL AUTO_INCREMENT,
+  `Id_Rol` INT(10) NOT NULL AUTO_INCREMENT,
   `Nombre` VARCHAR(30) NOT NULL,
   `Estado` BIT NOT NULL,
   PRIMARY KEY (`Id_Rol`))
@@ -268,9 +268,9 @@ DEFAULT CHARACTER SET = latin1;
 DROP TABLE IF EXISTS `BD_Elearning`.`tb_Usuario_Rol` ;
 
 CREATE TABLE IF NOT EXISTS `BD_Elearning`.`tb_Usuario_Rol` (
-  `Id_Usuario_Rol` INT NOT NULL AUTO_INCREMENT,
-  `Id_Usuario` INT NOT NULL,
-  `Id_Rol` INT NOT NULL,
+  `Id_Usuario_Rol` INT(10) NOT NULL AUTO_INCREMENT,
+  `Id_Usuario` INT(10) NOT NULL,
+  `Id_Rol` INT(10) NOT NULL,
   `Estado` BIT NOT NULL,
   PRIMARY KEY (`Id_Usuario_Rol`),
   INDEX `fk_tb_Usuario_Rol_01_idx` (`Id_Usuario` ASC),
@@ -296,9 +296,9 @@ DEFAULT CHARACTER SET = latin1;
 DROP TABLE IF EXISTS `BD_Elearning`.`tb_Curso_Rol` ;
 
 CREATE TABLE IF NOT EXISTS `BD_Elearning`.`tb_Curso_Rol` (
-  `Id_Curso_Rol` INT NOT NULL AUTO_INCREMENT,
-  `Id_Rol` INT NOT NULL,
-  `Id_Curso` INT NOT NULL,
+  `Id_Curso_Rol` INT(10) NOT NULL AUTO_INCREMENT,
+  `Id_Rol` INT(10) NOT NULL,
+  `Id_Curso` INT(10) NOT NULL,
   PRIMARY KEY (`Id_Curso_Rol`),
   INDEX `fk_tb_Curso_Rol_tb_Rol_idx` (`Id_Rol` ASC),
   INDEX `fk_tb_Curso_Rol_tb_Curso_idx` (`Id_Curso` ASC),
@@ -323,9 +323,9 @@ DEFAULT CHARACTER SET = latin1;
 DROP TABLE IF EXISTS `BD_Elearning`.`tb_Recurso_Rol` ;
 
 CREATE TABLE IF NOT EXISTS `BD_Elearning`.`tb_Recurso_Rol` (
-  `Id_Recurso_Rol` INT NOT NULL AUTO_INCREMENT,
-  `Id_Recurso` INT NOT NULL,
-  `Id_Rol` INT NOT NULL,
+  `Id_Recurso_Rol` INT(10) NOT NULL AUTO_INCREMENT,
+  `Id_Recurso` INT(10) NOT NULL,
+  `Id_Rol` INT(10) NOT NULL,
   `Estado` BIT NOT NULL,
   PRIMARY KEY (`Id_Recurso_Rol`),
   INDEX `fk_tb_Recurso_Rol_tb_Recurso_idx` (`Id_Recurso` ASC),
@@ -348,9 +348,9 @@ CREATE TABLE IF NOT EXISTS `BD_Elearning`.`tb_Recurso_Rol` (
 DROP TABLE IF EXISTS `BD_Elearning`.`tb_Curso_Usuario` ;
 
 CREATE TABLE IF NOT EXISTS `BD_Elearning`.`tb_Curso_Usuario` (
-  `Id_Curso_Usuario` INT NOT NULL,
-  `Id_Curso` INT NOT NULL,
-  `Id_Usuario` INT NOT NULL,
+  `Id_Curso_Usuario` INT(10) NOT NULL,
+  `Id_Curso` INT(10) NOT NULL,
+  `Id_Usuario` INT(10) NOT NULL,
   PRIMARY KEY (`Id_Curso_Usuario`),
   INDEX `fk_tb_Curso_Usuario_tb_Curso_idx` (`Id_Curso` ASC),
   INDEX `fk_tb_Curso_Usuario_tb_Usuario_idx` (`Id_Usuario` ASC),

@@ -37,19 +37,17 @@ DEFAULT CHARACTER SET = latin1;
 DROP TABLE IF EXISTS `BD_Elearning`.`tb_Usuario` ;
 
 CREATE TABLE IF NOT EXISTS `BD_Elearning`.`tb_Usuario` (
-  `Id_Usuario` INT(11) NOT NULL AUTO_INCREMENT,
-  `Identificacion` INT(11) NOT NULL,
-  `Nombre` VARCHAR(45) NOT NULL,
-  `Clave` VARCHAR(45) NOT NULL,
-  `Primer_Apellido` VARCHAR(45) NOT NULL,
-  `Segundo_Apellido` VARCHAR(45) NOT NULL,
-  `Id_Genero` INT(11) NOT NULL,
-  `Pais` VARCHAR(45) NOT NULL,
+  `Id_Usuario` INT(10) NOT NULL AUTO_INCREMENT,
+  `Identificacion` VARCHAR(30) NOT NULL,
+  `Nombre` VARCHAR(250) NOT NULL,
+  `Contraseña` VARCHAR(30) NOT NULL,
+  `Id_Genero` VARCHAR(10) NOT NULL,
+  `Pais` VARCHAR(100) NOT NULL,
   `Fecha_Ultimo_Ingreso` DATE NOT NULL,
-  `Direccion_IP` VARCHAR(45) NOT NULL,
-  `Sistema_Operativo` VARCHAR(45) NOT NULL,
-  `Navegador` VARCHAR(45) NOT NULL,
-  `Lenguaje` VARCHAR(45) NOT NULL,
+  `IP` VARCHAR(12) NOT NULL,
+  `SO` VARCHAR(10) NOT NULL,
+  `Navegador` VARCHAR(20) NOT NULL,
+  `Lenguaje` VARCHAR(10) NOT NULL,
   PRIMARY KEY (`Id_Usuario`),
   INDEX `fk_tb_Usuario_01_idx` (`Id_Genero` ASC),
   CONSTRAINT `fk_tb_Usuario_tb_Genero`
@@ -82,11 +80,12 @@ DEFAULT CHARACTER SET = latin1;
 DROP TABLE IF EXISTS `BD_Elearning`.`tb_Curso` ;
 
 CREATE TABLE IF NOT EXISTS `BD_Elearning`.`tb_Curso` (
-  `Id_Curso` INT NOT NULL AUTO_INCREMENT,
-  `Nombre` VARCHAR(45) NOT NULL,
-  `Duracion` INT NOT NULL,
+  `Id_Curso` INT(10) NOT NULL AUTO_INCREMENT,
+  `Nombre` VARCHAR(30) NOT NULL,
+  `Duracion` INT(10) NOT NULL,
   `Fecha_Inicio` DATE NOT NULL,
   `Fecha_Final` DATE NOT NULL,
+  `Estado` BIT NOT NULL,
   PRIMARY KEY (`Id_Curso`))
 ENGINE = InnoDB
 AUTO_INCREMENT = 1
@@ -163,11 +162,12 @@ DEFAULT CHARACTER SET = latin1;
 DROP TABLE IF EXISTS `BD_Elearning`.`tb_Matricula` ;
 
 CREATE TABLE IF NOT EXISTS `BD_Elearning`.`tb_Matricula` (
-  `Id_Matricula` INT(11) NOT NULL AUTO_INCREMENT,
-  `Id_Usuario` INT(11) NOT NULL,
-  `Id_Curso` INT(11) NOT NULL,
-  `Anio` VARCHAR(45) NOT NULL,
-  `Fecha_Matricula` VARCHAR(45) NOT NULL,
+  `Id_Matricula` INT(10) NOT NULL AUTO_INCREMENT,
+  `Periodo` INT(10) NOT NULL,
+  `Id_Usuario` INT(10) NOT NULL,
+  `Id_Curso` INT(10) NOT NULL,
+  `Anio` DATE NOT NULL,
+  `Fecha_Matricula` DATETIME NOT NULL,
   PRIMARY KEY (`Id_Matricula`),
   INDEX `fk_tb_Matricula_tb_Usuario_idx` (`Id_Usuario` ASC),
   INDEX `fk_tb_Matricula_tb_Curso_idx` (`Id_Curso` ASC),
@@ -192,10 +192,11 @@ DEFAULT CHARACTER SET = latin1;
 DROP TABLE IF EXISTS `BD_Elearning`.`tb_Semana` ;
 
 CREATE TABLE IF NOT EXISTS `BD_Elearning`.`tb_Semana` (
-  `Id_Semana` INT NOT NULL AUTO_INCREMENT,
-  `Id_Curso` INT NOT NULL,
-  `Fecha_Inicio` DATE NOT NULL,
-  `Fecha_Final` DATE NOT NULL,
+  `Id_Semana` INT(10) NOT NULL AUTO_INCREMENT,
+  `Tema` VARCHAR(30) NOT NULL,
+  `Visible` BIT NOT NULL,
+  `Id_Curso` INT(10) NOT NULL,
+  `Estado` BIT NOT NULL,
   PRIMARY KEY (`Id_Semana`),
   INDEX `fk_tb_Semana_tb_Curso_idx` (`Id_Curso` ASC),
   CONSTRAINT `fk_tb_Semana_tb_Curso`

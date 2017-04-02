@@ -6,7 +6,7 @@ CREATE PROCEDURE loginUsuario(IN p_identificacion varchar(30), IN p_Clave varcha
 	FROM bd_elearning.tb_usuario_rol AS UR
 	INNER JOIN bd_elearning.tb_rol AS R ON UR.Id_Rol = R.Id_Rol
 	INNER JOIN bd_elearning.tb_usuario AS U ON UR.Id_Usuario = U.Id_Usuario
-	WHERE U.Identificacion = p_identificacion AND U.Contraseña = p_Clave;
+	WHERE U.Identificacion = p_identificacion AND U.Clave = p_Clave;
  END $$
 DELIMITER ;
 
@@ -22,6 +22,18 @@ DELIMITER ;
 
 
 
+--Agregar Cursos
+INSERT INTO `bd_elearning`.`tb_curso` (`Nombre`, `Duracion`, `Fecha_Inicio`, `Fecha_Final`, `Estado`) 
+VALUES ('Español', '0', '2017-02-06', '2017-06-01', 1);
+
+INSERT INTO `bd_elearning`.`tb_curso` (`Nombre`, `Duracion`, `Fecha_Inicio`, `Fecha_Final`, `Estado`) 
+VALUES ('Inglés', '0', '2017-02-06', '2017-06-01', 1);
+
+--Agregar Genero
+INSERT INTO `bd_elearning`.`tb_genero` (`Id_Genero`, `Descripcion`) VALUES ('1', 'Masculino');
+INSERT INTO `bd_elearning`.`tb_genero` (`Id_Genero`, `Descripcion`) VALUES ('2', 'Femenino');
+
+--Agregar Roles
 INSERT INTO `bd_elearning`.`tb_rol` (`Id_Rol`, `Nombre`, `Estado`) 
 VALUES ('1', 'Administrador', 1);
 
@@ -36,3 +48,12 @@ VALUES ('4', 'Profesor', 1);
 
 INSERT INTO `bd_elearning`.`tb_rol` (`Id_Rol`, `Nombre`, `Estado`) 
 VALUES ('5', 'Estudiante', 1);
+
+--Agregar Usuarios
+INSERT INTO `BD_Elearning`.`tb_Usuario` (`Identificacion`, `Nombre`, `Primer_Apellido`, `Segundo_Apellido`, `Clave`, `Id_Genero`, `Pais`, `Fecha_Ultimo_Ingreso`, `IP`, `SO`, `Navegador`, `Lenguaje`) 
+VALUES ('1', 'Osvaldo', 'Aguero', 'Perez', '1', '1', 'Costa Rica', '2017-01-01', '1.1.1.1', 'Windows', 'Explorer', 'L1');
+
+
+--Asociar Usuarios con Roles
+INSERT INTO `bd_elearning`.`tb_usuario_rol` (`Id_Usuario_Rol`, `Id_Usuario`, `Id_Rol`, `Estado`) 
+VALUES ('1', '1', '1',  1);

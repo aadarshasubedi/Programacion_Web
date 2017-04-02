@@ -40,6 +40,8 @@ CREATE TABLE IF NOT EXISTS `BD_Elearning`.`tb_Usuario` (
   `Id_Usuario` INT(10) NOT NULL AUTO_INCREMENT,
   `Identificacion` VARCHAR(30) NOT NULL,
   `Nombre` VARCHAR(250) NOT NULL,
+  `Primer_Apellido` VARCHAR(250) NOT NULL,
+  `Segundo_Apellido` VARCHAR(250) NOT NULL,
   `Clave` VARCHAR(30) NOT NULL,
   `Id_Genero` INT(10) NOT NULL,
   `Pais` VARCHAR(100) NOT NULL,

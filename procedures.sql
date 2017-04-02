@@ -20,6 +20,40 @@ CREATE PROCEDURE agregar_Curso(IN p_nombre varchar(30), IN p_Fecha_Inicio date, 
 DELIMITER ;
 
 
+DROP PROCEDURE IF EXISTS actualizarUsuario;
+DELIMITER $$
+CREATE PROCEDURE actualizarUsuario
+(
+IN p_Nombre VARCHAR(250), 
+IN p_Primer_Apellido VARCHAR(250), 
+IN p_Segundo_Apellido VARCHAR(250), 
+IN p_Clave VARCHAR(30), 
+IN p_Id_Genero INT(10), 
+IN p_Pais VARCHAR(100), 
+IN P_Fecha_Ultimo_Ingreso DATE, 
+IN p_IP VARCHAR(20), 
+IN p_SO VARCHAR(255), 
+IN p_Navegador VARCHAR(255), 
+IN p_Lenguaje VARCHAR(255), 
+IN p_Id_Usuario INT(10)
+)
+ BEGIN
+ UPDATE bd_elearning.tb_usuario
+ SET 
+ Nombre = p_Nombre, 
+ Primer_Apellido = p_Primer_Apellido, 
+ Segundo_Apellido = p_Segundo_Apellido, 
+ Clave = p_Clave,
+ Id_Genero = p_Id_Genero, 
+ Pais = p_Pais, 
+ Fecha_Ultimo_Ingreso = P_Fecha_Ultimo_Ingreso, 
+ IP = p_IP, 
+ SO = p_SO, 
+ Navegador = p_Navegador, 
+ Lenguaje = p_Lenguaje 
+ WHERE Id_Usuario = p_Id_Usuario;
+ END $$
+DELIMITER ;
 
 
 --Agregar Cursos

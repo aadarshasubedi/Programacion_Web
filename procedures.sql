@@ -158,7 +158,7 @@ DELIMITER ;
 /* INSERTAR USUARIO */
 DROP PROCEDURE IF EXISTS pr_insertarUsuario;
 DELIMITER $$
-CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_insertarUsuario`(
+CREATE DEFINER=`root`@`localhost` PROCEDURE `pr_insertarUsuario`(
 	IN p_Id_Usuario           INT(11),
 	IN p_Nombre               VARCHAR(250),
 	IN p_Primer_Apellido      VARCHAR(45),
@@ -205,11 +205,12 @@ BEGIN
 		            Id_Usuario, 
 					Id_Rol, 
 					Estado)
-		VALUES (pi_Id_Usuario, 
-		        pi_Id_Rol, 1);
+		VALUES (p_Id_Usuario, 
+		        p_Id_Rol, 1);
 	COMMIT;
 END $$
 DELIMITER ;
+
 
 /* ELIMINAR USUARIO */
 DROP PROCEDURE IF EXISTS pr_eliminarUsuario;
@@ -218,12 +219,16 @@ CREATE PROCEDURE pr_eliminarUsuario
 (
 	IN p_IdUsuario INT(11)
 )
+
 BEGIN
 	START TRANSACTION;
     	SET AUTOCOMMIT = 0;
-		DELETE 
-		FROM	tb_Usuario
-		WHERE	Id_Usuario = pi_IdUsuario;
+                       
+		DELETE FROM bd_elearning.tb_usuario_rol WHERE Id_Usuario = p_IdUsuario;
+        
+        DELETE FROM bd_elearning.tb_usuario 
+        WHERE Id_Usuario = p_IdUsuario;
+        
 	COMMIT;
 END $$
 DELIMITER ;

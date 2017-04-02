@@ -1,6 +1,6 @@
 <?php
 
-include 'IUsuario.php';
+include 'ICurso.php';
 
 class DAO_Usuario implements IUsuario {
 

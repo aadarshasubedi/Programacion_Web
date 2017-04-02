@@ -128,9 +128,9 @@ VALUES ('1', '1', '1',  1);
  */
 
 /* OBTENER INFORMACION USUARIO */
-DROP PROCEDURE IF EXISTS pr_obtenetInformacion;
+DROP PROCEDURE IF EXISTS pr_obtenerInformacion;
 DELIMITER $$
-CREATE PROCEDURE pr_obtenetInformacion 
+CREATE PROCEDURE pr_obtenerInformacion 
 (
 	IN pi_IdUsuario INT(11)
 )

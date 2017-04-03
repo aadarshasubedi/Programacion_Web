@@ -2,7 +2,7 @@
 
 include 'ICurso.php';
 
-class DAO_Usuario implements IUsuario {
+class DAO_Curso implements IICurso {
 
 	private $dtConexion;
 
@@ -10,38 +10,30 @@ class DAO_Usuario implements IUsuario {
         $this -> dtConexion = $_conexion;                
     }
 
-    public function agregar($usuario) {
+    public function agregar($curso) {
         try {
             $conn = $this->dtConexion->abrirConexion();  
 
-            $Id_Usuario = $usuario->getId_Usuario();
-            $Clave = $usuario->getClave();
-            $Id_Genero = $usuario->getId_Genero();
-            $Nombre = $usuario->getNombre();
-            $Primer_Apellido = $usuario->getPrimer_Apellido();
-            $Segundo_Apellido = $usuario->getSegundo_Apellido();
-            $Pais = $usuario->getPais();
-            $Fecha_Ultimo_Ingreso = $usuario->getFecha_Ultimo_Ingreso();
-            $IP = $usuario->getDireccion_Ip();
-            $SO = $usuario->getSistema_Operativo();
-            $Navegador = $usuario->getNavegador();
-            $Lenguaje = $usuario->getLenguaje();
-            $Rol = $usuario->getRol();
+            $Nombre = $curso->getNombre();
+            $Duracion = $curso->getDuracion();
+            $Fecha_Inicio = $curso->getFecha_Inicio();
+            $Fecha_Final = $curso->getFecha_Final();
 
-            $stmt = $conn->prepare('CALL pr_insertarUsuario(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)');
-            $stmt->bindParam(1, $Id_Usuario, PDO::PARAM_STR); 
-            $stmt->bindParam(2, $Nombre, PDO::PARAM_STR);
-            $stmt->bindParam(3, $Primer_Apellido, PDO::PARAM_STR);
-            $stmt->bindParam(4, $Segundo_Apellido, PDO::PARAM_STR);            
-            $stmt->bindParam(5, $Clave, PDO::PARAM_STR);
-            $stmt->bindParam(6, $Id_Genero, PDO::PARAM_INT);
-            $stmt->bindParam(7, $Pais, PDO::PARAM_STR);
-            $stmt->bindParam(8, $Fecha_Ultimo_Ingreso, PDO::PARAM_STR);
-            $stmt->bindParam(9, $IP, PDO::PARAM_STR);
-            $stmt->bindParam(10, $SO, PDO::PARAM_STR);
-            $stmt->bindParam(11, $Navegador, PDO::PARAM_STR);
-            $stmt->bindParam(12, $Lenguaje, PDO::PARAM_STR);
-            $stmt->bindParam(13, $Rol, PDO::PARAM_INT);
+
+  `Nombre` VARCHAR(30),
+  `Duracion` INT(10),
+  `Fecha_Inicio` DATE,
+  `Fecha_Final` DATE,
+
+  `Estado` BIT,
+
+
+            $stmt = $conn->prepare('CALL pr_insertarUsuario(?,?,?,?)');
+            $stmt->bindParam(1, $Id_Usuario, PDO::PARAM_STR);
+            $stmt->bindParam(2, $Id_Usuario, PDO::PARAM_STR);
+            $stmt->bindParam(3, $Id_Usuario, PDO::PARAM_STR);
+            $stmt->bindParam(4, $Id_Usuario, PDO::PARAM_STR);
+
             $stmt->execute();
 
             return true;

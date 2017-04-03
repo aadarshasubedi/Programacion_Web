@@ -1,5 +1,5 @@
 /*Agregar Cursos*/
-INSERT INTO `bd_elearning`.`tb_curso` (`Nombre`, `Duracion`, `Fecha_Inicio`, `Fecha_Final`, `Estado`) 
+INSERT INTO `bd_elearning`.`tb_curso` (`Nombre`, `Duracion`, `Fecha_Inicio`, `Fecha_Final`) 
 VALUES ('Español', '0', '2017-02-06', '2017-06-01');
 
 /*Agregar Genero*/

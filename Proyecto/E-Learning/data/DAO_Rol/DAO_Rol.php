@@ -1,8 +1,8 @@
 <?php
 
-include 'ICurso.php';
+include 'IRol.php';
 
-class DAO_Curso implements ICurso {
+class DAO_Rol implements IRol {
 
 	private $dtConexion;
 

@@ -2,7 +2,7 @@
 
 include 'ICurso.php';
 
-class DAO_Curso implements IICurso {
+class DAO_Curso implements ICurso {
 
 	private $dtConexion;
 
@@ -15,24 +15,13 @@ class DAO_Curso implements IICurso {
             $conn = $this->dtConexion->abrirConexion();  
 
             $Nombre = $curso->getNombre();
-            $Duracion = $curso->getDuracion();
             $Fecha_Inicio = $curso->getFecha_Inicio();
             $Fecha_Final = $curso->getFecha_Final();
 
-
-  `Nombre` VARCHAR(30),
-  `Duracion` INT(10),
-  `Fecha_Inicio` DATE,
-  `Fecha_Final` DATE,
-
-  `Estado` BIT,
-
-
-            $stmt = $conn->prepare('CALL pr_insertarUsuario(?,?,?,?)');
-            $stmt->bindParam(1, $Id_Usuario, PDO::PARAM_STR);
-            $stmt->bindParam(2, $Id_Usuario, PDO::PARAM_STR);
-            $stmt->bindParam(3, $Id_Usuario, PDO::PARAM_STR);
-            $stmt->bindParam(4, $Id_Usuario, PDO::PARAM_STR);
+            $stmt = $conn->prepare('CALL pr_agregar_Curso(?,?,?)');
+            $stmt->bindParam(1, $Nombre, PDO::PARAM_STR);
+            $stmt->bindParam(2, $Fecha_Inicio, PDO::PARAM_STR);
+            $stmt->bindParam(3, $Fecha_Final, PDO::PARAM_STR);
 
             $stmt->execute();
 
@@ -44,37 +33,21 @@ class DAO_Curso implements IICurso {
         } 
     }
 
-    public function modificar($usuario) {
+    public function modificar($curso) {
         try {
             $conn = $this->dtConexion->abrirConexion();  
 
-            $Id_Usuario = $usuario->getId_Usuario();
-            $Nombre = $usuario->getNombre();
-            $Primer_Apellido = $usuario->getPrimer_Apellido();
-            $Segundo_Apellido = $usuario->getSegundo_Apellido();
-            $Clave = $usuario->getClave();
-            $Id_Genero = $usuario->getId_Genero();
-            $Pais = $usuario->getPais();
-            $Fecha_Ultimo_Ingreso = $usuario->getFecha_Ultimo_Ingreso();
-            $Direccion_IP = $usuario->getDireccion_Ip();
-            $Sistema_Operativo = $usuario->getSistema_Operativo();
-            $Navegador = $usuario->getNavegador();
-            $Lenguaje = $usuario->getLenguaje();
+            $Id_Curso = $curso->getId_Curso();
+            $Nombre = $curso->getNombre();
+            $Fecha_Inicio = $curso->getFecha_Inicio();
+            $Fecha_Final = $curso->getFecha_Final();
 
-            $stmt = $conn->prepare('CALL pr_actualizarUsuario(?,?,?,?,?,?,?,?,?,?,?,?)');
-
-            $stmt->bindParam(1, $Nombre, PDO::PARAM_STR);
-            $stmt->bindParam(2, $Primer_Apellido, PDO::PARAM_STR);
-            $stmt->bindParam(3, $Segundo_Apellido, PDO::PARAM_STR);            
-            $stmt->bindParam(4, $Clave, PDO::PARAM_STR);
-            $stmt->bindParam(5, $Id_Genero, PDO::PARAM_INT);
-            $stmt->bindParam(6, $Pais, PDO::PARAM_STR);
-            $stmt->bindParam(7, $Fecha_Ultimo_Ingreso, PDO::PARAM_STR);
-            $stmt->bindParam(8, $Direccion_IP, PDO::PARAM_STR);
-            $stmt->bindParam(9, $Sistema_Operativo, PDO::PARAM_STR);
-            $stmt->bindParam(10, $Navegador, PDO::PARAM_STR);
-            $stmt->bindParam(11, $Lenguaje, PDO::PARAM_STR);
-            $stmt->bindParam(12, $Id_Usuario, PDO::PARAM_INT);        
+            $stmt = $conn->prepare('CALL pr_modificar_Curso(?,?,?,?)');
+            $stmt->bindParam(1, $Id_Curso, PDO::PARAM_STR)
+            $stmt->bindParam(2, $Nombre, PDO::PARAM_STR);
+            $stmt->bindParam(3, $Fecha_Inicio, PDO::PARAM_STR);
+            $stmt->bindParam(4, $Fecha_Final, PDO::PARAM_STR);
+       
             $stmt->execute();
 
             return true;
@@ -85,7 +58,8 @@ class DAO_Curso implements IICurso {
         }
     }
 
-    public function eliminar($Id_Usuario) {
+    //EN PROCESO, TODAVIA NO IMPLEMENTADO PORQUE HAY QUE ELIMINAR PRIMERO EN TODAS LAS TABLAS QUE TIENE RELACION
+    /*public function eliminar($Id_Usuario) {
         try {
             $conn = $this->dtConexion->abrirConexion();
             $stmt = $conn->prepare('CALL pr_eliminarUsuario(?)'); 
@@ -98,36 +72,20 @@ class DAO_Curso implements IICurso {
             echo $e->getMessage();
             return false;
         }
-    }
+    }*/
 
-    public function consultar($Id_Usuario) {
+    
+    public function consultar($Id_Curso) {
         try {
             $conn = $this->dtConexion->abrirConexion(); 
-            $usuario = array();   
-            $stmt = $conn->prepare('SELECT * FROM tb_Usuario WHERE Id_Usuario = ?'); 
-            $stmt->bindParam(1, $Id_Usuario, PDO::PARAM_INT);
+            $curso = array();   
+            $stmt = $conn->prepare('CALL pr_buscarCurso(?)'); 
+            $stmt->bindParam(1, $Id_Curso, PDO::PARAM_INT);
             $stmt->execute();
-            $usuario = $stmt->fetch(PDO::FETCH_ASSOC);  
+            $curso = $stmt->fetch(PDO::FETCH_ASSOC);  
 
             $this->dtConexion->cerrarConexion($conn); 
-            return $usuario;
-        } catch (PDOException $e) {
-            echo $e->getMessage();
-            return false;
-        }        
-    }
-
-    public function consultarModificar($Id_Usuario) {
-        try {
-            $conn = $this->dtConexion->abrirConexion(); 
-            $usuario = array();   
-            $stmt = $conn->prepare('SELECT * FROM tb_Usuario WHERE Id_Usuario = ?'); 
-            $stmt->bindParam(1, $Id_Usuario, PDO::PARAM_INT);
-            $stmt->execute();
-            $usuario = $stmt->fetchALL();  
-
-            $this->dtConexion->cerrarConexion($conn); 
-            return $usuario;
+            return $curso;
         } catch (PDOException $e) {
             echo $e->getMessage();
             return false;
@@ -135,20 +93,19 @@ class DAO_Curso implements IICurso {
     }
 
     public function listar() {
-        try {      
-            $conn = $this->dtConexion->abrirConexion(); 
-            $listaUsuarios = array(); 	
-            $stmt = $conn->prepare('SELECT Id_Usuario, Nombre, Primer_Apellido, Segundo_Apellido 
-                                    FROM tb_Usuario ORDER BY Nombre'); 
-            $stmt->execute();
-            $listaUsuarios = $stmt->fetchALL();
+         try {      
+             $conn = $this->dtConexion->abrirConexion(); 
+             $listaCursos = array(); 
+             $stmt = $conn->prepare('CALL pr_listarCurso()'); 
+             $stmt->execute();
+             $listaCursos = $stmt->fetchALL();
 
-            $this->dtConexion->cerrarConexion($conn);
-            return $listaUsuarios;
-        } catch (PDOException $e) {
-    		echo $e->getMessage();
+             $this->dtConexion->cerrarConexion($conn);
+             return $listaCursos;
+         } catch (PDOException $e) {
+            echo $e->getMessage();
             return false;
-    	}        
+        }        
     }
 }
  

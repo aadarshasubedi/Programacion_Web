@@ -37,7 +37,7 @@ class DAO_Rol implements IRol {
             $Nombre = $rol->getNombre();
             $Estado = $rol->getEstado();
 
-            $stmt = $conn->prepare('CALL pr_modificar_Rol(?,?)');
+            $stmt = $conn->prepare('CALL pr_modificar_Rol(?,?,?)');
             $stmt->bindParam(1, $Id_Rol, PDO::PARAM_STR);
             $stmt->bindParam(2, $Nombre, PDO::PARAM_STR);
             $stmt->bindParam(3, $Estado, PDO::PARAM_STR);
@@ -69,7 +69,7 @@ class DAO_Rol implements IRol {
     }*/
 
     
-    public function consultar($Id_rol) {
+    public function consultar($Id_Rol) {
         try {
             $conn = $this->dtConexion->abrirConexion(); 
             $rol = array();   
@@ -92,7 +92,7 @@ class DAO_Rol implements IRol {
             $listaRoles = array(); 
             $stmt = $conn->prepare('CALL pr_listarRol()'); 
             $stmt->execute();
-            $listarols = $stmt->fetchALL();
+            $listaRoles = $stmt->fetchALL();
 
             $this->dtConexion->cerrarConexion($conn);
             return $listaRoles;

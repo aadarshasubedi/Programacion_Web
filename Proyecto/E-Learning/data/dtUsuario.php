@@ -14,14 +14,12 @@ class dtUsuario{
 		
 		try {
 			$conn = $this->dtConexion->abrirConexion(); 
-			print_r($conn);
 			$usuario = array();   
 			$stmt = $conn->prepare('CALL pr_loginUsuario(?,?)'); 
 			$stmt->bindParam(1, $Identificacion, PDO::PARAM_STR);
 			$stmt->bindParam(2, $Clave, PDO::PARAM_STR);
 			$stmt->execute();
 			$usuario = $stmt->fetch(PDO::FETCH_ASSOC);  
-			print_r($usuario);
 			$this->dtConexion->cerrarConexion($conn); 
 			return $usuario;
 		} catch (PDOException $e) {

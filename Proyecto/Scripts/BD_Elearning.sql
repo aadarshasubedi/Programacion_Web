@@ -222,11 +222,11 @@ CREATE TABLE IF NOT EXISTS `bd_elearning`.`tb_Tipo_Recurso` (
 
 
 -- -----------------------------------------------------
--- Table `bd_elearning`.`tb_Recurso`
+-- Table `bd_elearning`.`tb_recurso`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `bd_elearning`.`tb_Recurso` ;
+DROP TABLE IF EXISTS `bd_elearning`.`tb_recurso` ;
 
-CREATE TABLE IF NOT EXISTS `bd_elearning`.`tb_Recurso` (
+CREATE TABLE IF NOT EXISTS `bd_elearning`.`tb_recurso` (
   `Id_Recurso` INT(10) NOT NULL AUTO_INCREMENT,
   `Id_Tipo_Recurso` INT(10) NOT NULL,
   `Recurso_Padre` INT(10) NOT NULL,
@@ -235,17 +235,22 @@ CREATE TABLE IF NOT EXISTS `bd_elearning`.`tb_Recurso` (
   `Visible` INT(10) NOT NULL,
   `Secuencia` INT(10) NOT NULL,
   `Notas` VARCHAR(100) NOT NULL,
-  `Estado` BIT NOT NULL DEFAULT 1,
+  `Estado` BIT(1) NOT NULL DEFAULT b'1',
   `Semana` INT(10) NOT NULL,
   PRIMARY KEY (`Id_Recurso`),
+  INDEX `fk_tb_Recurso_tb_Recurso_Padre_idx` (`Recurso_Padre` ASC),
   INDEX `fk_tb_Recurso_tb_Tipo_Recurso_idx` (`Id_Tipo_Recurso` ASC),
   CONSTRAINT `fk_tb_Recurso_tb_Tipo_Recurso`
     FOREIGN KEY (`Id_Tipo_Recurso`)
-    REFERENCES `bd_elearning`.`tb_Tipo_Recurso` (`Id_Tipo_Recurso`)
+    REFERENCES `bd_elearning`.`tb_tipo_recurso` (`Id_Tipo_Recurso`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_tb_Recurso_tb_Recurso_Padre`
+    FOREIGN KEY (`Recurso_Padre`)
+    REFERENCES `bd_elearning`.`tb_recurso` (`Id_Recurso`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB
-AUTO_INCREMENT = 1
 DEFAULT CHARACTER SET = latin1;
 
 

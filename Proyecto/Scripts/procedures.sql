@@ -172,6 +172,74 @@ CREATE PROCEDURE pr_actualizarUsuario
  END $$
 DELIMITER ;
 
+/* Rol */
+DROP PROCEDURE IF EXISTS pr_agregar_Rol;
+DELIMITER $$
+CREATE PROCEDURE pr_agregar_Rol
+(
+	IN p_nombre varchar(30)
+)
+ BEGIN
+  	START TRANSACTION;
+    	SET AUTOCOMMIT = 0;
+		INSERT INTO `bd_elearning`.`tb_rol` (`Nombre`) VALUES (p_nombre);
+	COMMIT;
+ END $$
+DELIMITER ;
+
+
+DROP PROCEDURE IF EXISTS pr_modificar_Rol;
+DELIMITER $$
+CREATE PROCEDURE pr_modificar_Rol
+( 
+	IN p_Id_Rol INT(10),
+	IN p_Nombre VARCHAR(30),
+	IN p_Estado  BIT(1)
+)
+ BEGIN
+  	START TRANSACTION;
+    	SET AUTOCOMMIT = 0;
+		UPDATE bd_elearning.tb_rol
+		SET    Nombre = p_Nombre,
+               Estado = p_Estado
+		WHERE  Id_Rol = p_Id_Rol;
+	COMMIT;
+ END $$
+DELIMITER ;
+
+DROP PROCEDURE IF EXISTS pr_listarRol;
+DELIMITER $$
+CREATE PROCEDURE pr_listarRol()
+
+BEGIN
+	START TRANSACTION;
+    	SET AUTOCOMMIT = 0;
+                       
+		SELECT Id_Rol, Nombre, Estado FROM bd_elearning.tb_rol;
+                        
+	COMMIT;
+END $$
+DELIMITER ;
+
+
+DROP PROCEDURE IF EXISTS pr_buscarRol;
+DELIMITER $$
+CREATE PROCEDURE pr_buscarRol
+(
+	IN p_Id_Rol INT(10)
+)
+BEGIN
+	START TRANSACTION;
+    	SET AUTOCOMMIT = 0;
+                       
+		SELECT Id_Rol, Nombre, Estado FROM bd_elearning.tb_rol WHERE Id_Rol = p_Id_Rol;
+                        
+	COMMIT;
+END $$
+DELIMITER ;
+
+/* Rol */
+
 /* 
  * INICIA ROLLER 
  */

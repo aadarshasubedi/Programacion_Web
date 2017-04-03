@@ -10,18 +10,14 @@ class DAO_Rol implements IRol {
         $this -> dtConexion = $_conexion;                
     }
 
-    public function agregar($curso) {
+    public function agregar($rol) {
         try {
             $conn = $this->dtConexion->abrirConexion();  
 
-            $Nombre = $curso->getNombre();
-            $Fecha_Inicio = $curso->getFecha_Inicio();
-            $Fecha_Final = $curso->getFecha_Final();
+            $Nombre = $rol->getNombre();
 
-            $stmt = $conn->prepare('CALL pr_agregar_Curso(?,?,?)');
+            $stmt = $conn->prepare('CALL pr_agregar_Rol(?)');
             $stmt->bindParam(1, $Nombre, PDO::PARAM_STR);
-            $stmt->bindParam(2, $Fecha_Inicio, PDO::PARAM_STR);
-            $stmt->bindParam(3, $Fecha_Final, PDO::PARAM_STR);
 
             $stmt->execute();
 
@@ -33,20 +29,18 @@ class DAO_Rol implements IRol {
         } 
     }
 
-    public function modificar($curso) {
+    public function modificar($Rol) {
         try {
             $conn = $this->dtConexion->abrirConexion();  
 
-            $Id_Curso = $curso->getId_Curso();
-            $Nombre = $curso->getNombre();
-            $Fecha_Inicio = $curso->getFecha_Inicio();
-            $Fecha_Final = $curso->getFecha_Final();
+            $Id_Rol = $rol->getId_Rol();
+            $Nombre = $rol->getNombre();
+            $Estado = $rol->getEstado();
 
-            $stmt = $conn->prepare('CALL pr_modificar_Curso(?,?,?,?)');
-            $stmt->bindParam(1, $Id_Curso, PDO::PARAM_STR);
+            $stmt = $conn->prepare('CALL pr_modificar_Rol(?,?)');
+            $stmt->bindParam(1, $Id_Rol, PDO::PARAM_STR);
             $stmt->bindParam(2, $Nombre, PDO::PARAM_STR);
-            $stmt->bindParam(3, $Fecha_Inicio, PDO::PARAM_STR);
-            $stmt->bindParam(4, $Fecha_Final, PDO::PARAM_STR);
+            $stmt->bindParam(3, $Estado, PDO::PARAM_STR);
        
             $stmt->execute();
 
@@ -75,17 +69,17 @@ class DAO_Rol implements IRol {
     }*/
 
     
-    public function consultar($Id_Curso) {
+    public function consultar($Id_Rol) {
         try {
             $conn = $this->dtConexion->abrirConexion(); 
-            $curso = array();   
-            $stmt = $conn->prepare('CALL pr_buscarCurso(?)'); 
-            $stmt->bindParam(1, $Id_Curso, PDO::PARAM_INT);
+            $rol = array();   
+            $stmt = $conn->prepare('CALL pr_buscarRol(?)'); 
+            $stmt->bindParam(1, $Id_Rol, PDO::PARAM_INT);
             $stmt->execute();
-            $curso = $stmt->fetch(PDO::FETCH_ASSOC);  
+            $Rol = $stmt->fetch(PDO::FETCH_ASSOC);  
 
             $this->dtConexion->cerrarConexion($conn); 
-            return $curso;
+            return $rol;
         } catch (PDOException $e) {
             echo $e->getMessage();
             return false;
@@ -95,13 +89,13 @@ class DAO_Rol implements IRol {
     public function listar() {
          try {      
              $conn = $this->dtConexion->abrirConexion(); 
-             $listaCursos = array(); 
-             $stmt = $conn->prepare('CALL pr_listarCurso()'); 
+             $listaRoles = array(); 
+             $stmt = $conn->prepare('CALL pr_listarRol()'); 
              $stmt->execute();
-             $listaCursos = $stmt->fetchALL();
+             $listaRoles = $stmt->fetchALL();
 
              $this->dtConexion->cerrarConexion($conn);
-             return $listaCursos;
+             return $listaRoles;
          } catch (PDOException $e) {
             echo $e->getMessage();
             return false;

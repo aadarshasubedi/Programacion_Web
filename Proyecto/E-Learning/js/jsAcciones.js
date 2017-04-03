@@ -1,5 +1,14 @@
 function cargarPagina (url) {
-  	$('#contenedor').load(url);
+    $('#contenedor').load(url);
+}
+
+function cargarPaginaDatos (url) {
+    $('#datos').load(url);
+    $("#lista").css("display", "none");
+}
+
+function cargarPaginaListar (url) {
+    $('#lista').load(url);
 }
 
 function home() {

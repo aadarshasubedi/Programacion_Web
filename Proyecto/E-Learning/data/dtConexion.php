@@ -11,7 +11,7 @@ class dtConexion {
 	private function __construct() {
 	    $this -> serverName = "localhost";
 	    $this -> userName = "root";
-	    $this -> password = "1234";
+	    $this -> password = "";
 	    $this -> dbName = "bd_elearning";	    
   	}
 

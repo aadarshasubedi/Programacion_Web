@@ -1,7 +1,7 @@
 <?php 
 header('Content-Type: text/html; charset=ISO-8859-1');
 	
-	class dUsuario {
+	class dCurso {
 
 		private $Id_Curso;
 		private $Nombre;

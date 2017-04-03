@@ -1,19 +1,6 @@
 
 var $Id_UsuarioTemp = "";
 
-function cargarPagina (url) {
-  	$('#contenedor').load(url);
-}
-
-function cargarPaginaDatos (url) {
-  	$('#datos').load(url);
-  	$("#lista").css("display", "none");
-}
-
-function cargarPaginaListar (url) {
-  	$('#lista').load(url);
-}
-
 function paginaModificarUsuario(Id_Usuario){          
     $('#datos').load("../../interface/fUsuarios/fModificarUsuario.php?Id_Usuario="+Id_Usuario);
     $("#lista").css("display", "none");

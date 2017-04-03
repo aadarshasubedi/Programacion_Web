@@ -82,7 +82,7 @@ class DAO_Curso implements ICurso {
             $stmt = $conn->prepare('CALL pr_buscarCurso(?)'); 
             $stmt->bindParam(1, $Id_Curso, PDO::PARAM_INT);
             $stmt->execute();
-            $curso = $stmt->fetch(PDO::FETCH_ASSOC);  
+            $curso = $stmt->fetchALL();  
 
             $this->dtConexion->cerrarConexion($conn); 
             return $curso;
@@ -93,16 +93,16 @@ class DAO_Curso implements ICurso {
     }
 
     public function listar() {
-         try {      
-             $conn = $this->dtConexion->abrirConexion(); 
-             $listaCursos = array(); 
-             $stmt = $conn->prepare('CALL pr_listarCurso()'); 
-             $stmt->execute();
-             $listaCursos = $stmt->fetchALL();
+        try {      
+            $conn = $this->dtConexion->abrirConexion(); 
+            $listaCursos = array(); 
+            $stmt = $conn->prepare('CALL pr_listarCurso()'); 
+            $stmt->execute();
+            $listaCursos = $stmt->fetchALL();
 
-             $this->dtConexion->cerrarConexion($conn);
-             return $listaCursos;
-         } catch (PDOException $e) {
+            $this->dtConexion->cerrarConexion($conn);
+            return $listaCursos;
+        } catch (PDOException $e) {
             echo $e->getMessage();
             return false;
         }        

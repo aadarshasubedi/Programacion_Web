@@ -116,7 +116,7 @@ INSERT INTO `bd_elearning`.`tb_rol` (`Id_Rol`, `Nombre`, `Estado`)
 VALUES ('5', 'Estudiante', 1);
 
 /*Agregar Usuarios*/
-INSERT INTO `BD_Elearning`.`tb_Usuario` (`Id_Usuario`, `Nombre`, `Primer_Apellido`, `Segundo_Apellido`, `Clave`, `Id_Genero`, `Pais`, `Fecha_Ultimo_Ingreso`, `IP`, `SO`, `Navegador`, `Lenguaje`) 
+INSERT INTO `bd_elearning`.`tb_usuario` (`Id_Usuario`, `Nombre`, `Primer_Apellido`, `Segundo_Apellido`, `Clave`, `Id_Genero`, `Pais`, `Fecha_Ultimo_Ingreso`, `IP`, `SO`, `Navegador`, `Lenguaje`) 
 VALUES ('1', 'Osvaldo', 'Aguero', 'Perez', '1', '1', 'Costa Rica', '2017-01-01', '1.1.1.1', 'Windows', 'Explorer', 'L1');
 
 /*Asociar Usuarios con Roles*/
@@ -145,10 +145,10 @@ BEGIN
 				B.Descripcion, 
 				A.Pais,
                 C.Id_Rol
-		FROM	tb_Usuario A 
+		FROM	tb_usuario A 
 				INNER JOIN tb_Genero B ON
 					(A.Id_Genero = B.Id_Genero)
-				INNER JOIN tb_Usuario_Rol C ON
+				INNER JOIN tb_usuario_Rol C ON
 					(A.Id_Usuario = C.Id_Usuario)
 		WHERE	A.Id_Usuario = pi_IdUsuario;
 	COMMIT;
@@ -176,7 +176,7 @@ CREATE DEFINER=`root`@`localhost` PROCEDURE `pr_insertarUsuario`(
 BEGIN
 	START TRANSACTION;
     	SET AUTOCOMMIT = 0;
-		INSERT INTO tb_Usuario (Id_Usuario, 
+		INSERT INTO tb_usuario (Id_Usuario, 
 		                        Nombre, 
 								Primer_Apellido, 
 								Segundo_Apellido, 
@@ -201,7 +201,7 @@ BEGIN
 				p_Navegador, 
 				p_Lenguaje);
 		
-		INSERT INTO tb_Usuario_Rol(
+		INSERT INTO tb_usuario_Rol(
 		            Id_Usuario, 
 					Id_Rol, 
 					Estado)

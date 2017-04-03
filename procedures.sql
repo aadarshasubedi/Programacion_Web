@@ -83,6 +83,61 @@ CREATE PROCEDURE pr_agregar_Curso
  END $$
 DELIMITER ;
 
+DROP PROCEDURE IF EXISTS pr_modificar_Curso;
+DELIMITER $$
+CREATE PROCEDURE pr_modificar_Curso
+(
+	IN p_Id_Curso     INT(10), 
+	IN p_Nombre       VARCHAR(30), 
+	IN p_Fecha_Inicio DATE, 
+	IN p_Fecha_Final  DATE
+)
+ BEGIN
+  	START TRANSACTION;
+    	SET AUTOCOMMIT = 0;
+		UPDATE bd_elearning.tb_curso
+		SET    Nombre = p_Nombre,
+               Duracion = FLOOR(DATEDIFF(DATE(p_Fecha_Final), DATE(p_Fecha_Inicio))/7),
+               Fecha_Inicio = p_Fecha_Inicio,
+               Fecha_Final = p_Fecha_Final
+		WHERE  Id_Curso = p_Id_Curso;
+	COMMIT;
+ END $$
+DELIMITER ;
+
+DROP PROCEDURE IF EXISTS pr_listarCurso;
+DELIMITER $$
+CREATE PROCEDURE pr_listarCurso()
+
+BEGIN
+	START TRANSACTION;
+    	SET AUTOCOMMIT = 0;
+                       
+		SELECT Id_Curso, Nombre, Duracion, Fecha_Inicio, Fecha_Final 
+        FROM bd_elearning.tb_curso;
+                        
+	COMMIT;
+END $$
+DELIMITER ;
+
+
+DROP PROCEDURE IF EXISTS pr_buscarCurso;
+DELIMITER $$
+CREATE PROCEDURE pr_buscarCurso
+(
+	IN p_Id_Curso INT(10)
+)
+BEGIN
+	START TRANSACTION;
+    	SET AUTOCOMMIT = 0;
+                       
+		SELECT Id_Curso, Nombre, Duracion, Fecha_Inicio, Fecha_Final 
+        FROM bd_elearning.tb_curso WHERE Id_Curso = p_Id_Curso;
+                        
+	COMMIT;
+END $$
+DELIMITER ;
+
 DROP PROCEDURE IF EXISTS pr_actualizarUsuario;
 DELIMITER $$
 CREATE PROCEDURE pr_actualizarUsuario

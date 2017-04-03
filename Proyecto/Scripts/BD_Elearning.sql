@@ -86,7 +86,7 @@ CREATE TABLE IF NOT EXISTS `bd_elearning`.`tb_Curso` (
   `Duracion` INT(10) NOT NULL,
   `Fecha_Inicio` DATE NOT NULL,
   `Fecha_Final` DATE NOT NULL,
-  `Estado` BIT NOT NULL,
+  `Estado` BIT NOT NULL DEFAULT 1,
   PRIMARY KEY (`Id_Curso`))
 ENGINE = InnoDB
 AUTO_INCREMENT = 1
@@ -197,7 +197,7 @@ CREATE TABLE IF NOT EXISTS `bd_elearning`.`tb_Semana` (
   `Tema` VARCHAR(30) NOT NULL,
   `Visible` BIT NOT NULL,
   `Id_Curso` INT(10) NOT NULL,
-  `Estado` BIT NOT NULL,
+  `Estado` BIT NOT NULL DEFAULT 1,
   PRIMARY KEY (`Id_Semana`),
   INDEX `fk_tb_Semana_tb_Curso_idx` (`Id_Curso` ASC),
   CONSTRAINT `fk_tb_Semana_tb_Curso`
@@ -235,7 +235,7 @@ CREATE TABLE IF NOT EXISTS `bd_elearning`.`tb_Recurso` (
   `Visible` INT(10) NOT NULL,
   `Secuencia` INT(10) NOT NULL,
   `Notas` VARCHAR(100) NOT NULL,
-  `Estado` BIT NOT NULL,
+  `Estado` BIT NOT NULL DEFAULT 1,
   `Semana` INT(10) NOT NULL,
   PRIMARY KEY (`Id_Recurso`),
   INDEX `fk_tb_Recurso_tb_Tipo_Recurso_idx` (`Id_Tipo_Recurso` ASC),
@@ -257,7 +257,7 @@ DROP TABLE IF EXISTS `bd_elearning`.`tb_Rol` ;
 CREATE TABLE IF NOT EXISTS `bd_elearning`.`tb_Rol` (
   `Id_Rol` INT(10) NOT NULL AUTO_INCREMENT,
   `Nombre` VARCHAR(30) NOT NULL,
-  `Estado` BIT NOT NULL,
+  `Estado` BIT NOT NULL DEFAULT 1, 
   PRIMARY KEY (`Id_Rol`))
 ENGINE = InnoDB
 AUTO_INCREMENT = 1
@@ -273,7 +273,7 @@ CREATE TABLE IF NOT EXISTS `bd_elearning`.`tb_Usuario_Rol` (
   `Id_Usuario_Rol` INT(10) NOT NULL AUTO_INCREMENT,
   `Id_Usuario` INT(10) NOT NULL,
   `Id_Rol` INT(10) NOT NULL,
-  `Estado` BIT NOT NULL,
+  `Estado` BIT NOT NULL DEFAULT 1,
   PRIMARY KEY (`Id_Usuario_Rol`),
   INDEX `fk_tb_Usuario_Rol_01_idx` (`Id_Usuario` ASC),
   INDEX `fk_tb_Usuario_Rol_tb_Rol_idx` (`Id_Rol` ASC),
@@ -328,7 +328,7 @@ CREATE TABLE IF NOT EXISTS `bd_elearning`.`tb_Recurso_Rol` (
   `Id_Recurso_Rol` INT(10) NOT NULL AUTO_INCREMENT,
   `Id_Recurso` INT(10) NOT NULL,
   `Id_Rol` INT(10) NOT NULL,
-  `Estado` BIT NOT NULL,
+  `Estado` BIT NOT NULL DEFAULT 1,
   PRIMARY KEY (`Id_Recurso_Rol`),
   INDEX `fk_tb_Recurso_Rol_tb_Recurso_idx` (`Id_Recurso` ASC),
   INDEX `fk_tb_Recurso_Rol_tb_Rol_idx` (`Id_Rol` ASC),

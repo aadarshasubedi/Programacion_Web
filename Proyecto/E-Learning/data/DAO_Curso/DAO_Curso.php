@@ -43,7 +43,7 @@ class DAO_Curso implements ICurso {
             $Fecha_Final = $curso->getFecha_Final();
 
             $stmt = $conn->prepare('CALL pr_modificar_Curso(?,?,?,?)');
-            $stmt->bindParam(1, $Id_Curso, PDO::PARAM_STR)
+            $stmt->bindParam(1, $Id_Curso, PDO::PARAM_STR);
             $stmt->bindParam(2, $Nombre, PDO::PARAM_STR);
             $stmt->bindParam(3, $Fecha_Inicio, PDO::PARAM_STR);
             $stmt->bindParam(4, $Fecha_Final, PDO::PARAM_STR);

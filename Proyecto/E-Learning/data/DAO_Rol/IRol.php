@@ -1,6 +1,6 @@
 <?php
 
-interface ICurso {
+interface IRol {
     public function agregar($rol);
     public function eliminar($Id_Rol);
     public function modificar($rol);

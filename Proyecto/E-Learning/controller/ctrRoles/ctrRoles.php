@@ -34,7 +34,7 @@
 
 			$dRol->setId_Rol($_POST['Id_Rol']);
 	 		$dRol->setNombre($_POST['Nombre']);
-	 		$dRol->setEstado($_POST['Estado']);
+	 		//$dRol->setEstado($_POST['Estado']);
 		 	
 		 	if($this->BL_daoRol->modificar($dRol)){
 	      		echo 'Se ha modificado el rol correctamente.';

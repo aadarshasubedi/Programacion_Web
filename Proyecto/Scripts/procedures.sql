@@ -199,15 +199,15 @@ DELIMITER $$
 CREATE PROCEDURE pr_modificar_Rol
 ( 
 	IN p_Id_Rol INT(10),
-	IN p_Nombre VARCHAR(30),
-	IN p_Estado  BIT(1)
+	IN p_Nombre VARCHAR(30)/*,
+	IN p_Estado  BIT(1)*/
 )
  BEGIN
   	START TRANSACTION;
     	SET AUTOCOMMIT = 0;
 		UPDATE bd_elearning.tb_rol
-		SET    Nombre = p_Nombre,
-               Estado = p_Estado
+		SET    Nombre = p_Nombre/*,
+               Estado = p_Estado*/
 		WHERE  Id_Rol = p_Id_Rol;
 	COMMIT;
  END $$

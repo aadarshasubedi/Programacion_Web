@@ -35,12 +35,12 @@ class DAO_Rol implements IRol {
 
             $Id_Rol = $rol->getId_Rol();
             $Nombre = $rol->getNombre();
-            $Estado = $rol->getEstado();
+            //$Estado = $rol->getEstado();
 
-            $stmt = $conn->prepare('CALL pr_modificar_Rol(?,?,?)');
+            $stmt = $conn->prepare('CALL pr_modificar_Rol(?,?)');
             $stmt->bindParam(1, $Id_Rol, PDO::PARAM_STR);
             $stmt->bindParam(2, $Nombre, PDO::PARAM_STR);
-            $stmt->bindParam(3, $Estado, PDO::PARAM_STR);
+            //$stmt->bindParam(3, $Estado, PDO::PARAM_STR);
        
             $stmt->execute();
 

@@ -1,7 +1,7 @@
 $Id_RolTemp = "";
 
 $("#informativo").on('hidden.bs.modal', function () {
-    cargarPagina('../../interface/fRol/fGestionRoles.php');
+    cargarPagina('../../interface/fRoles/fGestionRoles.php');
 });
 
 function paginaModificarRol(Id_Rol){          
@@ -58,11 +58,11 @@ function agregarRol(){
             $("#formularioModificarRol").validate({
                 rules: {
                     Nombre: "required",
-                    Estado: "required",
+                    //Estado: "required",
                 }, 
                 messages: {
                     Nombre: "Campo Requerido",
-                    Estado: "Campo Requerido"
+                    //Estado: "Campo Requerido"
                 },
 
                 submitHandler: function(form) {                 

@@ -37,10 +37,10 @@
 						<input type="text" class="form-control" id="Nombre" name="Nombre" placeholder="<?php echo $Nombre; ?>" required value="<?php echo $Nombre; ?>">
 					</div>
 
-					<div class="form-group col-md-4">
+					<!--div class="form-group col-md-4">
 						<label class="sr-only" for="Estado">Estado</label>
 						<input type="text" class="form-control" id="Estado" name="Estado" placeholder="<?php echo $Estado; ?>" required value="<?php echo $Estado; ?>">
-					</div>
+					</div-->
 
 					<div class="form-group text-center col-md-12">
 						<button type="button" class="btn btn-danger" onclick="cargarPagina('../../interface/fRoles/fGestionRoles.php');">Cancelar</button>

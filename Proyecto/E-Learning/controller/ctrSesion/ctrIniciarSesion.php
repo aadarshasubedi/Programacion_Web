@@ -15,9 +15,21 @@
 		header("location: ../../interface/index.php");
 	} else {
 		if($usuario['Rol'] == 'Administrador'){
+
 			$_SESSION['Rol'] = $usuario['Rol'];
+			$_SESSION['Id_Usuario'] = $usuario['Id_Usuario'];
+			$_SESSION['Nombre'] = $usuario['Nombre'];
 			
 			header("location: ../../interface/fAdministrador/indexAdministrador.php");
+
+		} else if($usuario['Rol'] == 'Estudiante'){
+
+			$_SESSION['Rol'] = $usuario['Rol'];
+			$_SESSION['Id_Usuario'] = $usuario['Id_Usuario'];
+			$_SESSION['Nombre'] = $usuario['Nombre'];
+				
+			header("location: ../../interface/fEstudiante/indexEstudiante.php");
+
 		}
 	}
 ?>

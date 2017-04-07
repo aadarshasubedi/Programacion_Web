@@ -156,7 +156,8 @@ CREATE PROCEDURE pr_actualizarUsuario
 	IN p_SO                   VARCHAR(255), 
 	IN p_Navegador            VARCHAR(255), 
 	IN p_Lenguaje             VARCHAR(255), 
-	IN p_Id_Usuario           INT(10)
+	IN p_Id_Usuario           INT(10),
+	IN p_Id_Rol           	  INT(10)
 )
  BEGIN
  	START TRANSACTION;
@@ -174,6 +175,10 @@ CREATE PROCEDURE pr_actualizarUsuario
 			   Navegador = p_Navegador, 
 			   Lenguaje = p_Lenguaje 
 		WHERE  Id_Usuario = p_Id_Usuario;
+		
+		UPDATE bd_elearning.tb_usuario_rol
+        SET	   Id_Rol = p_Id_Rol
+        WHERE  Id_Usuario = p_Id_Usuario;
 	COMMIT;
  END $$
 DELIMITER ;
@@ -267,6 +272,7 @@ BEGIN
 				A.Segundo_Apellido, 
 				B.Descripcion, 
 				A.Pais,
+				A.Id_Genero,
                 C.Id_Rol
 		FROM	tb_Usuario A 
 				INNER JOIN tb_Genero B ON

@@ -1,6 +1,6 @@
 <script src="../../js/jsRoles.js"></script>
 
-<div class="row">
+<div class="row slide">
 
 	<div class="col-md-12">
 		<div class="panel panel-primary">

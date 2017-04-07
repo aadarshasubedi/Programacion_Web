@@ -63,6 +63,7 @@
 	      	$usuario->setSistema_Operativo(PHP_OS);
 	      	$usuario->setNavegador($_SERVER['HTTP_USER_AGENT']);
 	      	$usuario->setLenguaje($_SERVER["HTTP_ACCEPT_LANGUAGE"]);
+	      	$usuario->setRol($_POST['Id_Rol']);
 		 	
 		 	if($this->BL_daoUsuario->modificar($usuario)){
 	      		echo 'Se ha modificado el usuario correctamente.';
@@ -94,7 +95,7 @@
 		 		$dUsuario->setSegundo_Apellido($value['Segundo_Apellido']);
 		 		$dUsuario->setId_Genero($value['Id_Genero']);
 		 		$dUsuario->setPais($value['Pais']);
-		 		//$dUsuario->setRol($value['Id_Rol']);
+		 		$dUsuario->setRol($value['Id_Rol']);
 
 		 		array_push($lista, $dUsuario);
 		 	}

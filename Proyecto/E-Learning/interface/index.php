@@ -9,6 +9,8 @@
 
         if($rol == 'Administrador'){
             header("location: ../interface/fAdministrador/indexAdministrador.php");
+        } else if($rol == 'Estudiante') {
+            header("location: ../interface/fEstudiante/indexEstudiante.php");
         }
     } else {?>
 

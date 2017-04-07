@@ -1,24 +1,19 @@
-<!-- Menu -->
+<!-- Menu --> 
+
   <nav class="navbar navbar-default navbar-fixed-top">
     <div class="container">
 
       <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
         <span class="glyphicon glyphicon-menu-hamburger"></span>                     
       </button>
-      
+
       <div class="navbar-header">
-        <a class="navbar-brand" href="#" onclick="home();">ADMIN.: E-LEARNING</a>
+        <a class="navbar-brand" href="#" onclick="home();">STUDENT.: E-LEARNING</a>
       </div>
 
       <div class="collapse navbar-collapse" id="myNavbar">
-        <ul class="nav navbar-nav navbar-right">
-          
-          <li><a href="#" title="Módulo de Usuarios" onclick="cargarPagina('../../interface/fUsuarios/fGestionUsuarios.php');">Usuarios</a></li>
-          <li><a href="#" title="Módulo de Roles" onclick="cargarPagina('../../interface/fRoles/fGestionRoles.php');">Roles</a></li>
-          <li><a href="#" title="Módulo de Cursos" onclick="cargarPagina('../../interface/fCursos/fGestionCursos.php');">Cursos</a></li>          
-          <li><a href="#" title="Módulo de Recursos" onclick="cargarPagina('../../interface/fRecursos/fGestionRecursos.php');">Recursos</a></li>
-          <li><a href="#" title="Módulo de Matrícula" onclick="cargarPagina('../../interface/fMatriculas/fGestionMatriculas.php');">Matrícula</a></li>
 
+        <ul class="nav navbar-nav navbar-right">
           <li class="dropdown">
             <a class="dropdown-toggle" data-toggle="dropdown" href="#">Perfil
             <span class="glyphicon glyphicon-user"></span></a>
@@ -28,9 +23,20 @@
             </ul>
           </li>
         </ul>
-      </div>
 
+        <ul class="nav navbar-nav navbar-right">
+          <li class="dropdown">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown">Cursos<b class="caret"></b>
+            </a>
+            <ul class="dropdown-menu" style="background-color: #23819C;">
+              <li><a href="#">Curso #1</a></li>
+              <li><a href="#">Curso #2</a></li>
+              <li><a href="#">Curso #3</a></li>
+              <li><a href="#">Curso #4</a></li>
+            </ul>
+          </li>
+        </ul>
+
+      </div>
     </div>
   </nav>
-
-  

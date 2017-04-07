@@ -21,7 +21,7 @@
 	}
 ?>
 
-<div class="row">
+<div class="row slide">
 
 	<div class="col-md-12">
 		<div class="panel panel-primary">
@@ -73,8 +73,8 @@
 						<input type="text" class="form-control" id="Pais" name="Pais" placeholder="<?php echo $Pais; ?>" value="<?php echo $Pais; ?>" required>
 					</div>
 					<div class="form-group col-md-4">
-					<label class="sr-only" for="Id_Genero">Tipo Usuario:</label>
-					   <select class="form-control" name="Id_Genero" id="Id_Genero">
+					<label class="sr-only" for="Id_Rol">Tipo Usuario:</label>
+					   <select class="form-control" name="Id_Rol" id="Id_Rol">
 					   <option value="1" <?php if($Id_Rol == 1){ echo 'selected'; } ?>>Administrador</option>
 					   <option value="2" <?php if($Id_Rol == 2){ echo 'selected'; } ?>>Editor</option>
 					   <option value="3" <?php if($Id_Rol == 3){ echo 'selected'; } ?>>Moderador</option>

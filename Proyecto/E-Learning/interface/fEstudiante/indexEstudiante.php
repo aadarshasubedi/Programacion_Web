@@ -9,9 +9,9 @@
 		$rol = $_SESSION['Rol'];
 
 		if($rol == 'Administrador'){
-			//
-		} else if ($rol == 'Estudiante') {
-            header("location: ../../interface/fEstudiante/indexEstudiante.php");
+            header("location: ../../interface/fAdministrador/indexAdministrador.php");
+        } else if ($rol == 'Estudiante') {
+            //
         } else {
             header("location: ../../interface/index.php");
         }
@@ -40,12 +40,12 @@
   <body id="myPage" data-spy="scroll" data-target=".navbar" data-offset="60">
     
     <!-- Menu -->
-    <?php include '../../interface/complementos/menuAdmin.php'; ?>
+    <?php include '../../interface/complementos/menuStudent.php'; ?>
     
     <!-- Contenedor -->
     <div id="contenedor" class="container-fluid" style="width: 90%; margin: auto; margin-top: 20px;">
         <div class="slide">
-            <h1 class="text-center"><b>E-Learning</b></h1>
+            <h1 class="text-center"><b>E-Learning Student</b></h1>
             <p class="text-justify"><i>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sequi possimus animi esse corporis non eum voluptas dolorum quisquam itaque, pariatur, aut dolor vel culpa quam placeat, ea qui nulla eligendi tenetur nemo nobis minus fuga accusamus. Iste, unde, soluta delectus mollitia, itaque saepe aperiam ullam facere alias officiis iure architecto!</i></p>   
             <p class="text-justify"><i>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eos tenetur velit obcaecati a quam libero error incidunt voluptatibus neque, in quae aut! Labore atque illum mollitia consequatur veritatis quidem id ipsum cumque nemo quisquam, necessitatibus aliquam, error voluptate et inciduntollitia, itaque saepe aperiam ullam.</i></p> 
         </div>

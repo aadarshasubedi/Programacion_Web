@@ -68,8 +68,9 @@ class DAO_Usuario implements IUsuario {
             $Sistema_Operativo = $usuario->getSistema_Operativo();
             $Navegador = $usuario->getNavegador();
             $Lenguaje = $usuario->getLenguaje();
+            $Rol = $usuario->getRol();
 
-            $stmt = $conn->prepare('CALL pr_actualizarUsuario(?,?,?,?,?,?,?,?,?,?,?,?)');
+            $stmt = $conn->prepare('CALL pr_actualizarUsuario(?,?,?,?,?,?,?,?,?,?,?,?,?)');
 
             $stmt->bindParam(1, $Nombre, PDO::PARAM_STR);
             $stmt->bindParam(2, $Primer_Apellido, PDO::PARAM_STR);
@@ -82,7 +83,8 @@ class DAO_Usuario implements IUsuario {
             $stmt->bindParam(9, $Sistema_Operativo, PDO::PARAM_STR);
             $stmt->bindParam(10, $Navegador, PDO::PARAM_STR);
             $stmt->bindParam(11, $Lenguaje, PDO::PARAM_STR);
-            $stmt->bindParam(12, $Id_Usuario, PDO::PARAM_INT);        
+            $stmt->bindParam(12, $Id_Usuario, PDO::PARAM_INT); 
+            $stmt->bindParam(13, $Rol, PDO::PARAM_INT);        
             $stmt->execute();
 
             return true;
@@ -129,7 +131,7 @@ class DAO_Usuario implements IUsuario {
         try {
             $conn = $this->dtConexion->abrirConexion(); 
             $usuario = array();   
-            $stmt = $conn->prepare('SELECT * FROM tb_Usuario WHERE Id_Usuario = ?'); 
+            $stmt = $conn->prepare('CALL pr_obtenerInformacion(?)'); 
             $stmt->bindParam(1, $Id_Usuario, PDO::PARAM_INT);
             $stmt->execute();
             $usuario = $stmt->fetchALL();  

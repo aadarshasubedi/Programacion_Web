@@ -6,7 +6,7 @@
 	$control = new ctrRoles;
 	$lista = $control->listar();
 ?>
-<div class="col-md-12">
+<div class="col-md-12 slide">
 	<?php 
 	if($lista){
 	?>

@@ -16,7 +16,6 @@
           <li><a href="#" title="Módulo de Usuarios" onclick="cargarPagina('../../interface/fUsuarios/fGestionUsuarios.php');">Usuarios</a></li>
           <li><a href="#" title="Módulo de Roles" onclick="cargarPagina('../../interface/fRoles/fGestionRoles.php');">Roles</a></li>
           <li><a href="#" title="Módulo de Cursos" onclick="cargarPagina('../../interface/fCursos/fGestionCursos.php');">Cursos</a></li>          
-          <li><a href="#" title="Módulo de Recursos" onclick="cargarPagina('../../interface/fRecursos/fGestionRecursos.php');">Recursos</a></li>
           <li><a href="#" title="Módulo de Matrícula" onclick="cargarPagina('../../interface/fMatriculas/fGestionMatriculas.php');">Matrícula</a></li>
 
           <li class="dropdown">

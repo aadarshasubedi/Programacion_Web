@@ -34,6 +34,7 @@
 						echo 	"<td>".$curso->getFecha_Final()."</td>";
 
 						/*echo 	"<td style=\"text-align:center;\"><button class=\"btn btn-danger\" type=\"button\" onclick=\"modalEliminarCurso('".$curso->getId_Curso()."')\"><span class='glyphicon glyphicon-trash'></span> Eliminar</button></td>";*/
+						echo 	"<td style=\"text-align:center;\"><button class=\"btn btn-info\" type=\"button\" onclick=\"cargarRecursosCurso('".$curso->getId_Curso()."')\"><span class='glyphicon glyphicon-list-alt'></span> Recursos</button></td>";
 						echo 	"<td style=\"text-align:center;\"><button class=\"btn btn-success\" type=\"button\" onclick=\"paginaModificarCurso('".$curso->getId_Curso()."')\"><span class='glyphicon glyphicon-pencil'></span> Modificar</button></td>";
 						echo "</tr>";
 						

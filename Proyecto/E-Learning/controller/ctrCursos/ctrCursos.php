@@ -55,6 +55,7 @@
 
 		 		$dCurso->setId_Curso($value['Id_Curso']);
 		 		$dCurso->setNombre($value['Nombre']);
+		 		$dCurso->setDuracion($value['Duracion']);
 		 		$dCurso->setFecha_Inicio($value['Fecha_Inicio']);		 		
 		 		$dCurso->setFecha_Final($value['Fecha_Final']);
 

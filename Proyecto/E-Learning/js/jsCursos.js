@@ -1,11 +1,41 @@
 $Id_CursoTemp = "";
 
+$(function() {
+    $("#sortable").sortable({
+        connectWith: ".connectedSortable",
+        remove: function(event, ui) {
+            ui.item.clone().appendTo('#sortable1').val("0");
+            $(this).sortable('cancel');
+        }
+    }).disableSelection();
+
+    $("#sortable1, #sortable2").sortable({
+        
+    }).disableSelection();
+
+    $('#trash').droppable({
+        over: function(event, ui) {
+            if(ui.draggable.val() == 0){
+                eliminar = confirm("¿Deseas eliminar este recurso?");
+                if(eliminar) {
+                    ui.draggable.remove();
+                }
+            }
+        }
+    });
+});
+
 $("#informativo").on('hidden.bs.modal', function () {
     cargarPagina('../../interface/fCursos/fGestionCursos.php');
 });
 
 function paginaModificarCurso(Id_Curso){          
     $('#datos').load("../../interface/fCursos/fModificarCurso.php?Id_Curso="+Id_Curso);
+    $("#lista").css("display", "none");
+}
+
+function cargarRecursosCurso(Id_Curso){          
+    $('#datos').load("../../interface/fCursos/fRecursosCurso.php?Id_Curso="+Id_Curso);
     $("#lista").css("display", "none");
 }
 

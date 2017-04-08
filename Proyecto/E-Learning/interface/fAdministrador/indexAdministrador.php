@@ -36,6 +36,7 @@
     <script src="../../js/jquery.validate.min.js"></script>    
     <script src="../../js/jsPrincipal.js"></script> 
     <script src="../../js/jsAcciones.js"></script>  
+
   </head>
   <body id="myPage" data-spy="scroll" data-target=".navbar" data-offset="60">
     

@@ -9,8 +9,8 @@ $(function() {
         }
     }).disableSelection();
 
-    $("#sortable1, #sortable2").sortable({
-        
+    $("#sortable1, #sortable2, #sortable3").sortable({
+        connectWith: ".SortableSemanas"
     }).disableSelection();
 
     $('#trash').droppable({

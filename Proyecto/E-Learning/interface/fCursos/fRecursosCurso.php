@@ -56,7 +56,7 @@
 			  	<strong>Semana #<?php echo $i ?></strong>
 			</div>
 			<div style="width: 200px;">
-				<ul id="sortable1" class="connectedSortable">
+				<ul id="sortable1" class="connectedSortable SortableSemanas">
 					<li><strong class="ui-state-default ui-state-disabled">Recursos</strong></li>
 		  		</ul>
 	  		</div>	  		

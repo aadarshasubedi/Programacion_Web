@@ -16,9 +16,17 @@
 		public function agregar(){
 			$dCurso = new dCurso;
 
+			$año = date('Y');
 	 		$dCurso->setNombre($_POST['Nombre']);
-	 		$dCurso->setFecha_Inicio($_POST['Fecha_Inicio']);		 		
-	 		$dCurso->setFecha_Final($_POST['Fecha_Final']);
+	 		$periodo = $_POST['Periodo'];
+	 		if($periodo == 1){
+		 		$dCurso->setFecha_Inicio(date($año.'-02-07'));		 		
+		 		$dCurso->setFecha_Final(date($año.'-06-07'));
+		 	}
+		 	else{
+		 		$dCurso->setFecha_Inicio(date($año.'-07-20'));		 		
+		 		$dCurso->setFecha_Final(date($año.'-11-20'));	
+		 	}
 		 	
 		 	if($this->BL_daoCurso->agregar($dCurso)){
 	      		echo 'Se ha ingresado el curso correctamente.';
@@ -55,7 +63,6 @@
 
 		 		$dCurso->setId_Curso($value['Id_Curso']);
 		 		$dCurso->setNombre($value['Nombre']);
-		 		$dCurso->setDuracion($value['Duracion']);
 		 		$dCurso->setFecha_Inicio($value['Fecha_Inicio']);		 		
 		 		$dCurso->setFecha_Final($value['Fecha_Final']);
 

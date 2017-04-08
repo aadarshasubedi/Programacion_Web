@@ -367,7 +367,7 @@ DELIMITER ;
  * FIN ROLLER 
  */
 
- --Matricula
+/*Matricula*/
 DROP PROCEDURE IF EXISTS pr_insertarMatricula;
 DELIMITER $$
 CREATE DEFINER=`root`@`localhost` PROCEDURE `pr_insertarMatricula`(

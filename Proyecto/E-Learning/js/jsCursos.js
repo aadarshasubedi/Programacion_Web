@@ -47,13 +47,13 @@ function cargarRecursosCurso(Id_Curso){
             $("#formularioCurso").validate({
                 rules: {
                     Nombre: "required",
-                    Fecha_Inicio: "required",
-                    Fecha_Final: "required",
+                    /*Fecha_Inicio: "required",
+                    Fecha_Final: "required",*/
                 }, 
                 messages: {
                     Nombre: "Campo Requerido",
-                    Fecha_Inicio: "Campo Requerido",
-                    Fecha_Final: "Campo Requerido"
+                    /*Fecha_Inicio: "Campo Requerido",
+                    Fecha_Final: "Campo Requerido"*/
                 },
 
                 submitHandler: function(form) {                 

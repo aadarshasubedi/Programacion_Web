@@ -11,6 +11,7 @@ VALUES ('Español', '0', '2017-02-06', '2017-06-01');
 /*Agregar Genero*/
 INSERT INTO `bd_elearning`.`tb_genero` (`Id_Genero`, `Descripcion`) VALUES ('1', 'Masculino');
 INSERT INTO `bd_elearning`.`tb_genero` (`Id_Genero`, `Descripcion`) VALUES ('2', 'Femenino');
+INSERT INTO `bd_elearning`.`tb_genero` (`Id_Genero`, `Descripcion`) VALUES ('3', 'Otro');
 
 /*Agregar Roles*/
 INSERT INTO `bd_elearning`.`tb_rol` (`Id_Rol`, `Nombre`, `Estado`) 
@@ -226,7 +227,7 @@ BEGIN
 	START TRANSACTION;
     	SET AUTOCOMMIT = 0;
                        
-		SELECT Id_Rol, Nombre, Estado FROM bd_elearning.tb_rol;
+		SELECT Id_Rol, Nombre FROM bd_elearning.tb_rol;
                         
 	COMMIT;
 END $$
@@ -366,3 +367,30 @@ DELIMITER ;
  * FIN ROLLER 
  */
 
+ --Matricula
+DROP PROCEDURE IF EXISTS pr_insertarMatricula;
+DELIMITER $$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `pr_insertarMatricula`(
+	IN p_Periodo              INT(10),
+	IN p_Id_Usuario           INT(10),
+	IN p_Id_Curso             INT(10),
+	IN p_Año                    DATE,
+	IN p_Fecha_Matricula      DATETIME
+)
+BEGIN
+	START TRANSACTION;
+    	SET AUTOCOMMIT = 0;
+		INSERT INTO tb_Matricula (Periodo,
+								Id_Usuario, 		                         
+								Id_Curso, 
+								Anio, 
+								Fecha_Matricula)
+		VALUES (p_Periodo,
+				p_Id_Usuario, 		                         
+				p_Id_Curso, 
+				p_Año, 
+				p_Fecha_Matricula);
+		
+	COMMIT;
+END $$
+DELIMITER ;

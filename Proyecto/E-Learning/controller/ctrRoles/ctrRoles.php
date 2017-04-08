@@ -70,7 +70,6 @@
 
 		 		$dRol->setId_Rol($value['Id_Rol']);
 		 		$dRol->setNombre($value['Nombre']);
-		 		$dRol->setEstado($value['Estado']);
 
 		 		array_push($lista, $dRol);
 		 	}

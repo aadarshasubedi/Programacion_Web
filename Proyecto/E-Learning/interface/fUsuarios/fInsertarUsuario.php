@@ -1,6 +1,14 @@
 
 <script src="../../js/jsUsuarios.js"></script>
 
+<?php 
+	header('Content-Type: text/html; charset=UTF-8');
+	include("../../controller/ctrRoles/ctrRoles.php");
+
+	$control = new ctrRoles();
+	$listar = $control->listar();
+ ?>
+
 <div class="row slide">
 
 	<div class="col-md-12">
@@ -14,8 +22,8 @@
 				<hr>
 				<form id="formularioUsuario" name="formularioUsuario" method="POST" role="form">
 					<div class="form-group col-md-4">
-						<label class="sr-only" for="Id_Usuario">Número de Identificación</label>
-						<input type="text" class="form-control" id="Id_Usuario" name="Id_Usuario" placeholder="Identificación de Usuario" required>
+						<label class="sr-only" for="Id_Usuario">Numero de Identificacion</label>
+						<input type="text" class="form-control" id="Id_Usuario" name="Id_Usuario" placeholder="Identificacion de Usuario" required>
 					</div>
 
 					<div class="form-group col-md-4">
@@ -24,7 +32,7 @@
 					</div>
 
 					<div class="form-group col-md-4">
-						<label class="sr-only" for="Id_Genero">Género:</label>
+						<label class="sr-only" for="Id_Genero">Genero:</label>
 						<select class="form-control" name="Id_Genero" id="Id_Genero">
 							<option value="1">Masculino</option>
 							<option value="2">Femenino</option>
@@ -48,17 +56,17 @@
 					</div>
 
 					<div class="form-group col-md-4">
-						<label class="sr-only" for="Pais">País</label>
-						<input type="text" class="form-control" id="Pais" name="Pais" placeholder="País" required>
+						<label class="sr-only" for="Pais">Pais</label>
+						<input type="text" class="form-control" id="Pais" name="Pais" placeholder="Pais" required>
 					</div>
 					<div class="form-group col-md-4">
 					<label class="sr-only" for="Id_Rol">Tipo Usuario:</label>
 					   <select class="form-control" name="Id_Rol" id="Id_Rol">
-					   <option value="1">Administrador</option>
-					   <option value="2">Editor</option>
-					   <option value="3">Moderador</option>
-					   <option value="4">Profesor</option>
-					   <option value="5">Estudiante</option>
+					   	<?php 
+					   		foreach ($listar as $val) {
+					   			echo "<option value=\"".$val->getId_Rol()."\">".$val->getNombre()."</option>";
+					   		}
+					   	 ?>
 					   </select>
 					</div>
 						<div class="form-group col-md-4"></div>

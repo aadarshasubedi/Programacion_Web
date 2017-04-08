@@ -16,8 +16,7 @@
 				<tr>
 					<th><p>Codigo</p></th>
 					<th><p>Nombre</p></th>
-					<th><p>Estado</p></th>
-					<th colspan="3" class="text-center"><p>Opciones</p></th>
+					<th colspan="2" class="text-center"><p>Opciones</p></th>
 				</tr>
 			</thead>
 			<tbody>
@@ -27,7 +26,6 @@
 						echo "<tr>";
 						echo 	"<td>".$rol->getId_Rol()."</td>";
 						echo 	"<td>".$rol->getNombre()."</td>";
-						echo 	"<td>".$rol->getEstado()."</td>";
 
 						/*echo 	"<td style=\"text-align:center;\"><button class=\"btn btn-danger\" type=\"button\" onclick=\"modalEliminarrol('".$rol->getId_rol()."')\"><span class='glyphicon glyphicon-trash'></span> Eliminar</button></td>";*/
 						echo 	"<td style=\"text-align:center;\"><button class=\"btn btn-success\" type=\"button\" onclick=\"paginaModificarRol('".$rol->getId_Rol()."')\"><span class='glyphicon glyphicon-pencil'></span> Modificar</button></td>";

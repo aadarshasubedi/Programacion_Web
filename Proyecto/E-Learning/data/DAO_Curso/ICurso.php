@@ -6,6 +6,7 @@ interface ICurso {
     public function modificar($curso);
     public function consultar($Id_Curso);
     public function listar();
+    public function cursosEstudiantes($Id_Usuario);
 }
 
 ?>

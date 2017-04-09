@@ -41,6 +41,23 @@ class DAO_Recurso implements IRecurso {
             return false;
         } 
     }
+
+    public function consultar($Id_Recurso) {
+        try {
+            $conn = $this->dtConexion->abrirConexion(); 
+            $recurso = array();   
+            $stmt = $conn->prepare('CALL pr_obtener_recursos_cursos(?)'); 
+            $stmt->bindParam(1, $Id_Recurso, PDO::PARAM_INT);
+            $stmt->execute();
+            $recurso = $stmt->fetchALL();  
+
+            $this->dtConexion->cerrarConexion($conn); 
+            return $recurso;
+        } catch (PDOException $e) {
+            echo $e->getMessage();
+            return false;
+        }        
+    }
 }
  
 ?>

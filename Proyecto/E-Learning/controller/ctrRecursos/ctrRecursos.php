@@ -29,6 +29,14 @@
 				}
 			}		
 		}
+
+		public function consultar($Id_Recurso){
+			$Id_Recurso = $_GET['Id_Recurso'];
+
+		 	$listaRecursos = $this->BL_daoRecurso->consultar($Id_Recurso);
+
+			return $listaRecursos;
+		}
 	}
 
 	if($_POST != null){

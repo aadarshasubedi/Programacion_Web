@@ -21,6 +21,8 @@
 			$secuencia = 1;
 			$semana = str_replace('s', '', $list[0]);
 
+			$list[0] = $semana;
+
 			for ($i=0; $i < count($list); $i++) { 
 				$this->BL_daoRecurso->recurso($list[$i], $Id_Curso, $secuencia, $semana, $i);
 				if($i > 0){

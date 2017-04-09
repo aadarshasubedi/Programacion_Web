@@ -378,6 +378,11 @@ BEGIN
 				p_Id_Curso, 
 				p_Año, 
 				p_Fecha_Matricula);
+				
+		INSERT INTO	tb_Curso_Usuario (	Id_Usuario, 		                         
+										Id_Curso)
+		VALUES	(	p_Id_Usuario, 		                         
+					p_Id_Curso );
 		
 	COMMIT;
 END $$

@@ -236,7 +236,7 @@ CREATE TABLE IF NOT EXISTS `bd_elearning`.`tb_recurso` (
   `Visible` INT(10) NOT NULL,
   `Secuencia` INT(10) NOT NULL,
   `Notas` VARCHAR(100),
-  `Estado` BIT(1) NOT NULL DEFAULT b'1',
+  `Estado` BIT(1) NOT NULL DEFAULT 1,
   `Semana` INT(10) NOT NULL,
   PRIMARY KEY (`Id_Recurso`),
   INDEX `fk_tb_Recurso_tb_Recurso_Padre_idx` (`Recurso_Padre` ASC),

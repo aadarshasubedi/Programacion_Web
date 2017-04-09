@@ -92,22 +92,6 @@
 
 		 	return $lista;
 		}
-
-		#recurso($Tipo_Recurso, $Id_Curso,  $Secuencia, $Semana)
-
-		public function guardarRecurso(){
-			$list_order = $_POST['list_order'];
-			$Id_Curso = $_POST['curso']; 
-
-			$list = explode(',' , $list_order);
-			$secuencia = 1;
-			$semana = $list[0];
-
-			for ($i=1; $i < count($list); $i++) { 
-				$this->BL_daoCurso->recurso($list[$i], $Id_Curso, $secuencia, $semana);
-				$secuencia++;
-			}			
-		}
 	}
 
 	if($_POST != null){
@@ -122,8 +106,6 @@
 		 	$control->modificar();
 		} else if($op == 4){
 		 	$control->consultar();
-		} else if($op == 5){
-		 	$control->guardarRecurso();
-		} 
+		}
 	}
 ?>

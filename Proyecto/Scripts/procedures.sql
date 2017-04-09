@@ -391,47 +391,60 @@ CREATE PROCEDURE pr_agregar_actualizar_recurso
 	IN p_Visible			INT(10),
 	IN p_Secuencia			INT(10),
 	IN p_Notas				VARCHAR(100),
-	IN p_Estado				BIT(1),
-	IN p_Semana				INT(10)
+	IN p_Semana				INT(10),
+	IN p_Opcion				INT(10)
 )
  BEGIN
 	
   	START TRANSACTION;
     	SET AUTOCOMMIT = 0;
 		
-		IF EXISTS (	SELECT	1 
-					FROM 	tb_Recurso 
-					WHERE 	Id_Curso = p_Id_Curso
-							AND Id_Tipo_Recurso = p_Id_Tipo_Recurso
-							AND Semana = p_Semana) 
+		IF (p_Opcion = 0) 
 			THEN 
+			
 				UPDATE 	tb_Recurso 
-				SET		Secuencia  = p_Secuencia
+				SET		Estado = 0
 				WHERE	Id_Curso = p_Id_Curso
-						AND Id_Tipo_Recurso = p_Id_Tipo_Recurso
 						AND Semana = p_Semana;
-			ELSE 
-				INSERT INTO `bd_elearning`.`tb_Recurso` (`Id_Tipo_Recurso`, 
-		                                         `Id_Curso`, 
-											     `Recurso_Padre`, 
-											     `Nombre`,
-												 `URL`,
-												 `Visible`,
-												 `Secuencia`,
-												 `Notas`,
-												 `Estado`,
-												 `Semana`
-												 ) 
-				VALUES (p_Id_Tipo_Recurso,
-						p_Id_Curso,	
-						p_Recurso_Padre,
-						p_Nombre,			
-						p_URL,			
-						p_Visible,		
-						p_Secuencia,	
-						p_Notas,		
-						p_Estado,			
-						p_Semana);
+						
+			ELSE IF EXISTS (	SELECT	1
+								FROM 	tb_Recurso
+								WHERE 	Id_Curso = p_Id_Curso
+										AND Id_Tipo_Recurso = p_Id_Tipo_Recurso
+										AND Semana = p_Semana 
+										AND Estado = 0) 
+				THEN 
+				
+					UPDATE 	tb_Recurso 
+					SET		Estado = 1,
+							Semana = p_Semana,
+							Secuencia = p_Secuencia
+					WHERE	Id_Curso = p_Id_Curso
+							AND Id_Tipo_Recurso = p_Id_Tipo_Recurso
+							AND Semana = p_Semana;
+				
+				ELSE 
+					
+					INSERT INTO `bd_elearning`.`tb_Recurso` (`Id_Tipo_Recurso`, 
+													 `Id_Curso`, 
+													 `Recurso_Padre`, 
+													 `Nombre`,
+													 `URL`,
+													 `Visible`,
+													 `Secuencia`,
+													 `Notas`,
+													 `Semana`
+													 ) 
+					VALUES (p_Id_Tipo_Recurso,
+							p_Id_Curso,	
+							p_Recurso_Padre,
+							p_Nombre,			
+							p_URL,			
+							p_Visible,		
+							p_Secuencia,	
+							p_Notas,			
+							p_Semana);
+			END IF;
 		END IF;
 				
 	COMMIT;
@@ -457,6 +470,7 @@ CREATE PROCEDURE pr_obtener_recursos_cursos
 		FROM	tb_Recurso
 		
 		WHERE 	Id_Curso = p_Id_Curso
+				AND Estado = 1
 		
 		ORDER BY Semana, Secuencia;
 				

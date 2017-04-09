@@ -4,7 +4,7 @@ include 'IRecurso.php';
 
 class DAO_Recurso implements IRecurso {
 
-	private $dtConexion;
+    private $dtConexion;
 
     public function __construct($_conexion){
         $this -> dtConexion = $_conexion;                
@@ -42,12 +42,12 @@ class DAO_Recurso implements IRecurso {
         } 
     }
 
-    public function consultar($Id_Recurso) {
+    public function consultar($Id_Curso) {
         try {
             $conn = $this->dtConexion->abrirConexion(); 
             $recurso = array();   
             $stmt = $conn->prepare('CALL pr_obtener_recursos_cursos(?)'); 
-            $stmt->bindParam(1, $Id_Recurso, PDO::PARAM_INT);
+            $stmt->bindParam(1, $Id_Curso, PDO::PARAM_INT);
             $stmt->execute();
             $recurso = $stmt->fetchALL();  
 

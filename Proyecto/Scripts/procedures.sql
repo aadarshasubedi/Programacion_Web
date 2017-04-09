@@ -462,7 +462,8 @@ CREATE PROCEDURE pr_obtener_recursos_cursos
   	START TRANSACTION;
     	SET AUTOCOMMIT = 0;
 		
-		SELECT	Id_Curso,
+		SELECT	Id_Recurso,
+				Id_Curso,
 				Semana, 
 				Secuencia,
 				Id_Tipo_Recurso

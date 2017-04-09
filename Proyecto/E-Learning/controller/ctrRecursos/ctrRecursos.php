@@ -1,6 +1,7 @@
 <?php 
 	
 	include ("../../domain/dFactory.php");
+	include ("../../domain/dRecurso.php");
 
 	class ctrRecursos {
 
@@ -10,9 +11,7 @@
 		public function __construct() {
 		   $this -> factory = new Factory();
 		   $this -> BL_daoRecurso = $this-> factory -> DAO_RecursoFactory();
-		}
-
-		
+		}		
 
 		public function guardarRecurso(){
 			$list_order = $_POST['list_order'];
@@ -27,15 +26,27 @@
 				if($i > 0){
 					$secuencia++;
 				}
-			}		
+			}	
 		}
 
-		public function consultar($Id_Recurso){
-			$Id_Recurso = $_GET['Id_Recurso'];
+		public function consultar(){
 
-		 	$listaRecursos = $this->BL_daoRecurso->consultar($Id_Recurso);
+		 	$lista = array();
+		 	$valor = $this -> BL_daoRecurso -> consultar();
 
-			return $listaRecursos;
+		 	foreach ($valor as $value) {
+		 		$dRecurso = new dRecurso;
+
+		 		$dRecurso->setId_Tipo_Recurso($value['Id_Tipo_Recurso']);
+		 		$dRecurso->setId_Curso($value['Id_Curso']);
+		 		$dRecurso->setSemana($value['Semana']);
+		 		$dRecurso->setSecuencia($value['Secuencia']);
+		 		$dRecurso->setId_Tipo_Recurso($value['Id_Tipo_Recurso']);
+
+		 		array_push($lista, $dRecurso);
+		 	}
+
+		 	return $lista;
 		}
 	}
 

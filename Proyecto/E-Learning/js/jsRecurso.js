@@ -1,7 +1,6 @@
 $(function() {
     $("#sortable").sortable({
         connectWith: ".connectedSortable",
-        //items: "strong:not(.ui-state-disabled)",
         remove: function(event, ui) {
             ui.item.clone().appendTo('#sortable1').val("0");
             $(this).sortable('cancel');

@@ -2,6 +2,7 @@
 	
 	include ("../../domain/dFactory.php");
 	include ("../../domain/dCurso.php");
+	include ("../../domain/dRecurso.php");
 
 	class ctrCursos {
 
@@ -11,6 +12,7 @@
 		public function __construct() {
 		   $this -> factory = new Factory();
 		   $this -> BL_daoCurso = $this-> factory -> DAO_CursoFactory();
+		   $this -> BL_daoRecurso = $this-> factory -> DAO_RecursoFactory();
 		}
 
 		public function agregar(){
@@ -88,6 +90,26 @@
 		 		$dCurso->setFecha_Final($value['Fecha_Final']);
 
 		 		array_push($lista, $dCurso);
+		 	}
+
+		 	return $lista;
+		}
+
+		public function consultarRecursos($Id_Curso){
+
+		 	$lista = array();
+		 	$valor = $this -> BL_daoRecurso -> consultar($Id_Curso);
+
+		 	foreach ($valor as $value) {
+		 		$dRecurso = new dRecurso;
+
+		 		$dRecurso->setId_Tipo_Recurso($value['Id_Tipo_Recurso']);
+		 		$dRecurso->setId_Curso($value['Id_Curso']);
+		 		$dRecurso->setSemana($value['Semana']);
+		 		$dRecurso->setSecuencia($value['Secuencia']);
+		 		$dRecurso->setId_Tipo_Recurso($value['Id_Tipo_Recurso']);
+
+		 		array_push($lista, $dRecurso);
 		 	}
 
 		 	return $lista;

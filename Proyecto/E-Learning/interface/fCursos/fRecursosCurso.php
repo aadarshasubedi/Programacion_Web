@@ -6,7 +6,6 @@
 
 	$Id_Curso = $_GET['Id_Curso'];
 	include ("../../controller/ctrCursos/ctrCursos.php");
-
 	$control = new ctrCursos;
 	$lista = $control->consultar($Id_Curso);
 
@@ -16,6 +15,9 @@
  		$Fecha_Inicio = $curso->getFecha_Inicio();
  		$Fecha_Final = $curso->getFecha_Final();
 	}
+
+	$listaRecursos = $control->consultarRecursos($Id_Curso);
+
 ?>
 
 <style>
@@ -77,8 +79,39 @@
 
 		<?php for ($i = 1; $i <= 4; $i++) { ?>
 		<div class="alert alert-info">
-			<div id="sortable1" class="connectedSortable SortableSemanas" style="width: 200px;">
-				<strong id ="s<?php echo $i; ?>">Semana #<?php echo $i ?></strong>
+			<div id="sortable1" class="connectedSortable SortableSemanas" style="width: 250px;">
+				<strong id ="s<?php echo $i; ?>">Semana #<?php echo $i ?></strong> 
+
+				<?php 
+					foreach ($listaRecursos as $recurso) {
+						if($recurso->getSemana() == $i){
+							if($recurso->getId_Tipo_Recurso() == 1){ ?>
+								
+								<li class="ui-state-default sinEstilo" value="0" id="1"><span class="ui-icon ui-icon-arrowthick-2-n-s"></span>
+								  	<strong>Seccion!</strong>
+							  	</li>
+
+				<?php		} else if($recurso->getId_Tipo_Recurso() == 2){ ?>
+								
+								<li class="ui-state-default sinEstilo" value="0" id="2"><span class="ui-icon ui-icon-arrowthick-2-n-s"></span>
+								  	<span>No hay Clases!</span>
+							  	</li>
+
+				<?php		} else if($recurso->getId_Tipo_Recurso() == 3){ ?>
+								
+								<li class="ui-state-default sinEstilo" value="0" id="3"><span class="ui-icon ui-icon-arrowthick-2-n-s"></span>
+									<input type="text" id="seccion" placeholder="Texto" style="width: 150px;"/>
+							  	</li>
+
+				<?php		} else if($recurso->getId_Tipo_Recurso() == 4){ ?>
+								<li class="ui-state-default sinEstilo" value="0" id="4"><span class="ui-icon ui-icon-arrowthick-2-n-s"></span>
+									<a href="#" style="color: blue">Libro Programacion Web</a>
+							    </li>
+				<?php		} 
+						} 
+					} 
+				?>
+
 			</div>
 		</div> 	
 		<?php } ?>	   

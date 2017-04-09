@@ -107,6 +107,39 @@ class DAO_Curso implements ICurso {
             return false;
         }        
     }
+
+    public function recurso($Tipo_Recurso, $Id_Curso,  $Secuencia, $Semana){
+        try {
+            $conn = $this->dtConexion->abrirConexion();  
+
+            $Recurso_Padre = null; 
+            $Nombre = "asd";
+            $URL = "";
+            $Visible = 1;
+            $Notas = "asd";
+            $Estado = 1;
+
+            $stmt = $conn->prepare('CALL pr_agregar_actualizar_recurso(?,?,?,?,?,?,?,?,?,?)');
+            $stmt->bindParam(1, $Tipo_Recurso, PDO::PARAM_INT);
+            $stmt->bindParam(2, $Id_Curso, PDO::PARAM_INT);
+            $stmt->bindParam(3, $Recurso_Padre, PDO::PARAM_INT);
+            $stmt->bindParam(4, $Nombre, PDO::PARAM_STR);
+            $stmt->bindParam(5, $URL, PDO::PARAM_STR);
+            $stmt->bindParam(6, $Visible, PDO::PARAM_INT);
+            $stmt->bindParam(7, $Secuencia, PDO::PARAM_INT);
+            $stmt->bindParam(8, $Notas, PDO::PARAM_STR);
+            $stmt->bindParam(9, $Estado, PDO::PARAM_INT);
+            $stmt->bindParam(10, $Semana, PDO::PARAM_INT);
+
+            $stmt->execute();
+
+            return true;
+            $this->conexion->cerrarConexion($conn);
+        } catch (PDOException $e) {
+            echo $e->getMessage();
+            return false;
+        } 
+    }
 }
  
 ?>

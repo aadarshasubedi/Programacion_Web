@@ -1,19 +1,19 @@
-/*Agregar Tipos de Recursos*/
+
 INSERT INTO `bd_elearning`.`tb_tipo_recurso` (`Nombre`) VALUES ('Sección');
 INSERT INTO `bd_elearning`.`tb_tipo_recurso` (`Nombre`) VALUES ('Etiqueta');
 INSERT INTO `bd_elearning`.`tb_tipo_recurso` (`Nombre`) VALUES ('Texto');
 INSERT INTO `bd_elearning`.`tb_tipo_recurso` (`Nombre`) VALUES ('Enlace');
 
-/*Agregar Cursos*/
+
 INSERT INTO `bd_elearning`.`tb_curso` (`Nombre`, `Duracion`, `Fecha_Inicio`, `Fecha_Final`) 
 VALUES ('Español', '0', '2017-02-06', '2017-06-01');
 
-/*Agregar Genero*/
+
 INSERT INTO `bd_elearning`.`tb_genero` (`Id_Genero`, `Descripcion`) VALUES ('1', 'Masculino');
 INSERT INTO `bd_elearning`.`tb_genero` (`Id_Genero`, `Descripcion`) VALUES ('2', 'Femenino');
 INSERT INTO `bd_elearning`.`tb_genero` (`Id_Genero`, `Descripcion`) VALUES ('3', 'Otro');
 
-/*Agregar Roles*/
+
 INSERT INTO `bd_elearning`.`tb_rol` (`Id_Rol`, `Nombre`, `Estado`) 
 VALUES ('1', 'Administrador', 1);
 
@@ -29,11 +29,11 @@ VALUES ('4', 'Profesor', 1);
 INSERT INTO `bd_elearning`.`tb_rol` (`Id_Rol`, `Nombre`, `Estado`) 
 VALUES ('5', 'Estudiante', 1);
 
-/*Agregar Usuarios*/
+
 INSERT INTO `bd_elearning`.`tb_usuario` (`Id_Usuario`, `Nombre`, `Primer_Apellido`, `Segundo_Apellido`, `Clave`, `Id_Genero`, `Pais`, `Fecha_Ultimo_Ingreso`, `IP`, `SO`, `Navegador`, `Lenguaje`) 
 VALUES ('1', 'Osvaldo', 'Aguero', 'Perez', '1', '1', 'Costa Rica', '2017-01-01', '1.1.1.1', 'Windows', 'Explorer', 'L1');
 
-/*Asociar Usuarios con Roles*/
+
 INSERT INTO `bd_elearning`.`tb_usuario_rol` (`Id_Usuario_Rol`, `Id_Usuario`, `Id_Rol`, `Estado`) 
 VALUES ('1', '1', '1',  1);
 
@@ -184,7 +184,6 @@ CREATE PROCEDURE pr_actualizarUsuario
  END $$
 DELIMITER ;
 
-/* Rol */
 DROP PROCEDURE IF EXISTS pr_agregar_Rol;
 DELIMITER $$
 CREATE PROCEDURE pr_agregar_Rol
@@ -250,13 +249,6 @@ BEGIN
 END $$
 DELIMITER ;
 
-/* Rol */
-
-/* 
- * INICIA ROLLER 
- */
-
-/* OBTENER INFORMACION USUARIO */
 DROP PROCEDURE IF EXISTS pr_obtenerInformacion;
 DELIMITER $$
 CREATE PROCEDURE pr_obtenerInformacion 
@@ -285,7 +277,6 @@ BEGIN
 END $$
 DELIMITER ;
 
-/* INSERTAR USUARIO */
 DROP PROCEDURE IF EXISTS pr_insertarUsuario;
 DELIMITER $$
 CREATE DEFINER=`root`@`localhost` PROCEDURE `pr_insertarUsuario`(
@@ -341,8 +332,6 @@ BEGIN
 END $$
 DELIMITER ;
 
-
-/* ELIMINAR USUARIO */
 DROP PROCEDURE IF EXISTS pr_eliminarUsuario;
 DELIMITER $$
 CREATE PROCEDURE pr_eliminarUsuario 
@@ -363,11 +352,6 @@ BEGIN
 END $$
 DELIMITER ;
 
-/* 
- * FIN ROLLER 
- */
-
-/*Matricula*/
 DROP PROCEDURE IF EXISTS pr_insertarMatricula;
 DELIMITER $$
 CREATE DEFINER=`root`@`localhost` PROCEDURE `pr_insertarMatricula`(
@@ -391,6 +375,65 @@ BEGIN
 				p_Año, 
 				p_Fecha_Matricula);
 		
+	COMMIT;
+END $$
+DELIMITER ;
+
+DROP PROCEDURE IF EXISTS pr_agregar_actualizar_recurso;
+DELIMITER $$
+CREATE PROCEDURE pr_agregar_actualizar_recurso
+(
+	IN p_Id_Tipo_Recurso	INT(10),
+	IN p_Id_Curso			INT(10),
+	IN p_Recurso_Padre		INT(10),
+	IN p_Nombre				VARCHAR(30),
+	IN p_URL				VARCHAR(255),
+	IN p_Visible			INT(10),
+	IN p_Secuencia			INT(10),
+	IN p_Notas				VARCHAR(100),
+	IN p_Estado				BIT(1),
+	IN p_Semana				INT(10)
+)
+ BEGIN
+	
+  	START TRANSACTION;
+    	SET AUTOCOMMIT = 0;
+		
+		IF EXISTS (	SELECT	1 
+					FROM 	tb_Recurso 
+					WHERE 	Id_Curso = p_Id_Curso
+							AND Id_Tipo_Recurso = p_Id_Tipo_Recurso
+							AND Semana = p_Semana) 
+			THEN 
+				UPDATE 	tb_Recurso 
+				SET		Secuencia  = p_Secuencia
+				WHERE	Id_Curso = p_Id_Curso
+						AND Id_Tipo_Recurso = p_Id_Tipo_Recurso
+						AND Semana = p_Semana;
+			ELSE 
+				INSERT INTO `bd_elearning`.`tb_Recurso` (`Id_Tipo_Recurso`, 
+		                                         `Id_Curso`, 
+											     `Recurso_Padre`, 
+											     `Nombre`,
+												 `URL`,
+												 `Visible`,
+												 `Secuencia`,
+												 `Notas`,
+												 `Estado`,
+												 `Semana`
+												 ) 
+				VALUES (p_Id_Tipo_Recurso,
+						p_Id_Curso,	
+						p_Recurso_Padre,
+						p_Nombre,			
+						p_URL,			
+						p_Visible,		
+						p_Secuencia,	
+						p_Notas,		
+						p_Estado,			
+						p_Semana);
+		END IF;
+				
 	COMMIT;
 END $$
 DELIMITER ;

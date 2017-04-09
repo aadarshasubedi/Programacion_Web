@@ -11,7 +11,7 @@
 
 ?>
 
-<div class="row">
+<div class="row slide">
 
 	<div class="col-md-12">
 		<?php 

@@ -437,3 +437,29 @@ CREATE PROCEDURE pr_agregar_actualizar_recurso
 	COMMIT;
 END $$
 DELIMITER ;
+
+DROP PROCEDURE IF EXISTS pr_obtener_recursos_cursos;
+DELIMITER $$
+CREATE PROCEDURE pr_obtener_recursos_cursos
+(
+	IN p_Id_Curso			INT(10)
+)
+ BEGIN
+	
+  	START TRANSACTION;
+    	SET AUTOCOMMIT = 0;
+		
+		SELECT	Id_Curso,
+				Semana, 
+				Secuencia,
+				Id_Tipo_Recurso
+				
+		FROM	tb_Recurso
+		
+		WHERE 	Id_Curso = p_Id_Curso
+		
+		ORDER BY Semana, Secuencia;
+				
+	COMMIT;
+END $$
+DELIMITER ;

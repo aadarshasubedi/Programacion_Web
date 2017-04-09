@@ -7,7 +7,7 @@ $(function() {
         }
     }).disableSelection();
 
-    $("#sortable1, #sortable2, #sortable3").sortable({
+    $("#sortable1, #sortable2, #sortable3, #sortable4").sortable({
         connectWith: ".SortableSemanas",
         update: function(event, ui) {
             var list_sortable = $(this).sortable('toArray').toString();

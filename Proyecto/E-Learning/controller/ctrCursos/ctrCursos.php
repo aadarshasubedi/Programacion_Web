@@ -7,6 +7,7 @@
 	class ctrCursos {
 
 		private $BL_daoCurso;
+		private $BL_daoRecurso;
 		private $factory;
 
 		public function __construct() {

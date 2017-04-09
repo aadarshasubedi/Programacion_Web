@@ -50,7 +50,7 @@
 
 					<div class="form-group text-center col-md-12">
 						<button type="button" class="btn btn-danger" onclick="cargarPagina('../../interface/fCursos/fGestionCursos.php');">Cancelar</button>
-						<button type="submit" class="btn btn-primary">Actualizar</button>
+						<button type="submit" onclick="modificarCurso();" class="btn btn-primary">Actualizar</button>
 					</div>
 				</form>
 			</div>

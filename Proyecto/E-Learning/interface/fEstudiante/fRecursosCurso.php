@@ -1,6 +1,3 @@
-
-<script src="../../js/jsRecurso.js"></script>
-
 <?php 
 	header('Content-Type: text/html; charset=UTF-8');
 
@@ -49,37 +46,12 @@
 			<td><?php echo $Fecha_Final ?></td>
 		</tr>
 	</table>
-
 	<hr>
-
-	<div class="col-md-3">
-		<strong>Tipo de Recursos</strong>
-		<ul id="sortable" class="connectedSortable">
-		  <li class="ui-state-default sinEstilo" value="1" id="1"><span class="ui-icon ui-icon-arrowthick-2-n-s"></span>
-		  	<strong>Seccion!</strong>
-		  </li>
-		  <li class="ui-state-default sinEstilo" value="1" id="2"><span class="ui-icon ui-icon-arrowthick-2-n-s"></span>
-		  	<span>No hay Clases!</span>
-		  </li>
-		  <li class="ui-state-default sinEstilo" value="1" id="3"><span class="ui-icon ui-icon-arrowthick-2-n-s"></span>
-			<input type="text" id="seccion" placeholder="Texto" style="width: 150px;"/>
-		  </li>
-		  <li class="ui-state-default sinEstilo" value="1" id="4"><span class="ui-icon ui-icon-arrowthick-2-n-s"></span>
-			<a href="#" style="color: blue">Libro Programacion Web</a>
-		  </li>
-		</ul>
-		<hr>
-		<strong>Opciones Recurso</strong>
-		<div class="text-center" >
-  			<button class="btn btn-danger" id="trash" style="width: 200px;"><span class="glyphicon glyphicon-trash"></span></button>
-  		</div>
-  		<br>
-	</div>
-	<div class="col-md-9">
+	<div class="col-md-12">
 
 		<?php for ($i = 1; $i <= $Duracion; $i++) { ?>
 		<div class="alert alert-info">
-			<div id="sortable1" class="connectedSortable SortableSemanas" style="width: 250px;">
+			<div style="width: 250px;">
 				<strong id ="s<?php echo $i; ?>">Semana #<?php echo $i ?></strong> 
 
 				<?php 
@@ -87,24 +59,24 @@
 						if($recurso->getSemana() == $i){
 							if($recurso->getId_Tipo_Recurso() == 1){ ?>
 								
-								<li class="ui-state-default sinEstilo" value="0" id="1" ><span class="ui-icon ui-icon-arrowthick-2-n-s"></span>
+								<li class="sinEstilo" value="0" id="1">
 								  	<strong>Seccion!</strong>
 							  	</li>
 
 				<?php		} else if($recurso->getId_Tipo_Recurso() == 2){ ?>
 								
-								<li class="ui-state-default sinEstilo" value="0" id="2"><span class="ui-icon ui-icon-arrowthick-2-n-s"></span>
+								<li class="sinEstilo" value="0" id="2">
 								  	<span>No hay Clases!</span>
 							  	</li>
 
 				<?php		} else if($recurso->getId_Tipo_Recurso() == 3){ ?>
 								
-								<li class="ui-state-default sinEstilo" value="0" id="3"><span class="ui-icon ui-icon-arrowthick-2-n-s"></span>
+								<li class="sinEstilo" value="0" id="3">
 									<input type="text" id="seccion" placeholder="Texto" style="width: 150px;"/>
 							  	</li>
 
 				<?php		} else if($recurso->getId_Tipo_Recurso() == 4){ ?>
-								<li class="ui-state-default sinEstilo" value="0" id="4"><span class="ui-icon ui-icon-arrowthick-2-n-s"></span>
+								<li class="sinEstilo" value="0" id="4">
 									<a href="#" style="color: blue">Libro Programacion Web</a>
 							    </li>
 				<?php		} 

@@ -1,5 +1,18 @@
 <!-- Menu --> 
 
+<?php
+  header('Content-Type: text/html; charset=UTF-8');
+
+  include ("../../controller/ctrCursos/ctrCursos.php");
+
+  $Id_Usuario = $_SESSION['Id_Usuario'];
+
+  $control = new ctrCursos;
+  $lista = $control->cursosEstudiante($Id_Usuario);
+
+?>
+  <script src="../../js/jsCursos.js"></script>
+
   <nav class="navbar navbar-default navbar-fixed-top">
     <div class="container">
 
@@ -29,10 +42,11 @@
             <a href="#" class="dropdown-toggle" data-toggle="dropdown">Cursos<b class="caret"></b>
             </a>
             <ul class="dropdown-menu" style="background-color: #23819C;">
-              <li><a href="#">Curso #1</a></li>
-              <li><a href="#">Curso #2</a></li>
-              <li><a href="#">Curso #3</a></li>
-              <li><a href="#">Curso #4</a></li>
+              
+              <?php foreach ($lista as $curso) { ?>            
+                      <li><a href="#" onclick="cargarCursoEstudiante(<?php echo $curso->getId_Curso(); ?>);"><?php echo $curso->getNombre(); ?></a></li>
+              <?php } ?>
+
             </ul>
           </li>
         </ul>

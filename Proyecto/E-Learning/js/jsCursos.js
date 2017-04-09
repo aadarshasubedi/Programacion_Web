@@ -14,6 +14,10 @@ function cargarRecursosCurso(Id_Curso){
     $("#lista").css("display", "none");
 }
 
+function cargarCursoEstudiante(Id_Curso){
+    $('#contenedor').load("../../interface/fEstudiante/fRecursosCurso.php?Id_Curso="+Id_Curso);
+}
+
 /***** Agregar Curso *****/
 function agregarCurso(){
     var formData = new FormData(document.getElementById("formularioCurso"));   

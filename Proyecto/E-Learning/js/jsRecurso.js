@@ -1,3 +1,4 @@
+
 function cargarRecursosCurso(Id_Curso){          
     $('#datos').load("../../interface/fCursos/fRecursosCurso.php?Id_Curso="+Id_Curso);
     $("#lista").css("display", "none");
@@ -22,7 +23,6 @@ $(function() {
                 type: 'POST',
                 data: {list_order:list_sortable, opcion:1, curso:Id_Curso},
                 success: function(data) {
-                    alert("Listo!");
                     cargarRecursosCurso(Id_Curso);
                 }
             });

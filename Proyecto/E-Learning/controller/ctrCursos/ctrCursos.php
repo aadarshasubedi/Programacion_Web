@@ -1,5 +1,5 @@
 <?php 
-	
+
 	include ("../../domain/dFactory.php");
 	include ("../../domain/dCurso.php");
 	include ("../../domain/dRecurso.php");
@@ -111,6 +111,23 @@
 		 		$dRecurso->setId_Tipo_Recurso($value['Id_Tipo_Recurso']);
 
 		 		array_push($lista, $dRecurso);
+		 	}
+
+		 	return $lista;
+		}
+
+		public function cursosEstudiante($Id_Usuario){
+
+			$lista = array();
+		 	$valor = $this -> BL_daoCurso -> cursosEstudiantes($Id_Usuario);
+
+		 	foreach ($valor as $value) {
+		 		$dCurso = new dCurso;
+
+		 		$dCurso->setId_Curso($value['Id_Curso']);
+		 		$dCurso->setNombre($value['Nombre']);
+
+		 		array_push($lista, $dCurso);
 		 	}
 
 		 	return $lista;

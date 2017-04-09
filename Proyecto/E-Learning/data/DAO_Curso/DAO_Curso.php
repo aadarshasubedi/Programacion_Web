@@ -114,7 +114,7 @@ class DAO_Curso implements ICurso {
             $listaCursosEstudiante = array(); 
 
             $stmt = $conn->prepare('CALL pr_CursosEstudiante(?)'); 
-            $stmt = $conn->bindParam($Id_Usuario,  PDO::PARAM_INT);
+            $stmt->bindParam(1, $Id_Usuario, PDO::PARAM_INT);
             $stmt->execute();
             $listaCursosEstudiante = $stmt->fetchALL();
 

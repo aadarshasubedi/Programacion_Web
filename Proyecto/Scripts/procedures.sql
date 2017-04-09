@@ -412,7 +412,7 @@ CREATE PROCEDURE pr_agregar_actualizar_recurso
 								WHERE 	Id_Curso = p_Id_Curso
 										AND Id_Tipo_Recurso = p_Id_Tipo_Recurso
 										AND Semana = p_Semana 
-										AND Estado = 0) 
+										AND Estado = 0 ) 
 				THEN 
 				
 					UPDATE 	tb_Recurso 
@@ -423,27 +423,34 @@ CREATE PROCEDURE pr_agregar_actualizar_recurso
 							AND Id_Tipo_Recurso = p_Id_Tipo_Recurso
 							AND Semana = p_Semana;
 				
-				ELSE 
-					
-					INSERT INTO `bd_elearning`.`tb_Recurso` (`Id_Tipo_Recurso`, 
-													 `Id_Curso`, 
-													 `Recurso_Padre`, 
-													 `Nombre`,
-													 `URL`,
-													 `Visible`,
-													 `Secuencia`,
-													 `Notas`,
-													 `Semana`
-													 ) 
-					VALUES (p_Id_Tipo_Recurso,
-							p_Id_Curso,	
-							p_Recurso_Padre,
-							p_Nombre,			
-							p_URL,			
-							p_Visible,		
-							p_Secuencia,	
-							p_Notas,			
-							p_Semana);
+				ELSE IF NOT EXISTS (	SELECT	1
+									FROM 	tb_Recurso
+									WHERE 	Id_Curso = p_Id_Curso
+										AND Id_Tipo_Recurso = p_Id_Tipo_Recurso
+										AND Semana = p_Semana 
+										AND Estado = 1 )
+					THEN
+						
+						INSERT INTO `bd_elearning`.`tb_Recurso` (`Id_Tipo_Recurso`, 
+														 `Id_Curso`, 
+														 `Recurso_Padre`, 
+														 `Nombre`,
+														 `URL`,
+														 `Visible`,
+														 `Secuencia`,
+														 `Notas`,
+														 `Semana`
+														 ) 
+						VALUES (p_Id_Tipo_Recurso,
+								p_Id_Curso,	
+								p_Recurso_Padre,
+								p_Nombre,			
+								p_URL,			
+								p_Visible,		
+								p_Secuencia,	
+								p_Notas,			
+								p_Semana);
+				END IF;
 			END IF;
 		END IF;
 				

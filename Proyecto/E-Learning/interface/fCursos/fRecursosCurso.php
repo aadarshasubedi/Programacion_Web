@@ -32,7 +32,7 @@
 	}
 </style>
 
-<div class="container slide" style="width: 100%; margin: auto;">
+<div class="container" style="width: 100%; margin: auto;">
 	<h1><?php echo $Nombre ?></h1>
 
 	<table>
@@ -77,7 +77,7 @@
 	</div>
 	<div class="col-md-9">
 
-		<?php for ($i = 1; $i <= 4; $i++) { ?>
+		<?php for ($i = 1; $i <= $Duracion; $i++) { ?>
 		<div class="alert alert-info">
 			<div id="sortable1" class="connectedSortable SortableSemanas" style="width: 250px;">
 				<strong id ="s<?php echo $i; ?>">Semana #<?php echo $i ?></strong> 

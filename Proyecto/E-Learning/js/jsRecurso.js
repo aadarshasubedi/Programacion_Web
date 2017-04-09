@@ -1,3 +1,8 @@
+function cargarRecursosCurso(Id_Curso){          
+    $('#datos').load("../../interface/fCursos/fRecursosCurso.php?Id_Curso="+Id_Curso);
+    $("#lista").css("display", "none");
+}
+
 $(function() {
     $("#sortable").sortable({
         connectWith: ".connectedSortable",
@@ -7,7 +12,7 @@ $(function() {
         }
     }).disableSelection();
 
-    $("#sortable1, #sortable2, #sortable3, #sortable4").sortable({
+    $("#sortable1, #sortable2, #sortable3, #sortable4, #sortable5, #sortable6, #sortable7, #sortable8, #sortable9, #sortable10, #sortable11, #sortable12, #sortable13, #sortable14, #sortable15, #sortable16, #sortable17").sortable({
         connectWith: ".SortableSemanas",
         update: function(event, ui) {
             var list_sortable = $(this).sortable('toArray').toString();
@@ -17,7 +22,8 @@ $(function() {
                 type: 'POST',
                 data: {list_order:list_sortable, opcion:1, curso:Id_Curso},
                 success: function(data) {
-                   alert(data);
+                    alert("Listo!");
+                    cargarRecursosCurso(Id_Curso);
                 }
             });
         },

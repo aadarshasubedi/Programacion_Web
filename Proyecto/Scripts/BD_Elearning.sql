@@ -239,17 +239,11 @@ CREATE TABLE IF NOT EXISTS `bd_elearning`.`tb_recurso` (
   `Estado` BIT(1) NOT NULL DEFAULT 1,
   `Semana` INT(10) NOT NULL,
   PRIMARY KEY (`Id_Recurso`),
-  INDEX `fk_tb_Recurso_tb_Recurso_Padre_idx` (`Recurso_Padre` ASC),
   INDEX `fk_tb_Recurso_tb_Tipo_Recurso_idx` (`Id_Tipo_Recurso` ASC),
   INDEX `fk_tb_Recurso_tb_Curso_idx` (`Id_Curso` ASC),
   CONSTRAINT `fk_tb_Recurso_tb_Tipo_Recurso`
     FOREIGN KEY (`Id_Tipo_Recurso`)
     REFERENCES `bd_elearning`.`tb_tipo_recurso` (`Id_Tipo_Recurso`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
-  CONSTRAINT `fk_tb_Recurso_tb_Recurso_Padre`
-    FOREIGN KEY (`Recurso_Padre`)
-    REFERENCES `bd_elearning`.`tb_recurso` (`Id_Recurso`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_tb_Recurso_tb_Curso`

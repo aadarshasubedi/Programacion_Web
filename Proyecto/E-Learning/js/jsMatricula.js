@@ -8,13 +8,12 @@ function getValorSelect(Id_Usuario) {
         success: function(data) {
             var cursos = JSON.parse(data);
             $('#Id_Curso').empty();
-            
             if(cursos.length == 0){
                 $('#Id_Curso').append( '<option value="0" selected disable>No hay cursos disponibles</option>' );
             }else{
                 $('#Id_Curso').append( '<option value="#" selected disable>Seleccione un Curso</option>' );
                 for (var i = 0; i < cursos.length; i++) {
-                 $('#Id_Curso').append( '<option value="'+cursos[i].Id_Curso+'">'+cursos[i].Nombre+'</option>' );
+                 $('#Id_Curso').append( '<option value="'+cursos[i][0]+'">'+cursos[i][1]+'</option>' );
              }
          }
 

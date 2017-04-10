@@ -9,15 +9,15 @@
 		$rol = $_SESSION['Rol'];
 
 		if($rol == 'Administrador'){
-			//
-		} else if ($rol == 'Editor') {
-            header("location: ../../interface/fEditor/indexEditor.php");
+            header("location: ../../interface/fAdministrador/indexAdministrador.php");
         } else if ($rol == 'Estudiante') {
             header("location: ../../interface/fEstudiante/indexEstudiante.php");
         } else if ($rol == 'Moderador') {
             header("location: ../../interface/fModerador/indexModerador.php");
+        } else if ($rol == 'Editor') {
+            header("location: ../../interface/fEditor/indexEditor.php");
         } else if ($rol == 'Profesor') {
-            header("location: ../../interface/fProfesor/indexProfesor.php");
+            //
         } else {
             header("location: ../../interface/index.php");
         }
@@ -26,7 +26,7 @@
 
 <html lang="en">
   <head>
-    <title>Administrador</title>
+    <title>Profesor</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
@@ -42,17 +42,16 @@
     <script src="../../js/jquery.validate.min.js"></script>    
     <script src="../../js/jsPrincipal.js"></script> 
     <script src="../../js/jsAcciones.js"></script>  
-
   </head>
   <body id="myPage" data-spy="scroll" data-target=".navbar" data-offset="60">
     
     <!-- Menu -->
-    <?php include '../../interface/complementos/menuAdmin.php'; ?>
+    <?php include '../../interface/complementos/menuProfesor.php'; ?>
     
     <!-- Contenedor -->
     <div id="contenedor" class="container-fluid" style="width: 90%; margin: auto; margin-top: 20px;">
         <div class="slide">
-            <h1 class="text-center"><b>E-Learning</b></h1>
+            <h1 class="text-center"><b>E-Learning Profesor</b></h1>
             <p class="text-justify"><i>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sequi possimus animi esse corporis non eum voluptas dolorum quisquam itaque, pariatur, aut dolor vel culpa quam placeat, ea qui nulla eligendi tenetur nemo nobis minus fuga accusamus. Iste, unde, soluta delectus mollitia, itaque saepe aperiam ullam facere alias officiis iure architecto!</i></p>   
             <p class="text-justify"><i>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eos tenetur velit obcaecati a quam libero error incidunt voluptatibus neque, in quae aut! Labore atque illum mollitia consequatur veritatis quidem id ipsum cumque nemo quisquam, necessitatibus aliquam, error voluptate et inciduntollitia, itaque saepe aperiam ullam.</i></p> 
         </div>

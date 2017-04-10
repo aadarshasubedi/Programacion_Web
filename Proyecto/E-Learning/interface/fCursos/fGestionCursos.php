@@ -4,9 +4,12 @@
 <script src="../../js/jsCursos.js"></script>
 
 <div id="datos">
-
+  <?php 
+    session_start();
+    if($_SESSION['Rol'] == 'Administrador'){
+  ?>
 	<button type="button" class="btn btn-primary" onclick="cargarPaginaDatos('../../interface/fCursos/fInsertarCurso.php');">Nuevo Curso</button>
-	
+	<?php } ?>
 </div>
 
 <p><hr></p>

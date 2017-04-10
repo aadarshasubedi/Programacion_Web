@@ -10,6 +10,12 @@
 
 		if($rol == 'Administrador'){
             header("location: ../../interface/fAdministrador/indexAdministrador.php");
+        } else if ($rol == 'Editor') {
+            header("location: ../../interface/fEditor/indexEditor.php");
+        } else if ($rol == 'Moderador') {
+            header("location: ../../interface/fModerador/indexModerador.php");
+        } else if ($rol == 'Profesor') {
+            header("location: ../../interface/fProfesor/indexProfesor.php");
         } else if ($rol == 'Estudiante') {
             //
         } else {

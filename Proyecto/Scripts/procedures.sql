@@ -539,14 +539,13 @@ BEGIN
 	START TRANSACTION;
     	SET AUTOCOMMIT = 0;
                        
-		SELECT  C.Id_Curso, C.Nombre
-        FROM    bd_elearning.tb_curso_usuario              CU 
-				INNER JOIN bd_elearning.tb_usuario         U ON
-                           (CU.Id_Usuario = U.Id_Usuario)
-                INNER JOIN bd_elearning.tb_curso           C ON
-                           (CU.Id_Curso = C.Id_Curso)
-		WHERE U.Id_Usuario <> p_Id_Usuario
-        AND C.Estado = 1;
+SELECT  Id_Curso, Nombre 
+FROM    bd_elearning.tb_curso 
+WHERE   Id_Curso NOT IN ( SELECT     C.Id_Curso
+                          FROM       bd_elearning.tb_curso            C
+				          INNER JOIN bd_elearning.tb_curso_usuario CU ON
+									(CU.Id_Curso = C.Id_Curso)
+		                   WHERE CU.Id_Usuario = p_Id_Usuario);
                         
 	COMMIT;
 END $$

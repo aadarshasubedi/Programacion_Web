@@ -1,11 +1,13 @@
 
 <?php
+	session_start();
 	header('Content-Type: text/html; charset=UTF-8');
 
 	include ("../../controller/ctrUsuarios/ctrUsuarios.php");
 
 	$control = new ctrUsuarios;
-	$lista = $control->listar();
+	$Id_Usuario = $_SESSION['Id_Usuario'];
+	$lista = $control->listar($Id_Usuario);
 ?>
 <div class="col-md-12 slide">
 	<?php 

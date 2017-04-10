@@ -7,6 +7,7 @@ interface ICurso {
     public function consultar($Id_Curso);
     public function listar();
     public function cursosEstudiantes($Id_Usuario);
+    public function listarCursos($Id_Usuario);
 }
 
 ?>

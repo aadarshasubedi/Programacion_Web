@@ -517,3 +517,26 @@ BEGIN
 	COMMIT;
 END $$
 DELIMITER ;
+
+DROP PROCEDURE IF EXISTS pr_listaMatricula;
+DELIMITER $$
+CREATE PROCEDURE pr_listaMatricula
+(
+	IN p_Id_Usuario   INT(10)
+)
+BEGIN
+	START TRANSACTION;
+    	SET AUTOCOMMIT = 0;
+                       
+		SELECT  C.Id_Curso, C.Nombre
+        FROM    bd_elearning.tb_curso_usuario              CU 
+				INNER JOIN bd_elearning.tb_usuario         U ON
+                           (CU.Id_Usuario = U.Id_Usuario)
+                INNER JOIN bd_elearning.tb_curso           C ON
+                           (CU.Id_Curso = C.Id_Curso)
+		WHERE U.Id_Usuario <> p_Id_Usuario
+        AND C.Estado = 1;
+                        
+	COMMIT;
+END $$
+DELIMITER ;

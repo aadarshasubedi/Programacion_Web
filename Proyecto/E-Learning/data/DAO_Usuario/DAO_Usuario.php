@@ -144,12 +144,12 @@ class DAO_Usuario implements IUsuario {
         }        
     }
 
-    public function listar() {
+    public function listar($Id_Usuario) {
         try {      
             $conn = $this->dtConexion->abrirConexion(); 
             $listaUsuarios = array(); 	
             $stmt = $conn->prepare('SELECT Id_Usuario, Nombre, Primer_Apellido, Segundo_Apellido 
-                                    FROM tb_Usuario ORDER BY Nombre'); 
+                                    FROM tb_Usuario WHERE Id_Usuario <> '.$Id_Usuario.' ORDER BY Nombre'); 
             $stmt->execute();
             $listaUsuarios = $stmt->fetchALL();
 

@@ -41,10 +41,10 @@
 		 	}
 		}
 
-		public function listarUsuario(){
+		public function listarUsuario($Id_Usuario){
 
 		 	$lista = array();
-		 	$valor = $this -> BL_daoUsuario -> listar();
+		 	$valor = $this -> BL_daoUsuario -> listar($Id_Usuario);
 
 		 	foreach ($valor as $value) {
 		 		$dUsuario = new dUsuario;
@@ -62,20 +62,11 @@
 
 		public function listarCurso(){
 
-		 	$lista = array();
-		 	$valor = $this -> BL_daoCurso -> listar();
+			$Id_Usuario = $_POST['usuario'];
 
-		 	foreach ($valor as $value) {
-		 		$dCurso = new dCurso;
+		 	$lista = $this -> BL_daoCurso -> listarCursos($Id_Usuario);
 
-		 		$dCurso->setId_Curso($value['Id_Curso']);
-		 		$dCurso->setNombre($value['Nombre']);
-		 		$dCurso->setFecha_Inicio($value['Fecha_Inicio']);
-
-		 		array_push($lista, $dCurso);
-		 	}
-
-		 	return $lista;
+			echo json_encode($lista);
 		}		
 
 	}
@@ -92,6 +83,8 @@
 		 	$control->modificar();
 		} else if($op == 4){
 		 	$control->consultar();
-		} 
+		}  else if($op == 5){
+		 	$control->listarCurso();
+		}
 	}
 ?>

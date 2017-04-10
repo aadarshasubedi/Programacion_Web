@@ -103,10 +103,10 @@
 		 	return $lista;
 		}
 
-		public function listar(){
+		public function listar($Id_Usuario){
 
 		 	$lista = array();
-		 	$valor = $this -> BL_daoUsuario -> listar();
+		 	$valor = $this -> BL_daoUsuario -> listar($Id_Usuario);
 
 		 	foreach ($valor as $value) {
 		 		$dUsuario = new dUsuario;

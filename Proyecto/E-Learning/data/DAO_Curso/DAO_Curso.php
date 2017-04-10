@@ -125,6 +125,26 @@ class DAO_Curso implements ICurso {
             return false;
         }
     }
+
+    public function listarCursos($Id_Usuario){
+        try{
+            $conn = $this->dtConexion->abrirConexion(); 
+            $listaCursosEstudiante = array(); 
+
+            $stmt = $conn->prepare('CALL pr_listaMatricula(?)'); 
+            $stmt->bindParam(1, $Id_Usuario, PDO::PARAM_INT);
+            $stmt->execute();
+            $listaCursosEstudiante = $stmt->fetchALL();
+
+            $this->dtConexion->cerrarConexion($conn);
+            return $listaCursosEstudiante; 
+        } catch(PDOException $e){
+            echo $e->getMessage();
+            return false;
+        }
+    }
+
+    
 }
  
 ?>

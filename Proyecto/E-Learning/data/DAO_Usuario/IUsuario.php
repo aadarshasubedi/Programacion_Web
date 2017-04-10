@@ -6,7 +6,7 @@ interface IUsuario{
     public function modificar($usuario);
     public function consultar($Id_Usuario);
     public function consultarModificar($Id_Usuario);
-    public function listar();
+    public function listar($Id_Usuario);
 }
 
 ?>

@@ -30,6 +30,7 @@
 </style>
 
 <div class="container" style="width: 100%; margin: auto;">
+	
 	<h1><?php echo $Nombre ?></h1>
 
 	<table>
@@ -46,7 +47,9 @@
 			<td><?php echo $Fecha_Final ?></td>
 		</tr>
 	</table>
-
+	<div class="text-right">
+		<button type="button" class="btn btn-danger" onclick="cargarPagina('../../interface/fCursos/fGestionCursos.php');">Cancelar</button>
+	</div>
 	<hr>
 
 	<div class="col-md-3">

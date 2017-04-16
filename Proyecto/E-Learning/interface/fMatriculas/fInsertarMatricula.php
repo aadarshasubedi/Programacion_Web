@@ -48,7 +48,7 @@
 					</div>
 
 					<div class="form-group text-center col-md-12">
-						<button type="button" class="btn btn-danger" onclick="cargarPagina('../../interface/index.php');">Cancelar</button>
+						<button type="button" class="btn btn-danger" onclick="home();">Cancelar</button>
 						<button type="submit" class="btn btn-primary">Agregar</button>
 					</div>
 				</form>

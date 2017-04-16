@@ -1,3 +1,42 @@
+/*=======================*/
+/*        TABLE
+/*=======================*/
+
+window.operateEvents = {
+    'click .edit': function (e, value, row) {
+        //alert("Edit");
+        paginaModificarRol(parseInt(row.Codigo));
+    }
+};
+
+$(function () {
+    $('#tableRoles').bootstrapTable({
+        toolbar: ".toolbar",
+        search: true,
+        pagination: true,
+        pageSize: 5,
+        pageList: [5,10,25,50,100],
+        
+        formatShowingRows: function(pageFrom, pageTo, totalRows){
+            return "Showing " + pageFrom + " to " + pageTo + " of " + totalRows + " rows. \n";
+        },
+        
+        formatRecordsPerPage: function(pageNumber){
+            return pageNumber + " Rows per page";
+        }
+    });
+    
+    $(window).resize(function () {
+        $('#tableRoles').bootstrapTable('resetView');
+    });    
+});
+
+function operateFormatter(value, row, index) {
+    return [
+        '<button type="button" class="btn btn-default edit"><i class="fa fa-edit"></i><span> Edit</span></button>'
+    ].join('');
+}
+
 $Id_RolTemp = "";
 
 $("#informativo").on('hidden.bs.modal', function () {

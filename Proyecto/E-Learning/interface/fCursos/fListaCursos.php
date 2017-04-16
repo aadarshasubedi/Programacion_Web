@@ -6,51 +6,53 @@
 	$control = new ctrCursos;
 	$lista = $control->listar();
 ?>
+
+<style>
+	.pagination {
+		margin: 0px 0px;
+	}
+
+	.pagination a {
+		margin: 0px 5px;
+	    border-radius: 5px;
+	}
+</style>
+
 <div class="col-md-12 slide">
 	<?php 
 	if($lista){
 	?>
-	<div class="table-responsive">					
-		<table class="table table-hover">
-			<thead>
-				<tr>
-					<th><p>Codigo</p></th>
-					<th><p>Nombre</p></th>
-					<th><p>Duracion Semanas</p></th>
-					<th><p>Fecha Inicio</p></th>
-					<th><p>Fecha Final</p></th>
-					<?php if($_SESSION['Rol'] != 'Moderador'){ ?>
-					<th colspan="3" class="text-center"><p>Opciones</p></th>
-					<?php } ?>
-				</tr>
-			</thead>
-			<tbody>
-				<?php 					
-					foreach ($lista as $curso){
-					
+	
+	<div class="col-md-12">                    
+        <table id="tableCursos">
+            <thead>
+                <th class="text-center" data-field="Codigo" data-sortable="true">Codigo</th>
+            	<th class="text-center" data-field="Nombre" data-sortable="true">Nombre</th>
+            	<th class="text-center" data-field="Duracion" data-sortable="true">Duracion</th>
+            	<th class="text-center" data-field="Fecha_Inicio" data-sortable="true">Fecha Inicio</th>
+            	<th class="text-center" data-field="Fecha_Final" data-sortable="true">Fecha Final</th>
+            	<th class="text-center" data-field="operate" data-formatter="operateFormatter" data-events="operateEvents">Opciones</th>
+            </thead>
+            <tbody>
+                <?php 
+
+                    foreach ($lista as $curso){
+		
 						echo "<tr>";
 						echo 	"<td>".$curso->getId_Curso()."</td>";
 						echo 	"<td>".$curso->getNombre()."</td>";
 						echo 	"<td>".$curso->getDuracion()."</td>";
 						echo 	"<td>".$curso->getFecha_Inicio()."</td>";
 						echo 	"<td>".$curso->getFecha_Final()."</td>";
-
-						/*echo 	"<td style=\"text-align:center;\"><button class=\"btn btn-danger\" type=\"button\" onclick=\"modalEliminarCurso('".$curso->getId_Curso()."')\"><span class='glyphicon glyphicon-trash'></span> Eliminar</button></td>";*/
-						
-						if($_SESSION['Rol'] != 'Moderador'){
-							echo 	"<td style=\"text-align:center;\"><button class=\"btn btn-info\" type=\"button\" onclick=\"cargarRecursosCurso('".$curso->getId_Curso()."')\"><span class='glyphicon glyphicon-list-alt'></span> Recursos</button></td>";
-						}
-						if($_SESSION['Rol'] == 'Administrador'){
-							echo 	"<td style=\"text-align:center;\"><button class=\"btn btn-success\" type=\"button\" onclick=\"paginaModificarCurso('".$curso->getId_Curso()."')\"><span class='glyphicon glyphicon-pencil'></span> Modificar</button></td>";
-						}
-
 						echo "</tr>";
-						
+					
 					}
-				?>
-			</tbody>
-		</table>				
-	</div>
+
+                ?>
+            </tbody>
+        </table>          
+        <hr>
+    </div>
 
 	<?php 
 		} else {

@@ -22,7 +22,7 @@
             <a class="dropdown-toggle" data-toggle="dropdown" href="#">Perfil
             <span class="glyphicon glyphicon-user"></span></a>
             <ul class="dropdown-menu" style="background-color: #23819C;">
-              <li><a href="#"><span class="glyphicon glyphicon-pencil"></span> Editar</a></li>
+              <li><a href="#" title="Editar Perfil" onclick="cargarPagina('../../interface/fUsuarios/fModificarUsuarioLogin.php');"><span class="glyphicon glyphicon-pencil"></span> Editar</a></li>
               <li><a href="#" title="Cerrar Sesión" onclick="cerrarSesion();"><span class="glyphicon glyphicon-log-out"></span> Salir</a></li>
             </ul>
           </li>

@@ -1,7 +1,8 @@
 
 <?php 
-	
-	$Id_Usuario = $_GET['Id_Usuario'];
+	session_start();
+
+	$Id_Usuario = $_SESSION['Id_Usuario'];
 	include ("../../controller/ctrUsuarios/ctrUsuarios.php");
 
 	$control = new ctrUsuarios;
@@ -24,13 +25,13 @@
 	<div class="col-md-12">
 		<div class="panel panel-primary">
 			<div class="panel-heading">
-				<h3 class="panel-title" style="text-align:center;">Formulario para editar un usuario.</h3>
+				<h3 class="panel-title" style="text-align:center;">Formulario para editar usuario.</h3>
 			</div>
 
 			<div class="container-fluid">
 				<strong>Edite los datos requeridos.</strong>
 				<hr>
-				<form id="formularioModificarUsuario" name="formularioModificarUsuario" method="POST" role="form">
+				<form id="formularioModificarUsuarioLogin" name="formularioModificarUsuarioLogin" method="POST" role="form">
 
 					<div class="form-group col-md-4">
 						<label class="sr-only" for="Id_Usuario">Número de Identificación</label>
@@ -70,20 +71,22 @@
 						<label class="sr-only" for="Pais">País</label>
 						<input type="text" class="form-control" id="Pais" name="Pais" placeholder="<?php echo $Pais; ?>" value="<?php echo $Pais; ?>" required>
 					</div>
+
 					<div class="form-group col-md-4">
 					<label class="sr-only" for="Id_Rol">Tipo Usuario:</label>
-					   <select class="form-control" name="Id_Rol" id="Id_Rol">
+					   <select class="form-control" name="Id_Rol" id="Id_Rol" disabled>
 					   <option value="1" <?php if($Id_Rol == 1){ echo 'selected'; } ?>>Administrador</option>
 					   <option value="2" <?php if($Id_Rol == 2){ echo 'selected'; } ?>>Editor</option>
 					   <option value="3" <?php if($Id_Rol == 3){ echo 'selected'; } ?>>Moderador</option>
 					   <option value="4" <?php if($Id_Rol == 4){ echo 'selected'; } ?>>Profesor</option>
 					   <option value="5" <?php if($Id_Rol == 5){ echo 'selected'; } ?>>Estudiante</option>
 					   </select>
-					</div>					
+					</div>
+
 					<div class="form-group col-md-4"></div>
 
 					<div class="form-group text-center col-md-12">
-						<button type="button" class="btn btn-danger" onclick="cargarPagina('../../interface/fUsuarios/fGestionUsuarios.php');">Cancelar</button>
+						<button type="button" class="btn btn-danger" onclick="home();">Cancelar</button>
 						<button type="submit" class="btn btn-primary">Actualizar</button>
 					</div>
 				</form>
@@ -93,4 +96,4 @@
 
 </div>
 
-<script src="../../resourses/js/jsUsuarios.js"></script>
+<script src="../../resourses/js/jsAcciones.js"></script>

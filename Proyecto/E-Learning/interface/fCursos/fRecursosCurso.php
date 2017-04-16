@@ -25,6 +25,7 @@
 		height: 50px;
 		border-style: none;
 		background-color: transparent;
+		cursor: pointer;
 	}
 </style>
 

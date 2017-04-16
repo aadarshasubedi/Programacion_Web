@@ -43,7 +43,7 @@
         <?php include '../../interface/complementos/menuEditor.php'; ?>
 
         <!-- Contenedor -->
-        <div id="contenedor" class="container-fluid" style="width: 90%; margin: auto; margin-top: 20px;">
+        <div id="contenedor" class="container-fluid" style="width: 90%; margin: auto; margin-top: 40px;">
             <div class="slide">
                 <h1 class="text-center"><b>E-Learning Editor</b></h1>
                 <p class="text-justify"><i>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sequi possimus animi esse corporis non eum voluptas dolorum quisquam itaque, pariatur, aut dolor vel culpa quam placeat, ea qui nulla eligendi tenetur nemo nobis minus fuga accusamus. Iste, unde, soluta delectus mollitia, itaque saepe aperiam ullam facere alias officiis iure architecto!</i></p>   

@@ -121,6 +121,30 @@
 
 		 	return $lista;
 		}
+
+		public function modificarLogin(){
+			$usuario = new dUsuario;
+
+	      	$usuario->setId_Usuario($_POST['Id_Usuario']);
+	      	$usuario->setClave($_POST['Clave']);
+	      	$usuario->setId_Genero($_POST['Id_Genero']);
+	      	$usuario->setNombre($_POST['Nombre']);
+	      	$usuario->setPrimer_Apellido($_POST['Primer_Apellido']);
+	      	$usuario->setSegundo_Apellido($_POST['Segundo_Apellido']);
+	      	$usuario->setPais($_POST['Pais']);
+	      	$usuario->setFecha_Ultimo_Ingreso(date('Y-m-d H:i:s'));
+	      	$usuario->setDireccion_Ip($_SERVER['REMOTE_ADDR']);
+	      	$usuario->setSistema_Operativo(PHP_OS);
+	      	$usuario->setNavegador($_SERVER['HTTP_USER_AGENT']);
+	      	$usuario->setLenguaje($_SERVER["HTTP_ACCEPT_LANGUAGE"]);
+	      	$usuario->setRol($_POST['Id_Rol']);
+
+		 	if($this->BL_daoUsuario->modificar($usuario)){
+	      		echo 'Se ha modificado el usuario correctamente.';
+	      	} else {
+	      		echo 'Se ha producido un error al modificar el usuario.';
+	      	}
+		}
 	}
 
 	if($_POST != null){
@@ -135,6 +159,8 @@
 		 	$control->modificar();
 		} else if($op == 4){
 		 	$control->consultar();
-		} 
+		} else if($op == 5){
+		 	$control->modificarLogin();
+		}
 	}
 ?>

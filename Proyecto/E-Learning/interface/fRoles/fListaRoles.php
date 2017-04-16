@@ -6,36 +6,46 @@
 	$control = new ctrRoles;
 	$lista = $control->listar();
 ?>
+
+<style>
+	.pagination {
+		margin: 0px 0px;
+	}
+
+	.pagination a {
+		margin: 0px 5px;
+	    border-radius: 5px;
+	}
+</style>
+
 <div class="col-md-12 slide">
 	<?php 
 	if($lista){
 	?>
-	<div class="table-responsive">					
-		<table class="table table-hover">
-			<thead>
-				<tr>
-					<th><p>Codigo</p></th>
-					<th><p>Nombre</p></th>
-					<th colspan="2" class="text-center"><p>Opciones</p></th>
-				</tr>
-			</thead>
-			<tbody>
-				<?php 					
-					foreach ($lista as $rol){
-					
+	<div class="col-md-12">                    
+        <table id="tableRoles">
+            <thead>
+                <th class="text-center" data-field="Codigo" data-sortable="true">Codigo</th>
+            	<th class="text-center" data-field="Nombre" data-sortable="true">Nombre</th>
+            	<th class="text-center" data-field="operate" data-formatter="operateFormatter" data-events="operateEvents">Opciones</th>
+            </thead>
+            <tbody>
+                <?php 
+
+                    foreach ($lista as $rol){
+		
 						echo "<tr>";
 						echo 	"<td>".$rol->getId_Rol()."</td>";
 						echo 	"<td>".$rol->getNombre()."</td>";
-
-						/*echo 	"<td style=\"text-align:center;\"><button class=\"btn btn-danger\" type=\"button\" onclick=\"modalEliminarrol('".$rol->getId_rol()."')\"><span class='glyphicon glyphicon-trash'></span> Eliminar</button></td>";*/
-						echo 	"<td style=\"text-align:center;\"><button class=\"btn btn-success\" type=\"button\" onclick=\"paginaModificarRol('".$rol->getId_Rol()."')\"><span class='glyphicon glyphicon-pencil'></span> Modificar</button></td>";
 						echo "</tr>";
-						
+					
 					}
-				?>
-			</tbody>
-		</table>				
-	</div>
+
+                ?>
+            </tbody>
+        </table>          
+        <hr>
+    </div>	
 
 	<?php 
 		} else {

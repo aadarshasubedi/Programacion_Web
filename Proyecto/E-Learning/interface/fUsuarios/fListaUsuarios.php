@@ -14,6 +14,11 @@
 	.pagination {
 		margin: 0px 0px;
 	}
+
+	.pagination a {
+		margin: 0px 5px;
+	    border-radius: 5px;
+	}
 </style>
 
 <div class="col-md-12 slide">

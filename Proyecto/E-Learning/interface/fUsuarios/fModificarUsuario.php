@@ -1,6 +1,4 @@
 
-<script src="../../js/jsUsuarios.js"></script>
-
 <?php 
 	
 	$Id_Usuario = $_GET['Id_Usuario'];
@@ -94,3 +92,5 @@
 	</div>
 
 </div>
+
+<script src="../../resourses/js/jsUsuarios.js"></script>

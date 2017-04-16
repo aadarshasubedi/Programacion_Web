@@ -1,10 +1,6 @@
 
-<script src="../../js/jsUsuarios.js"></script>
-
 <div id="datos">
-
 	<button type="button" class="btn btn-primary" onclick="cargarPaginaDatos('../../interface/fUsuarios/fInsertarUsuario.php');">Nuevo Usuario</button>
-	
 </div>
 
 <p><hr></p>
@@ -12,7 +8,7 @@
 <div id="lista">		
  	<?php
 		include ("../../interface/fUsuarios/fListaUsuarios.php");
-  	?>		
+  ?>		
 </div>
 
 <div id="informativo" class="modal fade" data-backdrop="static" data-keyboard="false" role="dialog">
@@ -56,7 +52,6 @@
   </div>
 </div>
 
+<?php include ("../../interface/fUsuarios/fInformacionUsuario.php"); ?>
 
-<?php
-  include ("../../interface/fUsuarios/fInformacionUsuario.php");
-?>
+<script src="../../resourses/js/jsUsuarios.js"></script>

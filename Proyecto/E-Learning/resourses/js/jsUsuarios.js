@@ -1,3 +1,55 @@
+/*=======================*/
+/*        TABLE
+/*=======================*/
+
+window.operateEvents = {
+    'click .info': function (e, value, row) {
+        //alert("Info");
+        infoUsuario(parseInt(row.Identificacion));
+    },
+    'click .edit': function (e, value, row) {
+        //alert("Edit");
+        paginaModificarUsuario(parseInt(row.Identificacion));
+    },
+    'click .remove': function (e, value, row) {
+        //alert("Remove");
+        modalEliminarUsuario(parseInt(row.Identificacion));
+    }
+};
+
+$(function () {
+    $('#tableUsuarios').bootstrapTable({
+        toolbar: ".toolbar",
+        search: true,
+        pagination: true,
+        pageSize: 5,
+        pageList: [5,10,25,50,100],
+        
+        formatShowingRows: function(pageFrom, pageTo, totalRows){
+            return "Showing " + pageFrom + " to " + pageTo + " of " + totalRows + " rows. \n";
+        },
+        
+        formatRecordsPerPage: function(pageNumber){
+            return pageNumber + " Rows per page";
+        }
+    });
+    
+    $(window).resize(function () {
+        $('#tableUsuarios').bootstrapTable('resetView');
+    });    
+});
+
+function operateFormatter(value, row, index) {
+    return [
+        '<button type="button" class="btn btn-default info"><i class="fa fa-info"></i><span> Info</span></button>',
+        '<span> </span>',
+        '<button type="button" class="btn btn-default edit"><i class="fa fa-edit"></i><span> Edit</span></button>',
+        '<span> </span>',
+        '<button type="button" class="btn btn-default remove"><i class="fa fa-remove"></i><span> Remove</span></button>'
+    ].join('');
+}
+
+/**** - ****/
 
 var $Id_UsuarioTemp = "";
 
@@ -9,7 +61,6 @@ function paginaModificarUsuario(Id_Usuario){
 /*=======================*/
 /*        MODALS
 /*=======================*/
-
 
 $("#informativo").on('hidden.bs.modal', function () {
     cargarPagina('../../interface/fUsuarios/fGestionUsuarios.php');
@@ -155,7 +206,11 @@ $("#eliminarU").click(function(){
     cache : false,
     contentType : false,
     processData : false
-    }).done(function(data) {    
+    }).done(function(data) {   
+        $('#tableUsuarios').bootstrapTable('remove', {
+            field: 'Identificacion',
+            values: [$Id_UsuarioTemp]
+        }); 
         $("#mensaje").html(data);
         $('#informativo').modal('show');
     });

@@ -1,5 +1,3 @@
-<script src="../../js/jsRoles.js"></script>
-
 <?php 
 	
 	$Id_Rol = $_GET['Id_Rol'];
@@ -27,12 +25,12 @@
 				<hr>
 				<form id="formularioModificarRol" name="formularioModificarRol" method="POST" role="form">
 
-					<div class="form-group col-md-12">
-						<label class="sr-only" for="Id_Rol">`Codigo del rol</label>
+					<div class="form-group col-md-6">
+						<label class="sr-only" for="Id_Rol">Codigo del rol</label>
 						<input type="text" class="form-control" id="Id_Rol" name="Id_Rol" placeholder="Codigo del rol" required disabled value="<?php echo $Id_Rol; ?>">
 					</div>
 
-					<div class="form-group col-md-4">
+					<div class="form-group col-md-6">
 						<label class="sr-only" for="Nombre">Nombre</label>
 						<input type="text" class="form-control" id="Nombre" name="Nombre" placeholder="<?php echo $Nombre; ?>" required value="<?php echo $Nombre; ?>">
 					</div>
@@ -51,3 +49,5 @@
 		</div>
 	</div>
 </div>
+
+<script src="../../resourses/js/jsRoles.js"></script>

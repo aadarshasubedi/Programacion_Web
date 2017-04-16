@@ -9,37 +9,42 @@
 	$Id_Usuario = $_SESSION['Id_Usuario'];
 	$lista = $control->listar($Id_Usuario);
 ?>
+
+<style>
+	.pagination {
+		margin: 0px 0px;
+	}
+</style>
+
 <div class="col-md-12 slide">
 	<?php 
 	if($lista){
 	?>
-	<div class="table-responsive">					
-		<table class="table table-hover">
-			<thead>
-				<tr>
-					<th><p>Identificacion</p></th>
-					<th><p>Nombre Completo</p></th>
-					<th colspan="3" style="text-align:center;"><p>Opciones</p></th>
-				</tr>
-			</thead>
-			<tbody>
-				<?php 					
-					foreach ($lista as $usuario){
-					
+
+	<div class="col-md-12">                    
+        <table id="tableUsuarios">
+            <thead>
+                <th class="text-center" data-field="Identificacion" data-sortable="true">Identificacion</th>
+            	<th class="text-center" data-field="Nombre" data-sortable="true">Nombre</th>
+            	<th class="text-center" data-field="operate" data-formatter="operateFormatter" data-events="operateEvents">Opciones</th>
+            </thead>
+            <tbody>
+                <?php 
+
+                    foreach ($lista as $usuario){
+		
 						echo "<tr>";
 						echo 	"<td>".$usuario->getId_Usuario()."</td>";
-						echo 	"<td>".$usuario->getNombre()." ".$usuario->getPrimer_Apellido()." ".$usuario->getSegundo_Apellido()."</td>";
-
-						echo 	"<td style=\"text-align:center;\"><button class=\"btn btn-info\" type=\"button\" onclick=\"infoUsuario('".$usuario->getId_Usuario()."')\"><span class='glyphicon glyphicon-list-alt'></span> Ver</button></td>";
-						echo 	"<td style=\"text-align:center;\"><button class=\"btn btn-danger\" type=\"button\" onclick=\"modalEliminarUsuario('".$usuario->getId_Usuario()."')\"><span class='glyphicon glyphicon-trash'></span> Eliminar</button></td>";
-						echo 	"<td style=\"text-align:center;\"><button class=\"btn btn-success\" type=\"button\" onclick=\"paginaModificarUsuario('".$usuario->getId_Usuario()."')\"><span class='glyphicon glyphicon-pencil'></span> Modificar</button></td>";
+						echo 	"<td class=\"text-left\">".$usuario->getNombre()." ".$usuario->getPrimer_Apellido()." ".$usuario->getSegundo_Apellido()."</td>";
 						echo "</tr>";
-						
+					
 					}
-				?>
-			</tbody>
-		</table>				
-	</div>
+
+                ?>
+            </tbody>
+        </table>          
+        <hr>
+    </div>
 
 	<?php 
 		} else {

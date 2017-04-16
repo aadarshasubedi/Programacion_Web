@@ -11,19 +11,19 @@
     <div class="carousel-inner" role="listbox">
 
       <div class="item active">
-        <img src="../js/images/img001.jpg" alt="Imagen 001" width="460" height="345">
+        <img src="../resourses/images/img001.jpg" alt="Imagen 001" width="460" height="345">
         <div class="carousel-caption">
         </div>
       </div>
 
       <div class="item">
-        <img src="../js/images/img002.jpg" alt="Imagen 002" width="460" height="345">
+        <img src="../resourses/images/img002.jpg" alt="Imagen 002" width="460" height="345">
         <div class="carousel-caption">
         </div>
       </div>
 
       <div class="item">
-        <img src="../js/images/img003.jpg" alt="Imagen 003" width="460" height="345">
+        <img src="../resourses/images/img003.jpg" alt="Imagen 003" width="460" height="345">
         <div class="carousel-caption">
         </div>
       </div>

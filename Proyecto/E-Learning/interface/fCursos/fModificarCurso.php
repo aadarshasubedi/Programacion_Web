@@ -1,5 +1,3 @@
-<script src="../../js/jsCursos.js"></script>
-
 <?php 
 	
 	$Id_Curso = $_GET['Id_Curso'];
@@ -57,3 +55,5 @@
 		</div>
 	</div>
 </div>
+
+<script src="../../resourses/js/jsCursos.js"></script>

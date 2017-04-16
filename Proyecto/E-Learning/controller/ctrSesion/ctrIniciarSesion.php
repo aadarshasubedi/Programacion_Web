@@ -14,7 +14,7 @@
 	if(!$usuario){
 		header("location: ../../interface/index.php");
 	} else {
-		if($usuario['Rol'] == 'Administrador'){
+		if($usuario['Rol'] == '1'){
 
 			$_SESSION['Rol'] = $usuario['Rol'];
 			$_SESSION['Id_Usuario'] = $usuario['Id_Usuario'];
@@ -22,7 +22,7 @@
 			
 			header("location: ../../interface/fAdministrador/indexAdministrador.php");
 
-		} else if($usuario['Rol'] == 'Estudiante'){
+		} else if($usuario['Rol'] == '5'){
 
 			$_SESSION['Rol'] = $usuario['Rol'];
 			$_SESSION['Id_Usuario'] = $usuario['Id_Usuario'];
@@ -30,7 +30,7 @@
 				
 			header("location: ../../interface/fEstudiante/indexEstudiante.php");
 
-		} else if($usuario['Rol'] == 'Editor'){
+		} else if($usuario['Rol'] == '2'){
 
 			$_SESSION['Rol'] = $usuario['Rol'];
 			$_SESSION['Id_Usuario'] = $usuario['Id_Usuario'];
@@ -38,7 +38,7 @@
 				
 			header("location: ../../interface/fEditor/indexEditor.php");
 
-		} else if($usuario['Rol'] == 'Moderador'){
+		} else if($usuario['Rol'] == '3'){
 
 			$_SESSION['Rol'] = $usuario['Rol'];
 			$_SESSION['Id_Usuario'] = $usuario['Id_Usuario'];
@@ -46,7 +46,7 @@
 				
 			header("location: ../../interface/fModerador/indexModerador.php");
 
-		} else if($usuario['Rol'] == 'Profesor'){
+		} else if($usuario['Rol'] == '4'){
 
 			$_SESSION['Rol'] = $usuario['Rol'];
 			$_SESSION['Id_Usuario'] = $usuario['Id_Usuario'];

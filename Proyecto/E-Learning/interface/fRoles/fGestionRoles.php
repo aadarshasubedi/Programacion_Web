@@ -1,6 +1,4 @@
 
-<script src="../../js/jsRoles.js"></script>
-
 <div id="datos">
 
 	<button type="button" class="btn btn-primary" onclick="cargarPaginaDatos('../../interface/fRoles/fInsertarRol.php');">Nuevo Rol</button>
@@ -10,9 +8,7 @@
 <p><hr></p>
 
 <div id="lista">		
- 	<?php
-		include ("../../interface/fRoles/fListaRoles.php");
-  	?>		
+ 	<?php include ("../../interface/fRoles/fListaRoles.php"); ?>		
 </div>
 
 <div id="informativo" class="modal fade" data-backdrop="static" data-keyboard="false" role="dialog">
@@ -55,3 +51,5 @@
 
   </div>
 </div>
+
+<script src="../../resourses/js/jsRoles.js"></script>

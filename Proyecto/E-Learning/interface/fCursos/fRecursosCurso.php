@@ -1,5 +1,5 @@
 
-<script src="../../js/jsRecurso.js"></script>
+<script src="../../resourses/js/jsRecurso.js"></script>
 
 <?php 
 	header('Content-Type: text/html; charset=UTF-8');
@@ -21,10 +21,6 @@
 ?>
 
 <style>
-	.sinPunto {
-		list-style: none;
-	}
-
 	.sinEstilo {
 		height: 50px;
 		border-style: none;
@@ -118,3 +114,5 @@
 
 	</div>
 </div>
+
+<script src="../../resurses/js/jsRecurso.js"></script>

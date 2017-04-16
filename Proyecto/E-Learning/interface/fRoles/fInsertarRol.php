@@ -1,5 +1,3 @@
-<script src="../../js/jsRoles.js"></script>
-
 <div class="row slide">
 
 	<div class="col-md-12">
@@ -27,3 +25,5 @@
 		</div>
 	</div>
 </div>
+
+<script src="../../resourses/js/jsRoles.js"></script>

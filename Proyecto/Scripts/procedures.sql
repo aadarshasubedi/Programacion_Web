@@ -71,7 +71,7 @@ CREATE PROCEDURE pr_loginUsuario
 		        U.Nombre, 
 				U.Primer_Apellido, 
 				U.Segundo_Apellido, 
-				R.Nombre                           'Rol'
+				R.Id_Rol                           'Rol'
 		FROM    bd_elearning.tb_usuario_rol         UR
 		        INNER JOIN bd_elearning.tb_rol      R ON 
 				    (UR.Id_Rol = R.Id_Rol)

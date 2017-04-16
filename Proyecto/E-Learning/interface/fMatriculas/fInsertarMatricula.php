@@ -1,4 +1,4 @@
-<script src="../../js/jsMatricula.js"></script>
+<script src="../../resourses/js/jsMatricula.js"></script>
 
 <?php
 	session_start();
@@ -9,7 +9,6 @@
 	$control = new ctrMatriculas;
 	$Id_Usuario = $_SESSION['Id_Usuario'];
 	$listaUsuarios = $control->listarUsuario($Id_Usuario);
-	//$listaCursos = $control->listarCurso();
 
 ?>
 
@@ -47,29 +46,24 @@
 						<option value="#" selected disabled>Seleccione una Opción</option>
 					</select>
 					</div>
-						<div class="form-group col-md-4"></div>
 
-						<div class="form-group">
-
-						</div>
-
-						<div class="form-group text-center col-md-12">
-							<!--button type="button" class="btn btn-danger" onclick="cargarPagina('../../interface/index.php');">Cancelar</button-->
-							<button type="submit" class="btn btn-primary">Agregar</button>
-						</div>
-					</form>
-				</div>
+					<div class="form-group text-center col-md-12">
+						<button type="button" class="btn btn-danger" onclick="cargarPagina('../../interface/index.php');">Cancelar</button>
+						<button type="submit" class="btn btn-primary">Agregar</button>
+					</div>
+				</form>
 			</div>
-				<?php 
-					} else {
-						echo 
-						'
-							<div class="alert alert-warning">
-								<strong>Ups!</strong> No se han encontrado Usuarios o Cursos registrados.
-							</div>
-						';
-					}
-				 ?>
 		</div>
-
+			<?php 
+				} else {
+					echo 
+					'
+						<div class="alert alert-warning">
+							<strong>Ups!</strong> No se han encontrado Usuarios o Cursos registrados.
+						</div>
+					';
+				}
+			 ?>
 	</div>
+
+</div>

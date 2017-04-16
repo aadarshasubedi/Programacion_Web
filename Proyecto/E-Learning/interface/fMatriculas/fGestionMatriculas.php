@@ -1,11 +1,6 @@
 
-<script src="../../js/jsMatricula.js"></script>
-
-
 <div id="lista">		
- 	<?php
-		include ("../../interface/fMatriculas/fInsertarMatricula.php");
-  	?>		
+ 	<?php include ("../../interface/fMatriculas/fInsertarMatricula.php"); ?>		
 </div>
 
 <div id="informativo" class="modal fade" data-backdrop="static" data-keyboard="false" role="dialog">
@@ -48,3 +43,5 @@
 
   </div>
 </div>
+
+<script src="../../resourses/js/jsMatricula.js"></script>

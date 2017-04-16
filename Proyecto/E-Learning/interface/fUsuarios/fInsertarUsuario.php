@@ -1,6 +1,4 @@
 
-<script src="../../js/jsUsuarios.js"></script>
-
 <?php 
 	header('Content-Type: text/html; charset=UTF-8');
 	include("../../controller/ctrRoles/ctrRoles.php");
@@ -69,19 +67,21 @@
 					   	 ?>
 					   </select>
 					</div>
-						<div class="form-group col-md-4"></div>
+					<div class="form-group col-md-4"></div>
 
-						<div class="form-group">
+					<div class="form-group">
 
-						</div>
+					</div>
 
-						<div class="form-group text-center col-md-12">
-							<button type="button" class="btn btn-danger" onclick="cargarPagina('../../interface/fUsuarios/fGestionUsuarios.php');">Cancelar</button>
-							<button type="submit" class="btn btn-primary">Agregar</button>
-						</div>
-					</form>
-				</div>
+					<div class="form-group text-center col-md-12">
+						<button type="button" class="btn btn-danger" onclick="cargarPagina('../../interface/fUsuarios/fGestionUsuarios.php');">Cancelar</button>
+						<button type="submit" class="btn btn-primary">Agregar</button>
+					</div>
+				</form>
 			</div>
 		</div>
-
 	</div>
+
+</div>
+
+<script src="../../resourses/js/jsUsuarios.js"></script>

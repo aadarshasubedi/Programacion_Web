@@ -63,7 +63,36 @@ function cargarCursoEstudiante(Id_Curso){
     $('#contenedor').load("../../interface/fEstudiante/fRecursosCurso.php?Id_Curso="+Id_Curso);
 }
 
+
 /***** Agregar Curso *****/
+(function($,W,D){
+    var JQUERY4U = {};
+    JQUERY4U.UTIL = {
+        setupFormValidation: function(){
+            $("#formularioCurso").validate({
+                rules: {
+                    Nombre: "required",
+                    Fecha_Inicio: "required",
+                    Fecha_Final: "required",
+                }, 
+                messages: {
+                    Nombre: "Campo Requerido",
+                    Fecha_Inicio: "Campo Requerido",
+                    Fecha_Final: "Campo Requerido"
+                },
+
+                submitHandler: function(form) {                 
+                    agregarCurso();
+                }
+            });
+        }
+    }    
+    $(D).ready(function($) {
+        JQUERY4U.UTIL.setupFormValidation();
+    });
+ 
+} ) (jQuery, window, document);
+
 function agregarCurso(){
     var formData = new FormData(document.getElementById("formularioCurso"));   
     formData.append("opcion", 1);    

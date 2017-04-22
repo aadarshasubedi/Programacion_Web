@@ -28,7 +28,7 @@
 
 					<div class="form-group text-center col-md-12">
 						<button type="button" class="btn btn-danger" onclick="cargarPagina('../../interface/fCursos/fGestionCursos.php');">Cancelar</button>
-						<button type="submit" onclick="agregarCurso();" class="btn btn-primary">Agregar</button>
+						<button type="submit" class="btn btn-primary">Agregar</button>
 					</div>
 				</form>
 			</div>

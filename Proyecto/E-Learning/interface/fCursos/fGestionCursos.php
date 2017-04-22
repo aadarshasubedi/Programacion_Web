@@ -4,7 +4,7 @@
 <div id="datos">
   <?php 
     session_start();
-    if($_SESSION['Rol'] == 'Administrador'){
+    if($_SESSION['Rol'] == '1'){
   ?>
 	<button type="button" class="btn btn-primary" onclick="cargarPaginaDatos('../../interface/fCursos/fInsertarCurso.php');">Nuevo Curso</button>
 	<?php } ?>

@@ -11,17 +11,19 @@
 				<hr>
 				<form id="formularioCurso" name="formularioCurso" method="POST" role="form">
 
-					<div class="form-group col-md-6">
+					<div class="form-group col-md-4">
 						<label class="sr-only" for="Nombre">Nombre</label>
 						<input type="text" class="form-control" id="Nombre" name="Nombre" placeholder="Nombre del Curso" required>
 					</div>
 
-					<div class="form-group col-md-6">
-						<label class="sr-only" for="Periodo">Periodo</label>
-						<select class="form-control" name="Periodo" id="Periodo">
-							<option value="1">I Ciclo</option>
-							<option value="2">II Ciclo</option>
-						</select>
+					<div class="form-group col-md-4">
+						<label class="sr-only" for="Fecha_Inicio">Fecha Inicio</label>
+						<input type="date" class="form-control" id="Fecha_Inicio" name="Fecha_Inicio" placeholder="Fecha de Inicio" required>
+					</div>
+
+					<div class="form-group col-md-4">
+						<label class="sr-only" for="Fecha_Final">Fecha Final</label>
+						<input type="date" class="form-control" id="Fecha_Final" name="Fecha_Final" placeholder="Fecha Finalizacion" required>
 					</div>
 
 					<div class="form-group text-center col-md-12">

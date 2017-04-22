@@ -144,6 +144,28 @@ class DAO_Curso implements ICurso {
         }
     }
 
+    public function consultarExistenciaCurso($curso){
+        try {
+            $conn = $this->dtConexion->abrirConexion(); 
+            $nombre = $curso->getNombre();
+            $fecha_Inicio = $curso->getFecha_Inicio();
+            $fecha_Final = $curso->getFecha_Final();
+            $validacion = array();   
+
+            $stmt = $conn->prepare('SELECT Id_Curso FROM bd_elearning.tb_curso WHERE Nombre = ? AND Fecha_Inicio = ? AND Fecha_Final = ?'); 
+            $stmt->bindParam(1, $nombre, PDO::PARAM_STR);
+            $stmt->bindParam(2, $fecha_Inicio, PDO::PARAM_INT);
+            $stmt->bindParam(3, $fecha_Final, PDO::PARAM_INT);
+            $stmt->execute();
+            $validacion = $stmt->fetchALL();  
+
+            $this->dtConexion->cerrarConexion($conn); 
+            return $validacion;
+        } catch (PDOException $e) {
+            echo $e->getMessage();
+            return false;
+        } 
+    }
     
 }
  

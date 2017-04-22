@@ -21,11 +21,17 @@
 
 			$matricula = new dMatricula;
 
-			$periodo = explode("-", $_POST['Id_Curso']);
+			$id_Curso = $_POST['Id_Curso'];
+			$curso = $this->BL_daoCurso->consultar($id_Curso);
+			$fecha_Inicio = date_create_from_format('Y-m-d', $curso[0]['Fecha_Inicio']);
+			$fecha_Final = date_create_from_format('Y-m-d', $curso[0]['Fecha_Final']);
 
-			$matricula->setPeriodo($periodo[1]);
+			$diferencia = $fecha_Inicio->diff($fecha_Final);
+			$periodo = ( $diferencia->y * 12 ) + $diferencia->m;
+			
+			$matricula->setPeriodo($periodo);
 	      	$matricula->setId_Usuario($_POST['Id_Usuario']);
-	      	$matricula->setId_Curso($periodo[0]);
+	      	$matricula->setId_Curso($id_Curso);
 	      	$matricula->setAño(date('Y-m-d'));
 	      	$matricula->setFecha_Matricula(date('Y-m-d H:i:s'));
 		 	

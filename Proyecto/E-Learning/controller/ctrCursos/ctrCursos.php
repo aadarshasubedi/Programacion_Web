@@ -21,21 +21,19 @@
 
 			$año = date('Y');
 	 		$dCurso->setNombre($_POST['Nombre']);
-	 		$periodo = $_POST['Periodo'];
-	 		if($periodo == 1){
-		 		$dCurso->setFecha_Inicio(date($año.'-02-07'));		 		
-		 		$dCurso->setFecha_Final(date($año.'-06-07'));
+	 		$dCurso->setFecha_Inicio($_POST['Fecha_Inicio']);
+	 		$dCurso->setFecha_Final($_POST['Fecha_Final']);
+		 	
+		 	if($this->BL_daoCurso->consultarExistenciaCurso($dCurso)){
+		 		echo 'Ya existe dicho curso en el periodo seleccionado.';
 		 	}
 		 	else{
-		 		$dCurso->setFecha_Inicio(date($año.'-07-20'));		 		
-		 		$dCurso->setFecha_Final(date($año.'-11-20'));	
+		 		if($this->BL_daoCurso->agregar($dCurso)){
+		      		echo 'Se ha ingresado el curso correctamente.';
+		      	} else {
+		      		echo 'Se ha producido un error al ingresar el curso.';
+		      	}
 		 	}
-		 	
-		 	if($this->BL_daoCurso->agregar($dCurso)){
-	      		echo 'Se ha ingresado el curso correctamente.';
-	      	} else {
-	      		echo 'Se ha producido un error al ingresar el curso.';
-	      	}
 		}
 
 		public function eliminar(){

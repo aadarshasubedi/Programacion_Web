@@ -356,7 +356,7 @@ CREATE TABLE IF NOT EXISTS `bd_elearning`.`tb_Recurso_Rol` (
 DROP TABLE IF EXISTS `bd_elearning`.`tb_Curso_Usuario` ;
 
 CREATE TABLE IF NOT EXISTS `bd_elearning`.`tb_Curso_Usuario` (
-  `Id_Curso_Usuario` INT(10) NOT NULL,
+  `Id_Curso_Usuario` INT(10) NOT NULL AUTO_INCREMENT,
   `Id_Curso` INT(10) NOT NULL,
   `Id_Usuario` INT(10) NOT NULL,
   PRIMARY KEY (`Id_Curso_Usuario`),

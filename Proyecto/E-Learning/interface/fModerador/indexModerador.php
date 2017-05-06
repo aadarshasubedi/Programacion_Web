@@ -58,6 +58,7 @@
     <script src="../../resourses/js/jQuery.js"></script>
     <script src="../../resourses/bootstrap/js/bootstrap.min.js"></script>            
     <script src="../../resourses/js/jquery.validate.min.js"></script>
+    <script src="../../resourses/bootstrap/js/bootstrap-table.js"></script>
     <script src="../../resourses/js/jsPrincipal.js"></script> 
     <script src="../../resourses/js/jsAcciones.js"></script>
 </html>

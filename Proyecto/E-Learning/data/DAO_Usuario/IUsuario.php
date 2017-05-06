@@ -7,6 +7,8 @@ interface IUsuario{
     public function consultar($Id_Usuario);
     public function consultarModificar($Id_Usuario);
     public function listar($Id_Usuario);
+    public function listarMatricula();
+    public function listarProfesores();
 }
 
 ?>

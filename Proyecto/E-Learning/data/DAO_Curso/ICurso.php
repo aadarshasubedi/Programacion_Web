@@ -9,6 +9,7 @@ interface ICurso {
     public function cursosEstudiantes($Id_Usuario);
     public function listarCursos($Id_Usuario);
     public function consultarExistenciaCurso($curso);
+    public function listaCursosProfesor($Id_Usuario);
 }
 
 ?>

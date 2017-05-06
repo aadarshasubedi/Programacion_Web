@@ -17,11 +17,13 @@ class DAO_Curso implements ICurso {
             $Nombre = $curso->getNombre();
             $Fecha_Inicio = $curso->getFecha_Inicio();
             $Fecha_Final = $curso->getFecha_Final();
+            $Id_Profesor = $curso->getId_Profesor();
 
-            $stmt = $conn->prepare('CALL pr_agregar_Curso(?,?,?)');
+            $stmt = $conn->prepare('CALL pr_agregar_Curso(?,?,?,?)');
             $stmt->bindParam(1, $Nombre, PDO::PARAM_STR);
             $stmt->bindParam(2, $Fecha_Inicio, PDO::PARAM_STR);
             $stmt->bindParam(3, $Fecha_Final, PDO::PARAM_STR);
+            $stmt->bindParam(4, $Id_Profesor, PDO::PARAM_INT);
 
             $stmt->execute();
 
@@ -41,12 +43,14 @@ class DAO_Curso implements ICurso {
             $Nombre = $curso->getNombre();
             $Fecha_Inicio = $curso->getFecha_Inicio();
             $Fecha_Final = $curso->getFecha_Final();
+            $Id_Profesor = $curso->getId_Profesor();
 
-            $stmt = $conn->prepare('CALL pr_modificar_Curso(?,?,?,?)');
+            $stmt = $conn->prepare('CALL pr_modificar_Curso(?,?,?,?,?)');
             $stmt->bindParam(1, $Id_Curso, PDO::PARAM_STR);
             $stmt->bindParam(2, $Nombre, PDO::PARAM_STR);
             $stmt->bindParam(3, $Fecha_Inicio, PDO::PARAM_STR);
             $stmt->bindParam(4, $Fecha_Final, PDO::PARAM_STR);
+            $stmt->bindParam(5, $Id_Profesor, PDO::PARAM_INT);
        
             $stmt->execute();
 
@@ -167,6 +171,23 @@ class DAO_Curso implements ICurso {
         } 
     }
     
+    public function listaCursosProfesor($Id_Usuario){
+        try{
+            $conn = $this->dtConexion->abrirConexion(); 
+            $listaCursosProfesor = array(); 
+
+            $stmt = $conn->prepare('CALL pr_listaCursosProfesor(?)'); 
+            $stmt->bindParam(1, $Id_Usuario, PDO::PARAM_INT);
+            $stmt->execute();
+            $listaCursosProfesor = $stmt->fetchALL();
+
+            $this->dtConexion->cerrarConexion($conn);
+            return $listaCursosProfesor; 
+        } catch(PDOException $e){
+            echo $e->getMessage();
+            return false;
+        }
+    }
 }
  
 ?>

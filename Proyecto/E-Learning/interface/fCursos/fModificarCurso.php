@@ -10,7 +10,10 @@
 		$Nombre = $curso->getNombre();
  		$Fecha_Inicio = $curso->getFecha_Inicio();
  		$Fecha_Final = $curso->getFecha_Final();
+ 		$Id_Profesor = $curso->getId_Profesor();
 	}
+
+	$listaProfesores = $control->listarProfesores();
 ?>
 
 <div class="row slide">
@@ -46,9 +49,17 @@
 						<input type="date" class="form-control" id="Fecha_Final" name="Fecha_Final" placeholder="<?php echo $Fecha_Final; ?>" required value="<?php echo $Fecha_Final; ?>">
 					</div>
 
+					<div class="form-group col-md-4">
+						<select class="form-control" name="Id_Profesor" id="Id_Profesor">
+						<?php foreach ($listaProfesores as $usuario) { ?>
+								<option value="<?php echo $usuario->getId_Usuario(); ?>" <?php if($usuario->getId_Usuario() == $Id_Profesor){ echo 'selected'; } ?>><?php echo $usuario->getNombre()." ".$usuario->getPrimer_Apellido()." ".$usuario->getSegundo_Apellido(); ?></option>						
+						<?php }	?>
+						</select>
+					</div>
+
 					<div class="form-group text-center col-md-12">
 						<button type="button" class="btn btn-danger" onclick="cargarPagina('../../interface/fCursos/fGestionCursos.php');">Cancelar</button>
-						<button type="submit" onclick="modificarCurso();" class="btn btn-primary">Actualizar</button>
+						<button type="submit" class="btn btn-primary">Actualizar</button>
 					</div>
 				</form>
 			</div>

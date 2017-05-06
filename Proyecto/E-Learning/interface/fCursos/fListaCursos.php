@@ -3,8 +3,16 @@
 
 	include ("../../controller/ctrCursos/ctrCursos.php");
 
+	$Id_Rol = $_SESSION['Rol'];
+	$Id_Usuario = $_SESSION['Id_Usuario'];
+
 	$control = new ctrCursos;
-	$lista = $control->listar();
+
+	if($Id_Rol == 4){
+		$lista = $control->listaCursosProfesor($Id_Usuario);
+	} else {
+		$lista = $control->listar();
+	}
 ?>
 
 <style>

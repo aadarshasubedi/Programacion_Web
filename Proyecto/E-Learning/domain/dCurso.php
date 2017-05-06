@@ -8,6 +8,7 @@ header('Content-Type: text/html; charset=ISO-8859-1');
 		private $Duracion;
 		private $Fecha_Inicio;
 		private $Fecha_Final;
+		private $Id_Profesor;
 
 
 		public function __construct(){}
@@ -50,6 +51,14 @@ header('Content-Type: text/html; charset=ISO-8859-1');
 
 		public function getFecha_Final() {
 			return $this->Fecha_Final;
+		}
+
+		public function setId_Profesor($Id_Profesor) {
+			$this->Id_Profesor = $Id_Profesor;
+		}
+
+		public function getId_Profesor() {
+			return $this->Id_Profesor;
 		}
 	}
 

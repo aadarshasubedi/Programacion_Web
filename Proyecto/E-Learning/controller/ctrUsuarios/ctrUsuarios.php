@@ -145,6 +145,25 @@
 	      		echo 'Se ha producido un error al modificar el usuario.';
 	      	}
 		}
+
+		public function listarProfesores(){
+
+		 	$lista = array();
+		 	$valor = $this -> BL_daoUsuario -> listarProfesores();
+
+		 	foreach ($valor as $value) {
+		 		$dUsuario = new dUsuario;
+
+		 		$dUsuario->setId_Usuario($value['Id_Usuario']);
+		 		$dUsuario->setNombre($value['Nombre']);
+		 		$dUsuario->setPrimer_Apellido($value['Primer_Apellido']);
+		 		$dUsuario->setSegundo_Apellido($value['Segundo_Apellido']);
+
+		 		array_push($lista, $dUsuario);
+		 	}
+
+		 	return $lista;
+		}
 	}
 
 	if($_POST != null){

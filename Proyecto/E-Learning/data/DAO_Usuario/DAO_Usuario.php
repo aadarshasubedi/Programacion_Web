@@ -148,8 +148,8 @@ class DAO_Usuario implements IUsuario {
         try {      
             $conn = $this->dtConexion->abrirConexion(); 
             $listaUsuarios = array(); 	
-            $stmt = $conn->prepare('SELECT Id_Usuario, Nombre, Primer_Apellido, Segundo_Apellido 
-                                    FROM tb_Usuario WHERE Id_Usuario <> '.$Id_Usuario.' ORDER BY Nombre'); 
+            $stmt = $conn->prepare('CALL pr_listarUsuarios(?)');
+            $stmt->bindParam(1, $Id_Usuario, PDO::PARAM_INT); 
             $stmt->execute();
             $listaUsuarios = $stmt->fetchALL();
 
@@ -159,6 +159,38 @@ class DAO_Usuario implements IUsuario {
     		echo $e->getMessage();
             return false;
     	}        
+    }
+
+    public function listarMatricula() {
+        try {      
+            $conn = $this->dtConexion->abrirConexion(); 
+            $listaUsuarios = array();   
+            $stmt = $conn->prepare('CALL pr_listarUsuariosMatricula()');
+            $stmt->execute();
+            $listaUsuarios = $stmt->fetchALL();
+
+            $this->dtConexion->cerrarConexion($conn);
+            return $listaUsuarios;
+        } catch (PDOException $e) {
+            echo $e->getMessage();
+            return false;
+        }        
+    }
+
+    public function listarProfesores() {
+        try {      
+            $conn = $this->dtConexion->abrirConexion(); 
+            $listaProfesores = array();   
+            $stmt = $conn->prepare('CALL pr_listarProfesores()');
+            $stmt->execute();
+            $listaProfesores = $stmt->fetchALL();
+
+            $this->dtConexion->cerrarConexion($conn);
+            return $listaProfesores;
+        } catch (PDOException $e) {
+            echo $e->getMessage();
+            return false;
+        }        
     }
 }
  

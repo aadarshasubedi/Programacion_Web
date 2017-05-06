@@ -50,7 +50,7 @@
 		public function listarUsuario($Id_Usuario){
 
 		 	$lista = array();
-		 	$valor = $this -> BL_daoUsuario -> listar($Id_Usuario);
+		 	$valor = $this -> BL_daoUsuario -> listarMatricula();
 
 		 	foreach ($valor as $value) {
 		 		$dUsuario = new dUsuario;

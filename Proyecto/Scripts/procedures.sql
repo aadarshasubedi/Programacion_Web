@@ -89,7 +89,8 @@ CREATE PROCEDURE pr_agregar_Curso
 (
 	IN p_nombre       varchar(30), 
 	IN p_Fecha_Inicio date, 
-	IN p_Fecha_Final  date
+	IN p_Fecha_Final  date,
+	IN p_Id_Profesor  INT(10) 
 )
  BEGIN
   	START TRANSACTION;
@@ -97,11 +98,13 @@ CREATE PROCEDURE pr_agregar_Curso
 		INSERT INTO `bd_elearning`.`tb_curso` (`Nombre`, 
 		                                       `Duracion`, 
 											   `Fecha_Inicio`, 
-											   `Fecha_Final`) 
+											   `Fecha_Final`,
+											   `Id_Profesor`) 
 		VALUES (p_nombre, 
 		        FLOOR(DATEDIFF(DATE(p_Fecha_Final), DATE(p_Fecha_Inicio))/7), 
 				p_Fecha_Inicio, 
-				p_Fecha_Final);
+				p_Fecha_Final,
+				p_Id_Profesor);
 	COMMIT;
  END $$
 DELIMITER ;
@@ -113,7 +116,8 @@ CREATE PROCEDURE pr_modificar_Curso
 	IN p_Id_Curso     INT(10), 
 	IN p_Nombre       VARCHAR(30), 
 	IN p_Fecha_Inicio DATE, 
-	IN p_Fecha_Final  DATE
+	IN p_Fecha_Final  DATE,
+	IN p_Id_Profesor  INT(10)
 )
  BEGIN
   	START TRANSACTION;
@@ -122,7 +126,8 @@ CREATE PROCEDURE pr_modificar_Curso
 		SET    Nombre = p_Nombre,
                Duracion = FLOOR(DATEDIFF(DATE(p_Fecha_Final), DATE(p_Fecha_Inicio))/7),
                Fecha_Inicio = p_Fecha_Inicio,
-               Fecha_Final = p_Fecha_Final
+               Fecha_Final = p_Fecha_Final,
+			   Id_Profesor = p_Id_Profesor
 		WHERE  Id_Curso = p_Id_Curso;
 	COMMIT;
  END $$
@@ -154,8 +159,14 @@ BEGIN
 	START TRANSACTION;
     	SET AUTOCOMMIT = 0;
                        
-		SELECT Id_Curso, Nombre, Duracion, Fecha_Inicio, Fecha_Final 
-        FROM bd_elearning.tb_curso WHERE Id_Curso = p_Id_Curso;
+		SELECT 	C.Id_Curso, 
+				C.Nombre, 
+				C.Duracion, 
+				C.Fecha_Inicio, 
+				C.Fecha_Final,
+				C.Id_Profesor
+        FROM 	tb_curso C
+		WHERE 	Id_Curso = p_Id_Curso;
                         
 	COMMIT;
 END $$
@@ -550,6 +561,86 @@ WHERE   Id_Curso NOT IN ( SELECT     C.Id_Curso
 				          INNER JOIN bd_elearning.tb_curso_usuario CU ON
 									(CU.Id_Curso = C.Id_Curso)
 		                   WHERE CU.Id_Usuario = p_Id_Usuario);
+                        
+	COMMIT;
+END $$
+DELIMITER ;
+
+DROP PROCEDURE IF EXISTS pr_listarUsuariosMatricula;
+DELIMITER $$
+CREATE PROCEDURE pr_listarUsuariosMatricula
+(
+	
+)
+BEGIN
+	START TRANSACTION;
+    	SET AUTOCOMMIT = 0;
+                       
+		SELECT  U.Id_Usuario, U.Nombre, U.Primer_Apellido, U.Segundo_Apellido 
+		FROM    tb_Usuario U 
+				INNER JOIN tb_Usuario_Rol UR ON
+					U.Id_Usuario = UR.Id_Usuario
+		WHERE   UR.Id_Usuario = 5 
+		ORDER BY Nombre;
+                        
+	COMMIT;
+END $$
+DELIMITER ;
+
+DROP PROCEDURE IF EXISTS pr_listarUsuarios;
+DELIMITER $$
+CREATE PROCEDURE pr_listarUsuarios
+(
+	IN p_Id_Usuario   INT(10)
+)
+BEGIN
+	START TRANSACTION;
+    	SET AUTOCOMMIT = 0;
+                       
+		SELECT 	Id_Usuario, Nombre, Primer_Apellido, Segundo_Apellido 
+		FROM 	tb_Usuario 
+		WHERE 	Id_Usuario <> p_Id_Usuario
+		ORDER BY Nombre;
+                        
+	COMMIT;
+END $$
+DELIMITER ;
+
+DROP PROCEDURE IF EXISTS pr_listarProfesores;
+DELIMITER $$
+CREATE PROCEDURE pr_listarProfesores
+(
+	
+)
+BEGIN
+	START TRANSACTION;
+    	SET AUTOCOMMIT = 0;
+                       
+		SELECT  U.Id_Usuario, U.Nombre, U.Primer_Apellido, U.Segundo_Apellido 
+		FROM    tb_Usuario U 
+				INNER JOIN tb_Usuario_Rol UR ON
+					U.Id_Usuario = UR.Id_Usuario
+		WHERE   UR.Id_Rol = 4 
+		ORDER BY Nombre;
+                        
+	COMMIT;
+END $$
+DELIMITER ;
+
+DROP PROCEDURE IF EXISTS pr_listaCursosProfesor;
+DELIMITER $$
+CREATE PROCEDURE pr_listaCursosProfesor
+(
+	IN p_Id_Usuario   INT(10)
+)
+
+BEGIN
+	START TRANSACTION;
+    	SET AUTOCOMMIT = 0;
+                       
+		SELECT 	Id_Curso, Nombre, Duracion, Fecha_Inicio, Fecha_Final 
+        FROM 	tb_curso
+		WHERE	Id_Profesor = p_Id_Usuario;
                         
 	COMMIT;
 END $$

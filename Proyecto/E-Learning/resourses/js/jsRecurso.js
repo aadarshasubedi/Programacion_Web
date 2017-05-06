@@ -8,9 +8,17 @@ function cargarRecursosCurso(Id_Curso){
     $("#lista").css("display", "none");
 }
 
-function prueba(d){
-    //tempIdSelect = $(d).attr("identificador");
+function guardaTempRecursoSelected(d){
     tempIdSelect = d;
+    var identificador = $(tempIdSelect).attr("identificador");
+    var id = $(tempIdSelect).attr("id");
+    var texto = "";
+    if (id == 1 || id == 2){
+        texto = $("[identificador="+identificador+"]").find('strong').text();            
+    }else if (id == 4){
+        texto = $("[identificador="+identificador+"]").find('a').text();            
+    }
+    $('#nombreEtiqueta').val(texto);
 }
 
 function guardarConfigurarion(){
@@ -44,6 +52,10 @@ function guardarConfigurarion(){
                 //cargarRecursosCurso(Id_Curso);
             }
         });
+}
+
+function abrirModal(){
+    $("#modalRecurso").modal('show');
 }
 
 $(document).ready(function () {
@@ -97,15 +109,16 @@ function dragAndDrop(){
             ui.item.attr("value","0");
             //$(this).sortable('cancel');
             
-            //$((ui.item).find('li')).attr('onclick','prueba(this);');
+            //$((ui.item).find('li')).attr('onclick','guardaTempRecursoSelected(this);');
             var id = $((ui.item)).attr('id');
             $((ui.item)).attr('identificador',id+""+identificadorId);
             identificadorId++;
             if(id != 3){
-                $(ui.item).attr('onclick','prueba(this);');
-                $((ui.item).find('span')).attr('data-toggle','modal').attr('data-target','#modalRecurso');
-                $((ui.item).find('span')).attr('data-toggle','modal').attr('data-hover','tooltip');
-                $((ui.item).find('span')).attr('data-toggle','modal').attr('title','Configuracion');
+                $(ui.item).attr('onclick','guardaTempRecursoSelected(this);');
+                //$((ui.item).find('span')).attr('data-toggle','modal').attr('data-target','#modalRecurso');
+                $((ui.item).find('span')).attr('onclick','abrirModal();');
+                $((ui.item).find('span')).attr('data-hover','tooltip');
+                $((ui.item).find('span')).attr('title','Configuracion');
                 $((ui.item).find('span')).removeClass( "ui-icon ui-icon-arrowthick-2-n-s" ).addClass( "ui-icon ui-icon-pencil" );
             }        
         }

@@ -38,6 +38,7 @@
 		background-color: transparent;
 	}
 </style>
+		<input value="Abrir modal" class="btn btn-success" type="button" onclick="abrirModal();" name="btnGuardar">
 
 	<!-- Modal -->
 	<div id="modalRecurso" class="modal fade" role="dialog">
@@ -121,7 +122,7 @@
 				<?php 
 					foreach ($listaRecursos as $recurso) {
 						if($recurso->getSemana() == $i){ ?>
-							<li class="ui-state-default sinEstilo" value="0" id="<?php echo $recurso->getId_Tipo_Recurso()?>" identificador="<?php echo $recurso->getIdentificador()?>" onclick="prueba(this);"><span data-hover="tooltip" title="Configuracion" data-toggle="modal" data-target="#modalRecurso" class="ui-icon ui-icon-pencil"></span>
+							<li class="ui-state-default sinEstilo" value="0" id="<?php echo $recurso->getId_Tipo_Recurso()?>" identificador="<?php echo $recurso->getIdentificador()?>" onclick="guardaTempRecursoSelected(this);"><span data-hover="tooltip" title="Configuracion" onclick="abrirModal();" class="ui-icon ui-icon-pencil"></span>
 				<?php 	if($recurso->getId_Tipo_Recurso() == 1){ ?>
 							<strong Id="tituloSeccion"><?php echo $recurso->getNombre()?></strong>
 				<?php } else if($recurso->getId_Tipo_Recurso() == 2){ ?>

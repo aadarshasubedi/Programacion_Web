@@ -113,6 +113,8 @@
 		 		$dRecurso->setSemana($value['Semana']);
 		 		$dRecurso->setSecuencia($value['Secuencia']);
 		 		$dRecurso->setId_Tipo_Recurso($value['Id_Tipo_Recurso']);
+		 		$dRecurso->setIdentificador($value['Identificador']);
+		 		$dRecurso->setNombre($value['Nombre']);
 
 		 		array_push($lista, $dRecurso);
 		 	}

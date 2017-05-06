@@ -449,7 +449,9 @@ CREATE PROCEDURE pr_obtener_recursos_cursos
 				Id_Curso,
 				Semana, 
 				Secuencia,
-				Id_Tipo_Recurso
+				Id_Tipo_Recurso,
+				Identificador,
+                Nombre
 				
 		FROM	tb_Recurso
 		
@@ -563,6 +565,125 @@ BEGIN
 					U.Id_Usuario = UR.Id_Usuario
 		WHERE   UR.Id_Rol = 4 
 		ORDER BY Nombre;
+                        
+	COMMIT;
+END $$
+DELIMITER ;
+
+DROP PROCEDURE IF EXISTS pr_agregar_actualizar_recurso;
+DELIMITER $$
+CREATE PROCEDURE pr_agregar_actualizar_recurso(
+	IN p_Id_Tipo_Recurso	INT(10),
+	IN p_Id_Curso			INT(10),
+	IN p_Recurso_Padre		INT(10),
+	IN p_Nombre				VARCHAR(30),
+	IN p_URL				VARCHAR(255),
+	IN p_Visible			INT(10),
+	IN p_Secuencia			INT(10),
+	IN p_Notas				VARCHAR(100),
+	IN p_Semana				INT(10),
+	IN p_Identificador		INT
+)
+BEGIN
+	
+  	START TRANSACTION;
+    	SET AUTOCOMMIT = 0;
+        
+		IF EXISTS (	SELECT	1
+								FROM 	tb_Recurso
+								WHERE 	Id_Curso = p_Id_Curso
+										AND Id_Tipo_Recurso = p_Id_Tipo_Recurso
+										AND Semana = p_Semana 
+                                        AND Identificador = p_Identificador
+										AND Estado = 0 ) THEN
+			
+					UPDATE 	tb_Recurso 
+					SET		Estado = 1,
+							Secuencia = p_Secuencia,
+                            Notas = p_Notas,
+                            Url = p_Url,
+                            Nombre = p_Nombre
+					WHERE	Id_Curso = p_Id_Curso
+							AND Id_Tipo_Recurso = p_Id_Tipo_Recurso
+							AND Semana = p_Semana
+                            AND Identificador = p_Identificador
+                            AND	Estado = 0 ;
+                            
+		ELSE IF EXISTS ( SELECT	1
+								FROM 	tb_Recurso
+								WHERE 	Id_Curso = p_Id_Curso
+										AND Id_Tipo_Recurso = p_Id_Tipo_Recurso 
+                                        AND Identificador = p_Identificador
+                                        AND Estado = 1) THEN
+					UPDATE 	tb_Recurso 
+					SET		Semana = p_Semana,
+							Secuencia = p_Secuencia,
+                            Notas = p_Notas,
+                            Url = p_Url,
+                            Nombre = p_Nombre
+							WHERE 	Id_Curso = p_Id_Curso
+									AND Id_Tipo_Recurso = p_Id_Tipo_Recurso 
+									AND Identificador = p_Identificador
+									AND Estado = 1;
+		ELSE 
+				INSERT INTO `bd_elearning`.`tb_Recurso` (`Id_Tipo_Recurso`, 
+														 `Id_Curso`, 
+														 `Recurso_Padre`, 
+														 `Nombre`,
+														 `URL`,
+														 `Visible`,
+														 `Secuencia`,
+														 `Notas`,
+														 `Semana`,
+                                                         `Identificador`
+														 ) 
+						VALUES (p_Id_Tipo_Recurso,
+								p_Id_Curso,	
+								p_Recurso_Padre,
+								p_Nombre,			
+								p_URL,			
+								p_Visible,		
+								p_Secuencia,	
+								p_Notas,			
+								p_Semana,
+                                p_Identificador);
+				END IF;
+			END IF;
+	COMMIT;
+END $$
+DELIMITER $$ ;
+
+DROP PROCEDURE IF EXISTS pr_obtener_totalSemanas;
+DELIMITER $$
+CREATE PROCEDURE pr_obtener_totalSemanas
+(
+	IN p_Id_Curso INT(10)
+)
+BEGIN
+	START TRANSACTION;
+    	SET AUTOCOMMIT = 0;
+                       
+		SELECT Duracion
+        FROM bd_elearning.tb_curso 
+        WHERE Id_Curso = p_Id_Curso;
+                        
+	COMMIT;
+END $$
+DELIMITER ;
+
+DROP PROCEDURE IF EXISTS pr_eliminar_recurso;
+DELIMITER $$
+CREATE PROCEDURE pr_eliminar_recurso
+(
+	IN p_Identificador INT(10)
+)
+BEGIN
+	START TRANSACTION;
+    	SET AUTOCOMMIT = 0;
+                       
+		UPDATE bd_elearning.tb_recurso
+        SET Estado = 0
+        WHERE Identificador = p_Identificador;
                         
 	COMMIT;
 END $$

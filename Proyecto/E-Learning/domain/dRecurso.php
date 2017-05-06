@@ -14,6 +14,7 @@ header('Content-Type: text/html; charset=ISO-8859-1');
 		private $Notas;
 		private $Estado;
 		private $Semana;
+		private $Identificador;
 
 
 		public function __construct(){}
@@ -105,6 +106,14 @@ header('Content-Type: text/html; charset=ISO-8859-1');
 		public function getSemana() {
 			return $this->Semana;
 		}			
+
+		public function setIdentificador($Identificador) {
+			$this->Identificador = $Identificador;
+		}
+
+		public function getIdentificador() {
+			return $this->Identificador;
+		}	
 	}
 
 ?>

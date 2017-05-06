@@ -14,21 +14,25 @@
 		}		
 
 		public function guardarRecurso(){
-			$list_order = $_POST['list_order'];
-			$Id_Curso = $_POST['curso']; 
+			if (isset($_POST['semana'])){
+				$semana = $_POST['semana'];
+				$Id_Curso = $_POST['curso']; 
 
-			$list = explode(',' , $list_order);
-			$secuencia = 1;
-			$semana = str_replace('s', '', $list[0]);
-
-			$list[0] = $semana;
-
-			for ($i=0; $i < count($list); $i++) { 
-				$this->BL_daoRecurso->recurso($list[$i], $Id_Curso, $secuencia, $semana, $i);
-				if($i > 0){
-					$secuencia++;
+				 foreach ($semana as $key) {
+				 	$secuencia = 0;
+				 	$key["IdSemana"] = str_replace('semana', '', $key["IdSemana"]);
+				 	echo $key["IdSemana"]."\n";
+				 	foreach($key["recurso"] as $recurso){
+				 		//secuencia por cada recurso
+				 		//echo $recurso["Rec_Identificador"]."\n";
+				 		//echo $recurso["Rec_IdTipo"]."\n";
+				 		//echo $recurso["Rec_Nombre"]."\n\n";
+				 		//echo "Seguiente Recurso"."\n\n";
+				 		$this->BL_daoRecurso->recurso($recurso["Rec_IdTipo"], $Id_Curso, $secuencia, $key["IdSemana"], $recurso["Rec_Nombre"],$recurso["Rec_Identificador"]);
+				 		$secuencia++;
+				 	}
 				}
-			}	
+			}
 		}
 
 		public function consultar(){
@@ -50,6 +54,22 @@
 
 		 	return $lista;
 		}
+
+		public function totalSemanas(){
+			$Id_Curso = $_POST['Id_Curso']; 
+			$semanas = $this -> BL_daoRecurso -> totalSemanas($Id_Curso);
+
+			echo $semanas;
+		}
+
+		public function eliminarRecurso(){
+			if (isset($_POST['IdentificadorRecurso'])){
+				$IdentificadorRecurso = $_POST['IdentificadorRecurso'];
+				$result = $this -> BL_daoRecurso -> eliminarRecurso($IdentificadorRecurso);
+				echo $result;
+			}
+		}
+
 	}
 
 	if($_POST != null){
@@ -58,6 +78,10 @@
 
 		if($op == 1){
 		 	$control->guardarRecurso();
+		} else if($op == 2){
+		 	$control->totalSemanas();
+		} else if($op == 3){
+		 	$control->eliminarRecurso();
 		} 
 	}
 ?>

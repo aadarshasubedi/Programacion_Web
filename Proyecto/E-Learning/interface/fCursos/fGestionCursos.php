@@ -1,5 +1,6 @@
-
+<link href="../../resourses/css/sweetalert.css" rel="stylesheet" type="text/css">
 <script src="../../resourses/js/jsCursos.js"></script>
+<script src="../../resourses/js/sweetalert.min.js"></script> 
 
 <div id="datos">
   <?php 

@@ -1,6 +1,10 @@
+<link rel="stylesheet" href="../../resourses/css/jquery-ui.min.css">
+<link rel="stylesheet" href="../../resourses/css/jquery-ui.theme.min.css">
+<link rel="stylesheet" href="../../resourses/css/jquery-ui.structure.min.css">
 <link href="../../resourses/css/sweetalert.css" rel="stylesheet" type="text/css">
 <script src="../../resourses/js/jsCursos.js"></script>
 <script src="../../resourses/js/sweetalert.min.js"></script> 
+<script src="../../resourses/js/jquery-ui.min.js"></script> 
 
 <div id="datos">
   <?php 

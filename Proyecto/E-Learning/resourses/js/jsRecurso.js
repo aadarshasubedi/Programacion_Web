@@ -104,6 +104,8 @@ function dragAndDrop(){
             if(id != 3){
                 $(ui.item).attr('onclick','prueba(this);');
                 $((ui.item).find('span')).attr('data-toggle','modal').attr('data-target','#modalRecurso');
+                $((ui.item).find('span')).attr('data-toggle','modal').attr('data-hover','tooltip');
+                $((ui.item).find('span')).attr('data-toggle','modal').attr('title','Configuracion');
                 $((ui.item).find('span')).removeClass( "ui-icon ui-icon-arrowthick-2-n-s" ).addClass( "ui-icon ui-icon-pencil" );
             }        
         }
@@ -192,5 +194,3 @@ $(function() {
     .then(dragAndDrop)
     ;
 });
-
-

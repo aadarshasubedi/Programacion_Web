@@ -121,7 +121,7 @@
 				<?php 
 					foreach ($listaRecursos as $recurso) {
 						if($recurso->getSemana() == $i){ ?>
-							<li class="ui-state-default sinEstilo" value="0" id="<?php echo $recurso->getId_Tipo_Recurso()?>" identificador="<?php echo $recurso->getIdentificador()?>" onclick="prueba(this);"><span data-toggle="modal" data-target="#modalRecurso" class="ui-icon ui-icon-pencil"></span>
+							<li class="ui-state-default sinEstilo" value="0" id="<?php echo $recurso->getId_Tipo_Recurso()?>" identificador="<?php echo $recurso->getIdentificador()?>" onclick="prueba(this);"><span data-hover="tooltip" title="Configuracion" data-toggle="modal" data-target="#modalRecurso" class="ui-icon ui-icon-pencil"></span>
 				<?php 	if($recurso->getId_Tipo_Recurso() == 1){ ?>
 							<strong Id="tituloSeccion"><?php echo $recurso->getNombre()?></strong>
 				<?php } else if($recurso->getId_Tipo_Recurso() == 2){ ?>
@@ -141,5 +141,5 @@
 		<?php } ?>	   
 
 	</div>
+
 </div>
-<script src="../../resurses/js/jsRecurso.js"></script>

@@ -8,6 +8,14 @@ function cargarRecursosCurso(Id_Curso){
     $("#lista").css("display", "none");
 }
 
+/*
+Cuando se presiona el icono de cada recurso,
+se guarda en temporal el recurso seleccionado.
+
+Ademas se agrega el nombre del recurso a la variable del modal,
+para que cuando el modal se abra, se vea el nombre que tenía 
+antes de cambiarlo.
+*/
 function guardaTempRecursoSelected(d){
     tempIdSelect = d;
     var identificador = $(tempIdSelect).attr("identificador");
@@ -21,6 +29,10 @@ function guardaTempRecursoSelected(d){
     $('#nombreEtiqueta').val(texto);
 }
 
+/*
+Obtiene todos los recursos que se encuentras en sus respectivas 
+semanas.
+*/
 function guardarConfigurarion(){
         var Id_Curso = $("#Id_Curso").text();
         var lista = [];
@@ -58,6 +70,10 @@ function abrirModal(){
     $("#modalRecurso").modal('show');
 }
 
+/*
+Guarda en el modal se cambia el nombre del recurso, y se presiona guardar,
+se guarda ese nuevo nombre del recurso y se le pone al recurso.
+*/
 $(document).ready(function () {
     $("#formModalRecurso").on("submit", function(e) {
         //alert($(tempIdSelect).attr('id'));
@@ -79,6 +95,9 @@ $(document).ready(function () {
     });
 });
 
+/*
+Obtiene de la base de datos el total de semanas que tiene un curso
+*/
 function totalSemanas() {
     var Id_Curso = $("#Id_Curso").text();
     var deferred = new $.Deferred();
@@ -94,12 +113,22 @@ function totalSemanas() {
     return deferred.promise();
 }
 
+/*
+concatena los id de las semanas para saber cuales semanas van a comunicarse
+y asi compartir recursos entre ellas.
+*/
 function concatSortableSemanas(totalSem){
     for (var i = 2; i <= totalSem; i++) {
         sortableSemanasDinamico += ",#semana"+i;
     }
 }
 
+/*
+Cuando se arrastra un recurso del panel izquierdo al derecho, al recurso que se agrega a la derecha
+se le agregan varias propiedades como el icono, ese mismo icono, se encaga de abrir el modal y activar 
+la funcion que guarda en temporal el recurso seleccionado
+
+*/
 function dragAndDrop(){
 
     $("#sortable").sortable({
@@ -107,15 +136,12 @@ function dragAndDrop(){
         remove: function(event, ui) {
             ui.item.clone().appendTo(this).val("1");
             ui.item.attr("value","0");
-            //$(this).sortable('cancel');
-            
-            //$((ui.item).find('li')).attr('onclick','guardaTempRecursoSelected(this);');
+
             var id = $((ui.item)).attr('id');
             $((ui.item)).attr('identificador',id+""+identificadorId);
             identificadorId++;
             if(id != 3){
                 $(ui.item).attr('onclick','guardaTempRecursoSelected(this);');
-                //$((ui.item).find('span')).attr('data-toggle','modal').attr('data-target','#modalRecurso');
                 $((ui.item).find('span')).attr('onclick','abrirModal();');
                 $((ui.item).find('span')).attr('data-hover','tooltip');
                 $((ui.item).find('span')).attr('title','Configuracion');
@@ -124,37 +150,17 @@ function dragAndDrop(){
         }
     }).disableSelection();
 
+/*
+Conecta todas las semanas de un cursos para que se puedan compartir recursos
+entre ellas
+*/
     $(sortableSemanasDinamico).sortable({
         connectWith: ".SortableSemanas"
-       /* update: function(event, ui) {
-            var list_sortable = $(this).sortable('toArray').toString();
-            var Id_Curso = $("#Id_Curso").text();
-            alert("entra " + $(this).sortable('toArray'));
-            var id = $((ui.item)).attr('id');
-            var identi = $((ui.item)).attr('identificador');
-            if (id == 1 || id == 2){
-                var im = $("[identificador="+identi+"]").find('strong').text();            
-                alert(im);
-            }else if (id == 3){
-                var im = $("[identificador="+identi+"]").find('input').text();
-                alert(im);
-            }else if(id == 4){
-                var im = $("[identificador="+identi+"]").find('a').text();
-                alert(im);
-            }*/
-            //alert("pru " + pru);
-            //alert(list_sortable);
-            /*$.ajax({
-                url: '../../controller/ctrRecursos/ctrRecursos.php',
-                type: 'POST',
-                data: {list_order:list_sortable, opcion:1, curso:Id_Curso},
-                success: function(data) {
-                    cargarRecursosCurso(Id_Curso);
-                }
-            });*/
-        //},
     }).disableSelection();
 
+/*
+Elimina un recurso que se haya arrastrado al icono de borrar.
+*/
     $('#trash').droppable({
         over: function(event, ui) {
            var identi = $((ui.draggable)).attr('identificador');
@@ -178,10 +184,6 @@ function dragAndDrop(){
     });
 }
 
-function listarRecursos() {
-    var Id_Curso = $("#Id_Curso").text();
-    cargarRecursosCurso(Id_Curso);
-}
 
 function eliminarRecurso(identificadorRecurso, recurso){
     $.ajax({ 
@@ -200,6 +202,17 @@ function eliminarRecurso(identificadorRecurso, recurso){
     });
 }
 
+/*
+Carga los recursos que estan en la base de datos asociados al curso
+*/
+function listarRecursos() {
+    var Id_Curso = $("#Id_Curso").text();
+    cargarRecursosCurso(Id_Curso);
+}
+
+/*
+Hace llamados sincronos, primero al metodo de totalsemanas, cuando termine al metodo dragAndDrop y asi sucesivamente.
+*/
 
 $(function() {
     var promise = totalSemanas();

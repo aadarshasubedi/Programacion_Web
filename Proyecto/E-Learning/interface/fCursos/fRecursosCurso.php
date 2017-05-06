@@ -38,7 +38,6 @@
 		background-color: transparent;
 	}
 </style>
-		<input value="Abrir modal" class="btn btn-success" type="button" onclick="abrirModal();" name="btnGuardar">
 
 	<!-- Modal -->
 	<div id="modalRecurso" class="modal fade" role="dialog">

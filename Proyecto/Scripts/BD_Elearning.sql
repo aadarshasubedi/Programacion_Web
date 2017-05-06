@@ -87,6 +87,7 @@ CREATE TABLE IF NOT EXISTS `bd_elearning`.`tb_Curso` (
   `Fecha_Inicio` DATE NOT NULL,
   `Fecha_Final` DATE NOT NULL,
   `Estado` BIT NOT NULL DEFAULT 1,
+  `Id_Profesor` INT(10) NOT NULL,
   PRIMARY KEY (`Id_Curso`))
 ENGINE = InnoDB
 AUTO_INCREMENT = 1

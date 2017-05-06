@@ -651,7 +651,7 @@ BEGIN
 			END IF;
 	COMMIT;
 END $$
-DELIMITER $$ ;
+DELIMITER ;
 
 DROP PROCEDURE IF EXISTS pr_obtener_totalSemanas;
 DELIMITER $$

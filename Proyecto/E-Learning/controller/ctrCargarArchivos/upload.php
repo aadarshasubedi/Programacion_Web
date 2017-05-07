@@ -16,6 +16,13 @@
 		}
 
 		public function subidaArchivo(){
+
+
+			if (isset($_POST['archivo'])){
+				$archivo = $_POST['archivo'];
+				$file = $archivo.archivo;
+			}
+
 			//tipo de formato de archivo que acepta
 			$permitidos = array("jpg","jpeg","gif","png","mp3","mp4", "wma");
 			$extension = pathinfo($_FILES['file']['name'] , PATHINFO_EXTENSION);
@@ -56,13 +63,27 @@
 							echo "Ocurrio un error en la carga.";
 						} else {
 							unlink($carga . "\\" . $_FILES['file']['name']);
-
+							//guardarArchivo($archivo);
 							echo "Copiado con exito!";
 						}
 					}
 				}
 			} else {
 				echo "Archivo invalido!";
+			}
+		}
+
+		/*public function guardarArchivo($archivo){
+			if($this->BL_daoRecurso)
+		}*/
+
+
+		if($_POST != null){
+			$op = $_POST['opcion'];
+			$control = new Archivo;
+
+			if($op == 1){
+			 	$control->subidaArchivo();
 			}
 		}
 

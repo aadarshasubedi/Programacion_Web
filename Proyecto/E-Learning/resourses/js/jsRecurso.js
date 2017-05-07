@@ -160,15 +160,13 @@ function dragAndDrop(){
            var identi = $((ui.draggable)).attr('identificador');
             if(ui.draggable.val() == 0){
                 swal({
-                  title: "¿Deseas eliminar este recurso?",
-                  type: "warning",
+                  title: '¿Deseas eliminar este recurso?',
+                  type: 'warning',
                   showCancelButton: true,
-                  confirmButtonColor: "#DD6B55",
-                  confirmButtonText: "Si",
-                  cancelButtonText: "No",
-                  closeOnConfirm: false
-                },
-                  function(){
+                  confirmButtonColor: '#DD6B55',
+                  confirmButtonText: 'Si',
+                  cancelButtonText: 'No'
+                }).then(function () {
                     var identificador = (ui.draggable).attr('identificador');
                     eliminarRecurso(identificador, ui.draggable); 
                     swal("Eliminado", "El recurso se ha eliminado", "success");

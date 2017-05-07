@@ -71,22 +71,31 @@
 			} else {
 				echo "Archivo invalido!";
 			}
+			echo "entra controller";
 		}
 
 		/*public function guardarArchivo($archivo){
 			if($this->BL_daoRecurso)
 		}*/
 
-
-		if($_POST != null){
-			$op = $_POST['opcion'];
-			$control = new Archivo;
-
-			if($op == 1){
-			 	$control->subidaArchivo();
-			}
+		public function prueba(){
+			
+			$archivo = $_POST['archivo'];
+			//echo $archivo["Id_Curso"];
+			echo "entra";
 		}
 
+	}
+
+	if($_POST != null){
+		$op = $_POST['opcion'];
+		$control = new Archivo;
+
+		if($op == 1){
+			$control->subidaArchivo();
+		}else if($op == 5){
+			$control->prueba();
+		}
 	}
 	
 ?>

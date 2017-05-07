@@ -2,10 +2,74 @@ var totalSemanasDinamico = 0;
 var sortableSemanasDinamico = "#semana1";
 var identificadorId = 0;
 var tempIdSelect;
+var totalDeSemanas = 0;
 
 function cargarRecursosCurso(Id_Curso){  
     $('#datos').load("../../interface/fCursos/fRecursosCurso.php?Id_Curso="+Id_Curso);
     $("#lista").css("display", "none");
+}
+
+function cargarArchivoRecurso() {
+    var Id_Curso = $("#Id_Curso").text();
+    var idTipoRecurso = 4; // Es por defecto 4 porque este tipo de recurso es un link
+    var identificador = identificadorId;
+    identificadorId++;
+    var secuencia = 0;
+
+    var opciones = '<option value="0" disabled selected > Seleccione una semana </option>';
+    for (var i = 1; i <= totalDeSemanas; i++) {
+        opciones += '<option value="' + i + '">' + "Semana "+ i + '</option>';
+    }
+    swal({
+      title: 'Configuración de archivo',
+      html:
+      '<input name="nombre" placeholder="Nombre" id="nombre" class="form-control"> <br>' +
+      '<input name="archivo" type="file" id="archivo" class="form-control"> <br>' +
+      '<select name="selectorSemanas" id="selectorSemanas" class="form-control">'+opciones+'</select"> <br>',
+      preConfirm: function () {
+        return new Promise(function (resolve) {
+          resolve([
+            $('#nombre'),
+            $('#archivo'),
+            $('#selectorSemanas')
+            ])
+      })
+    },
+    onOpen: function () {
+        $('#nombre').focus()
+    }
+}).then(function (result) {
+  var nombre = result[0].val();
+  var archiv = result[1];
+  var itemSeleccionado = result[2].find(":selected").text();
+
+  var archivo = new Object();
+  archivo.Id_Curso = Id_Curso;
+  archivo.Id_Tipo_Recurso = idTipoRecurso;
+  archivo.Identificador = identificador;
+  archivo.secuencia = secuencia;
+  archivo.nombre = nombre;
+  archivo.archivo = archiv;
+  archivo.semana = itemSeleccionado;
+  guardarArchivo(archivo);
+}).catch(swal.noop)
+}
+
+function guardarArchivo(arc) {
+    //alert(arc.archivo);
+    //var archivo = [];
+    //archivo.push(arc);
+    $.ajax({
+        url: '../../controller/ctrCargarArchivos/upload.php',
+        type: 'POST',
+        data: {ar:archivo, opcion:5},
+        success: function(data) {
+            alert("se guardo el archivo " + data);
+        },
+        error: function(data){
+            alert("error " + data);
+        }
+    });   
 }
 
 function guardaTempRecursoSelected(d){
@@ -22,12 +86,12 @@ function guardaTempRecursoSelected(d){
 }
 
 function guardarConfigurarion(){
-        var Id_Curso = $("#Id_Curso").text();
-        var lista = [];
-        $(".SortableSemanas").each(function() {
-            if(($(this).find("li")).children().length > 0){
-                var semana = new Object();    
-                semana.IdSemana = $(this).attr("id"); 
+    var Id_Curso = $("#Id_Curso").text();
+    var lista = [];
+    $(".SortableSemanas").each(function() {
+        if(($(this).find("li")).children().length > 0){
+            var semana = new Object();    
+            semana.IdSemana = $(this).attr("id"); 
                 var recurso = [];                           // Donde se van almacenar temporalmente los recursos de cada semana
                 $(this).find("li").each(function(i) {     // Se crea un objeto por cada recurso de semana
                     var rec = new Object();
@@ -52,14 +116,14 @@ function guardarConfigurarion(){
                 //cargarRecursosCurso(Id_Curso);
             }
         });
-}
+    }
 
-function abrirModal(){
-    $("#modalRecurso").modal('show');
-}
+    function abrirModal(){
+        $("#modalRecurso").modal('show');
+    }
 
-$(document).ready(function () {
-    $("#formModalRecurso").on("submit", function(e) {
+    $(document).ready(function () {
+        $("#formModalRecurso").on("submit", function(e) {
         //alert($(tempIdSelect).attr('id'));
         var identificador = $(tempIdSelect).attr("identificador");
         var id = $(tempIdSelect).attr("id");
@@ -73,40 +137,41 @@ $(document).ready(function () {
         $("#modalRecurso").modal('hide');
         e.preventDefault();
     });
-     
-    $("#btnSubmitModal").on('click', function() {
-        $("#formModalRecurso").submit();
-    });
-});
 
-function totalSemanas() {
-    var Id_Curso = $("#Id_Curso").text();
-    var deferred = new $.Deferred();
-    $.ajax({
-        url: '../../controller/ctrRecursos/ctrRecursos.php',
-        type: 'POST',
-        data: {Id_Curso:Id_Curso, opcion:2},
-        success: function(data) {
-            concatSortableSemanas(data);
-            deferred.resolve();
-        }
+        $("#btnSubmitModal").on('click', function() {
+            $("#formModalRecurso").submit();
+        });
     });
-    return deferred.promise();
-}
 
-function concatSortableSemanas(totalSem){
-    for (var i = 2; i <= totalSem; i++) {
-        sortableSemanasDinamico += ",#semana"+i;
+    function totalSemanas() {
+        var Id_Curso = $("#Id_Curso").text();
+        var deferred = new $.Deferred();
+        $.ajax({
+            url: '../../controller/ctrRecursos/ctrRecursos.php',
+            type: 'POST',
+            data: {Id_Curso:Id_Curso, opcion:2},
+            success: function(data) {
+                totalDeSemanas = data;
+                concatSortableSemanas(data);
+                deferred.resolve();
+            }
+        });
+        return deferred.promise();
     }
-}
 
-function dragAndDrop(){
+    function concatSortableSemanas(totalSem){
+        for (var i = 2; i <= totalSem; i++) {
+            sortableSemanasDinamico += ",#semana"+i;
+        }
+    }
 
-    $("#sortable").sortable({
-        connectWith: ".connectedSortable",
-        remove: function(event, ui) {
-            ui.item.clone().appendTo(this).val("1");
-            ui.item.attr("value","0");
+    function dragAndDrop(){
+
+        $("#sortable").sortable({
+            connectWith: ".connectedSortable",
+            remove: function(event, ui) {
+                ui.item.clone().appendTo(this).val("1");
+                ui.item.attr("value","0");
             //$(this).sortable('cancel');
             
             //$((ui.item).find('li')).attr('onclick','guardaTempRecursoSelected(this);');
@@ -124,8 +189,8 @@ function dragAndDrop(){
         }
     }).disableSelection();
 
-    $(sortableSemanasDinamico).sortable({
-        connectWith: ".SortableSemanas"
+        $(sortableSemanasDinamico).sortable({
+            connectWith: ".SortableSemanas"
        /* update: function(event, ui) {
             var list_sortable = $(this).sortable('toArray').toString();
             var Id_Curso = $("#Id_Curso").text();
@@ -155,10 +220,10 @@ function dragAndDrop(){
         //},
     }).disableSelection();
 
-    $('#trash').droppable({
-        over: function(event, ui) {
-           var identi = $((ui.draggable)).attr('identificador');
-            if(ui.draggable.val() == 0){
+        $('#trash').droppable({
+            over: function(event, ui) {
+             var identi = $((ui.draggable)).attr('identificador');
+             if(ui.draggable.val() == 0){
                 swal({
                   title: '¿Deseas eliminar este recurso?',
                   type: 'warning',
@@ -166,42 +231,42 @@ function dragAndDrop(){
                   confirmButtonColor: '#DD6B55',
                   confirmButtonText: 'Si',
                   cancelButtonText: 'No'
-                }).then(function () {
-                    var identificador = (ui.draggable).attr('identificador');
-                    eliminarRecurso(identificador, ui.draggable); 
-                    swal("Eliminado", "El recurso se ha eliminado", "success");
-                });  
+              }).then(function () {
+                var identificador = (ui.draggable).attr('identificador');
+                eliminarRecurso(identificador, ui.draggable); 
+                swal("Eliminado", "El recurso se ha eliminado", "success");
+            });  
+          }
+      }
+  });
+    }
+
+    function listarRecursos() {
+        var Id_Curso = $("#Id_Curso").text();
+        cargarRecursosCurso(Id_Curso);
+    }
+
+    function eliminarRecurso(identificadorRecurso, recurso){
+        $.ajax({ 
+            url: '../../controller/ctrRecursos/ctrRecursos.php',
+            type: 'POST',
+            data: {IdentificadorRecurso:identificadorRecurso, opcion:3},
+            success: function(data) {  
+                recurso.remove();  
+                setTimeout(function(){ 
+                    listarRecursos(); 
+                }, 1000);                  
+            },
+            error: function(data){
+                return false;
             }
-        }
+        });
+    }
+
+
+    $(function() {
+        var promise = totalSemanas();
+        promise
+        .then(dragAndDrop)
+        ;
     });
-}
-
-function listarRecursos() {
-    var Id_Curso = $("#Id_Curso").text();
-    cargarRecursosCurso(Id_Curso);
-}
-
-function eliminarRecurso(identificadorRecurso, recurso){
-    $.ajax({ 
-        url: '../../controller/ctrRecursos/ctrRecursos.php',
-        type: 'POST',
-        data: {IdentificadorRecurso:identificadorRecurso, opcion:3},
-        success: function(data) {  
-            recurso.remove();  
-            setTimeout(function(){ 
-                listarRecursos(); 
-            }, 1000);                  
-        },
-        error: function(data){
-            return false;
-        }
-    });
-}
-
-
-$(function() {
-    var promise = totalSemanas();
-    promise
-    .then(dragAndDrop)
-    ;
-});

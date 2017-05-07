@@ -83,6 +83,7 @@
 		</tr>
 	</table>
 	<div class="text-right">
+		<input value="Cargar archivos" class="btn btn-success" type="button" onclick="cargarArchivoRecurso();" name="btnGuardarArchivo">
 		<input value="Guardar Configuraci&oacute;n" class="btn btn-success" type="button" onclick="guardarConfigurarion();" name="btnGuardar">
 		<button type="button" class="btn btn-danger" onclick="cargarPagina('../../interface/fCursos/fGestionCursos.php');">Cancelar</button>
 	</div>

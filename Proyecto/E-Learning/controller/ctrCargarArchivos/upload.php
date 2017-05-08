@@ -19,8 +19,8 @@
 
 
 			if (isset($_POST['archivo'])){
-				$archivo = $_POST['archivo'];
-				$file = $archivo.archivo;
+				//$archivo = $_POST['archivo'];
+				//$file = $archivo.archivo;
 			}
 
 			//tipo de formato de archivo que acepta
@@ -71,19 +71,11 @@
 			} else {
 				echo "Archivo invalido!";
 			}
-			echo "entra controller";
 		}
 
 		/*public function guardarArchivo($archivo){
 			if($this->BL_daoRecurso)
 		}*/
-
-		public function prueba(){
-			
-			$archivo = $_POST['archivo'];
-			//echo $archivo["Id_Curso"];
-			echo "entra";
-		}
 
 	}
 
@@ -93,8 +85,6 @@
 
 		if($op == 1){
 			$control->subidaArchivo();
-		}else if($op == 5){
-			$control->prueba();
 		}
 	}
 	

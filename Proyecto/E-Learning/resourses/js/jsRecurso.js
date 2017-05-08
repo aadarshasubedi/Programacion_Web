@@ -11,8 +11,8 @@ function cargarRecursosCurso(Id_Curso){
 
 function cargarArchivoRecurso() {
     var Id_Curso = $("#Id_Curso").text();
-    var idTipoRecurso = 4; // Es por defecto 4 porque este tipo de recurso es un link
-    var identificador = identificadorId;
+    var Id_Tipo_Recurso = 4; // Es por defecto 4 porque este tipo de recurso es un link
+    var Identificador = identificadorId;
     identificadorId++;
     var secuencia = 0;
 
@@ -20,17 +20,21 @@ function cargarArchivoRecurso() {
     for (var i = 1; i <= totalDeSemanas; i++) {
         opciones += '<option value="' + i + '">' + "Semana "+ i + '</option>';
     }
+//      '<form enctype="multipart/form-data"'
     swal({
       title: 'Configuración de archivo',
       html:
+      '<form id="formArchivo" name="formArchivo" method="POST" enctype="multipart/form-data">'+
       '<input name="nombre" placeholder="Nombre" id="nombre" class="form-control"> <br>' +
-      '<input name="archivo" type="file" id="archivo" class="form-control"> <br>' +
-      '<select name="selectorSemanas" id="selectorSemanas" class="form-control">'+opciones+'</select"> <br>',
+      '<input name="file" type="file" id="file" class="form-control"> <br>' +
+      '<select name="selectorSemanas" id="selectorSemanas" class="form-control">'+opciones+'</select"> <br>'+
+      '</form>',
       preConfirm: function () {
         return new Promise(function (resolve) {
           resolve([
+            $('#formArchivo'),
             $('#nombre'),
-            $('#archivo'),
+            $('#file'),
             $('#selectorSemanas')
             ])
       })
@@ -39,30 +43,41 @@ function cargarArchivoRecurso() {
         $('#nombre').focus()
     }
 }).then(function (result) {
-  var nombre = result[0].val();
-  var archiv = result[1];
-  var itemSeleccionado = result[2].find(":selected").text();
 
-  var archivo = new Object();
-  archivo.Id_Curso = Id_Curso;
-  archivo.Id_Tipo_Recurso = idTipoRecurso;
-  archivo.Identificador = identificador;
-  archivo.secuencia = secuencia;
-  archivo.nombre = nombre;
-  archivo.archivo = archiv;
-  archivo.semana = itemSeleccionado;
-  guardarArchivo(archivo);
+  var formData = new FormData(document.getElementById("formArchivo"));
+  formData.append("opcion",1);
+  formData.append("Id_Curso",Id_Curso);
+  formData.append("Id_Tipo_Recurso",Id_Tipo_Recurso);
+  formData.append("Identificador",Identificador);
+  formData.append("secuencia",secuencia);
+  formData.append("file",result[2]);
+
+    $.ajax({
+        url: '../../controller/ctrCargarArchivos/upload.php',
+        type: 'POST',
+        data: formData,
+        processData: false,  // tell jQuery not to process the data
+        contentType: false,   // tell jQuery not to set contentType
+        success: function(data) {
+            alert("se guardo el archivo " + data);
+        },
+        error: function(data){
+            alert("error " + data);
+        }
+    });  
 }).catch(swal.noop)
 }
 
 function guardarArchivo(arc) {
     //alert(arc.archivo);
-    //var archivo = [];
-    //archivo.push(arc);
+    var archivo = [];
+    archivo.push(arc);
+    var pru = new Object();
+    alert(JSON.stringify(archivo));
     $.ajax({
         url: '../../controller/ctrCargarArchivos/upload.php',
         type: 'POST',
-        data: {ar:archivo, opcion:5},
+        data: {semana:pru, opcion:5},
         success: function(data) {
             alert("se guardo el archivo " + data);
         },

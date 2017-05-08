@@ -56,8 +56,8 @@ function cargarArchivoRecurso() {
         url: '../../controller/ctrCargarArchivos/upload.php',
         type: 'POST',
         data: formData,
-        processData: false,  // tell jQuery not to process the data
-        contentType: false,   // tell jQuery not to set contentType
+        processData: false, 
+        contentType: false,  
         success: function(data) {
             alert("se guardo el archivo " + data);
         },
@@ -66,25 +66,6 @@ function cargarArchivoRecurso() {
         }
     });  
 }).catch(swal.noop)
-}
-
-function guardarArchivo(arc) {
-    //alert(arc.archivo);
-    var archivo = [];
-    archivo.push(arc);
-    var pru = new Object();
-    alert(JSON.stringify(archivo));
-    $.ajax({
-        url: '../../controller/ctrCargarArchivos/upload.php',
-        type: 'POST',
-        data: {semana:pru, opcion:5},
-        success: function(data) {
-            alert("se guardo el archivo " + data);
-        },
-        error: function(data){
-            alert("error " + data);
-        }
-    });   
 }
 
 function guardaTempRecursoSelected(d){

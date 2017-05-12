@@ -100,7 +100,7 @@
 				<?php } else if($recurso->getId_Tipo_Recurso() == 3){ ?>
 							<input type="text" id="seccion" placeholder="Texto" style="width: 150px;"/>
 				<?php } else if($recurso->getId_Tipo_Recurso() == 4){ ?>
-							<a href="#" onclick="reproducir('Video','<?php echo $recurso->getUrl()?>');" style="color: blue"><?php echo $recurso->getNombre()?></a>
+							<a href="#" onclick="reproducir('<?php echo $recurso->getNombre()?>','<?php echo $recurso->getUrl()?>');" style="color: blue"><?php echo $recurso->getNombre()?></a>
 							 </li>
 				<?php } 
 						} 
@@ -191,7 +191,7 @@
 				<h4 id="title" class="modal-title"></h4>
 			</div>
 			<div class="modal-body">
-				<video id="video" src="" width="500" height="350" controls loop preload="auto" ></video>
+				<video id="video" src="" width="100%" height="100%" controls loop preload="auto" ></video>
 			</div>
 		</div>
 

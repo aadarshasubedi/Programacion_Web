@@ -4,11 +4,11 @@ INSERT INTO `bd_elearning`.`tb_tipo_recurso` (`Nombre`) VALUES ('Texto');
 INSERT INTO `bd_elearning`.`tb_tipo_recurso` (`Nombre`) VALUES ('Enlace');
 
 
-INSERT INTO `bd_elearning`.`tb_curso` (`Nombre`, `Duracion`, `Fecha_Inicio`, `Fecha_Final`) 
-VALUES ('Español', '17', '2017-02-06', '2017-06-01');
+INSERT INTO `bd_elearning`.`tb_curso` (`Nombre`, `Duracion`, `Fecha_Inicio`, `Fecha_Final`,`Id_Profesor`) 
+VALUES ('Español', '17', '2017-02-06', '2017-06-01',1);
 
-INSERT INTO `bd_elearning`.`tb_curso` (`Nombre`, `Duracion`, `Fecha_Inicio`, `Fecha_Final`) 
-VALUES ('Inglés', '17', '2017-02-06', '2017-06-01');
+INSERT INTO `bd_elearning`.`tb_curso` (`Nombre`, `Duracion`, `Fecha_Inicio`, `Fecha_Final`,`Id_Profesor`) 
+VALUES ('Inglés', '17', '2017-02-06', '2017-06-01',1);
 
 
 INSERT INTO `bd_elearning`.`tb_genero` (`Id_Genero`, `Descripcion`) VALUES ('1', 'Masculino');

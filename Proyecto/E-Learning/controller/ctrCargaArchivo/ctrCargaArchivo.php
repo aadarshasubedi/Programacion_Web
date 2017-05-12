@@ -58,18 +58,13 @@
         					$Identificador = $_POST['Identificador'];
         					$this->BL_daoRecurso->recurso($Id_Tipo_Recurso, $Id_Curso, $Secuencia, $Semana, $Nombre, $Identificador, $Url);
 							//echo "nombre ". $nombreArchivo;
-							echo "Archivo copiado con exito.";
+							echo "Archivo guardado con exito.";
 						}
 					}
 				}
 			} else {
 				echo "Archivo invalido.";
 			}
-		}
-
-		public function guardarRecursoAchivo($archivo) {
-			echo $archivo;
-			//$this->BL_daoRecurso->recurso($recurso["Rec_IdTipo"], $Id_Curso, $secuencia, $key["IdSemana"], $recurso["Rec_Nombre"],$recurso["Rec_Identificador"]);
 		}
 
 		public function copiarLocal()	{
@@ -84,7 +79,7 @@
 			}
 		}
 
-		public function borrarLocal()	{
+		public function borrarLocal() {
 			$video = $_POST['nombre'];
 			$rutaTemp = realpath("tempUpload/") . "\\" . $video;
 
@@ -92,6 +87,17 @@
 				echo "borrado";
 			} else {
 				echo "error";
+			}
+		}
+
+		public function borrarLocalCloud()	{
+			$video = $_POST['nombre'];
+			$rutaTemp = realpath("cloud/") . "\\" . $video;
+
+			if(unlink($rutaTemp)){
+				echo true;
+			} else {
+				echo false;
 			}
 		}
 	}
@@ -106,6 +112,8 @@
 		 	$control->copiarLocal();
 		} else if($op == 3){
 		 	$control->borrarLocal();
+		} else if($op == 4){
+		 	$control->borrarLocalCloud();
 		}
 	}
 ?>

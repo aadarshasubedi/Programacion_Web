@@ -136,8 +136,34 @@ function dragAndDrop(){
                 },
                   function(){
                     var identificador = (ui.draggable).attr('identificador');
-                    eliminarRecurso(identificador, ui.draggable); 
-                    swal("Eliminado", "El recurso se ha eliminado", "success");
+                    var nombre = (ui.draggable).attr("url");
+                    var Id_Recurso = (ui.draggable).attr("id");
+                    
+                    var promise = eliminarRecurso(identificador, ui.draggable); 
+                    promise
+                    .then(function(result){
+                        if(result) {
+                            if(Id_Recurso==4){
+                                return eliminarRecursoArchivoCloud(nombre);
+                            } 
+
+                            return result;
+                            
+                        } else {
+                            alert("error al eliminar el recurso de la bd");
+                        }
+                    })
+                    .then(function(result){
+                        if(result) {
+                            swal("Eliminado", "El recurso se ha eliminado", "success");
+                            setTimeout(function(){ 
+                                listarRecursos(); 
+                            }, 1000);  
+                        } else {
+                            alert("error al eliminar archivo de cloud");
+                        }                        
+                    })
+                    ;
                 });  
             }
         }
@@ -150,20 +176,35 @@ function listarRecursos() {
 }
 
 function eliminarRecurso(identificadorRecurso, recurso){
+    var deferred = new $.Deferred();
     $.ajax({ 
         url: '../../controller/ctrRecursos/ctrRecursos.php',
         type: 'POST',
         data: {IdentificadorRecurso:identificadorRecurso, opcion:3},
         success: function(data) {  
-            recurso.remove();  
-            setTimeout(function(){ 
-                listarRecursos(); 
-            }, 1000);                  
+
+            recurso.remove();
+            deferred.resolve(true);
+                            
         },
         error: function(data){
-            return false;
+            deferred.resolve(false);
         }
     });
+    return deferred.promise();
+}
+
+function eliminarRecursoArchivoCloud($nombre) {
+    var deferred = new $.Deferred();
+    $.ajax({ 
+        url: '../../controller/ctrCargaArchivo/ctrCargaArchivo.php',
+        type: 'POST',
+        data: {nombre:$nombre, opcion:4},
+        success: function(data) {  
+            deferred.resolve(data);
+        }
+    });
+    return deferred.promise();
 }
 
 
@@ -228,7 +269,7 @@ function reproducir(name, video){
     });
 }
 
-//elimina el video una vez cerrado el modal
+//elimina el video de la carpeta temporal una vez cerrado el modal
 $("#modalVideo").on('hidden.bs.modal', function () {
     $("#video").attr("src","");
     $.ajax({

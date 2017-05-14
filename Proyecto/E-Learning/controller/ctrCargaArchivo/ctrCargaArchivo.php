@@ -2,6 +2,8 @@
 
 	include ("../../domain/dFactory.php");
 	include ("../../domain/dRecurso.php");
+	include ("../../controller/ctrCargaArchivo/ctrUploadWebServices.php");
+	include ("../../controller/ctrCargaArchivo/ctrDownloadWebServices.php");
 
 	class ctrCargaArchivo {
 
@@ -57,8 +59,14 @@
 							$Semana = $_POST['semana'];
         					$Identificador = $_POST['Identificador'];
         					$this->BL_daoRecurso->recurso($Id_Tipo_Recurso, $Id_Curso, $Secuencia, $Semana, $Nombre, $Identificador, $Url);
-							//echo "nombre ". $nombreArchivo;
-							echo "Archivo copiado con exito.";
+							
+							//Condicion subida a server
+							if($_FILES['file']['type'] == 'video/mp4'){
+								$control = new ctrUploadWebServices;
+								$control->Subir($_FILES['file']['name']);
+							} else {
+								echo "Archivo subido con exito.";
+							}							
 						}
 					}
 				}
@@ -67,20 +75,13 @@
 			}
 		}
 
-		public function guardarRecursoAchivo($archivo) {
-			echo $archivo;
-			//$this->BL_daoRecurso->recurso($recurso["Rec_IdTipo"], $Id_Curso, $secuencia, $key["IdSemana"], $recurso["Rec_Nombre"],$recurso["Rec_Identificador"]);
-		}
-
 		public function copiarLocal()	{
 			$video = $_POST['nombre'];
-			$rutaCloud = realpath("cloud/") . "\\" . $video;
-			$rutaTemp = realpath("tempUpload/") . "\\" . $video;
-
-			if(copy($rutaCloud, $rutaTemp)){
-				echo true;
+			$control = new ctrDownloadWebServices;
+			if($control->Descargar($video)){
+				return true;
 			} else {
-				echo false;
+				return false;
 			}
 		}
 

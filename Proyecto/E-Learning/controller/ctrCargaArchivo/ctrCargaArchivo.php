@@ -59,6 +59,7 @@
 							$Semana = $_POST['semana'];
         					$Identificador = $_POST['Identificador'];
         					$this->BL_daoRecurso->recurso($Id_Tipo_Recurso, $Id_Curso, $Secuencia, $Semana, $Nombre, $Identificador, $Url);
+<<<<<<< HEAD
 							
 							//Condicion subida a server
 							if($_FILES['file']['type'] == 'video/mp4'){
@@ -67,6 +68,10 @@
 							} else {
 								echo "Archivo subido con exito.";
 							}							
+=======
+							//echo "nombre ". $nombreArchivo;
+							echo "Archivo guardado con exito.";
+>>>>>>> origin/master
 						}
 					}
 				}
@@ -85,7 +90,7 @@
 			}
 		}
 
-		public function borrarLocal()	{
+		public function borrarLocal() {
 			$video = $_POST['nombre'];
 			$rutaTemp = realpath("tempUpload/") . "\\" . $video;
 
@@ -93,6 +98,17 @@
 				echo "borrado";
 			} else {
 				echo "error";
+			}
+		}
+
+		public function borrarLocalCloud()	{
+			$video = $_POST['nombre'];
+			$rutaTemp = realpath("cloud/") . "\\" . $video;
+
+			if(unlink($rutaTemp)){
+				echo true;
+			} else {
+				echo false;
 			}
 		}
 	}
@@ -107,6 +123,8 @@
 		 	$control->copiarLocal();
 		} else if($op == 3){
 		 	$control->borrarLocal();
+		} else if($op == 4){
+		 	$control->borrarLocalCloud();
 		}
 	}
 ?>

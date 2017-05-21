@@ -177,6 +177,25 @@
 
 		 	return $lista;
 		}
+
+		public function listaCursosEditor($Id_Usuario){
+			$lista = array();
+		 	$valor = $this -> BL_daoCurso -> listaCursosEditor($Id_Usuario);
+
+		 	foreach ($valor as $value) {
+		 		$dCurso = new dCurso;
+
+		 		$dCurso->setId_Curso($value['Id_Curso']);
+		 		$dCurso->setNombre($value['Nombre']);
+		 		$dCurso->setDuracion($value['Duracion']);
+		 		$dCurso->setFecha_Inicio($value['Fecha_Inicio']);		 		
+		 		$dCurso->setFecha_Final($value['Fecha_Final']);
+
+		 		array_push($lista, $dCurso);
+		 	}
+
+		 	return $lista;
+		}		
 	}
 
 	if($_POST != null){

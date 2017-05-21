@@ -10,8 +10,12 @@
 
 	if($Id_Rol == 4){
 		$lista = $control->listaCursosProfesor($Id_Usuario);
-	} else {
-		$lista = $control->listar();
+	} else{
+		if($Id_Rol == 2){
+			$lista = $control->listaCursosEditor($Id_Usuario);
+		} else{
+			$lista = $control->listar();
+		}
 	}
 ?>
 

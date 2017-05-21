@@ -741,3 +741,23 @@ BEGIN
 COMMIT;
 END $$
 DELIMITER ;
+
+DROP PROCEDURE IF EXISTS pr_listaCursosEditor;
+DELIMITER $$
+CREATE PROCEDURE pr_listaCursosEditor
+(
+	IN p_Id_Usuario   INT(10)
+)
+
+BEGIN
+	START TRANSACTION;
+    	SET AUTOCOMMIT = 0;
+                       
+		SELECT 	C.Id_Curso, C.Nombre, C.Duracion, C.Fecha_Inicio, C.Fecha_Final 
+        FROM 	tb_curso C INNER JOIN tb_curso_usuario CU ON
+        C.Id_Curso = CU.Id_Curso
+		WHERE	CU.Id_Usuario = p_Id_Usuario;
+                        
+	COMMIT;
+END $$
+DELIMITER ;

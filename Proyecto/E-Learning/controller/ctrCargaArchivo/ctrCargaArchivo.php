@@ -59,7 +59,6 @@
 							$Semana = $_POST['semana'];
         					$Identificador = $_POST['Identificador'];
         					$this->BL_daoRecurso->recurso($Id_Tipo_Recurso, $Id_Curso, $Secuencia, $Semana, $Nombre, $Identificador, $Url);
-<<<<<<< HEAD
 							
 							//Condicion subida a server
 							if($_FILES['file']['type'] == 'video/mp4'){
@@ -68,10 +67,9 @@
 							} else {
 								echo "Archivo subido con exito.";
 							}							
-=======
+
 							//echo "nombre ". $nombreArchivo;
 							echo "Archivo guardado con exito.";
->>>>>>> origin/master
 						}
 					}
 				}

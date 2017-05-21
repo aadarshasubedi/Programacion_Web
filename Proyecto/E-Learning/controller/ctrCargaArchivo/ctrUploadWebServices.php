@@ -20,7 +20,7 @@ class ctrUploadWebServices {
 
 		/*invocamos al metodo consultar que ofrece el wsdl, y le mandamos los parametros correspondientes
 		podemos hacerlo mediante un array*/
-		if($client->upload(array('arg0' => $filename, 'arg1' => $contents))){
+		if($client->upload(array('arg0' => $filename, 'arg1' => $contents, 'arg2' => 1, 'arg3' => 2,'arg4' => "mp4", 'arg5' => 3))){
 			unlink($fileRoot);
 			echo "Archivo subido con exito.";
 		} else {

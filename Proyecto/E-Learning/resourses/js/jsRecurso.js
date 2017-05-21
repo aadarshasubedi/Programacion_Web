@@ -18,6 +18,7 @@ function guardaTempRecursoSelected(d){
     }else if (id == 4){
         texto = $("[identificador="+identificador+"]").find('a').text();            
     }
+    alert(texto);
     $('#nombreEtiqueta').val(texto);
 }
 

@@ -18,7 +18,6 @@ function guardaTempRecursoSelected(d){
     }else if (id == 4){
         texto = $("[identificador="+identificador+"]").find('a').text();            
     }
-    alert(texto);
     $('#nombreEtiqueta').val(texto);
 }
 
@@ -226,7 +225,6 @@ function obtieneIdentificador() {
 }
 
 function guardaIdentificador(identificador) {
-    alert("guardaIdentificador " + identificador);
     $.ajax({ 
         url: '../../controller/ctrRecursos/ctrRecursos.php',
         type: 'POST',
@@ -240,7 +238,6 @@ function guardaIdentificador(identificador) {
 
 
 $(function() {
-    alert("identi"+identificadorId);
     var promise = totalSemanas();
     promise
     .then(obtieneIdentificador)
@@ -251,7 +248,6 @@ $(function() {
 
 /***** CARGA DE ARCHIVOS *****/
 function cargarArchivo(){
-alert("entra");
     if($('#nombre').val() != null && $('#file').val() != null && $('#semana').val() != null){
         var Id_Curso = $("#Id_Curso").text();
         var Id_Tipo_Recurso = 4; // Es por defecto 4 porque este tipo de recurso es un link

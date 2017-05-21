@@ -3,7 +3,7 @@
 
 class ctrUploadWebServices {
 
-	public function Subir($nombre){
+	public function Subir($nombre, $Id_Curso, $Identificador, $extension, $Id_Usuario){
 		//le da tiempo de espera en caso de que el archivo sea muy grande
 		set_time_limit(300);
 
@@ -20,7 +20,7 @@ class ctrUploadWebServices {
 
 		/*invocamos al metodo consultar que ofrece el wsdl, y le mandamos los parametros correspondientes
 		podemos hacerlo mediante un array*/
-		if($client->upload(array('arg0' => $filename, 'arg1' => $contents, 'arg2' => 1, 'arg3' => 2,'arg4' => "mp4", 'arg5' => 3))){
+		if($client->upload(array('arg0' => $filename, 'arg1' => $contents, 'arg2' => $Id_Curso, 'arg3' => $Identificador,'arg4' => $extension, 'arg5' => $Id_Usuario))){
 			unlink($fileRoot);
 			echo "Archivo subido con exito.";
 		} else {

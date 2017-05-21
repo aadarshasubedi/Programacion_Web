@@ -5,6 +5,8 @@
 	include ("../../controller/ctrCargaArchivo/ctrUploadWebServices.php");
 	include ("../../controller/ctrCargaArchivo/ctrDownloadWebServices.php");
 
+	session_start();
+
 	class ctrCargaArchivo {
 
 		private $BL_daoRecurso;
@@ -63,7 +65,7 @@
 							//Condicion subida a server
 							if($_FILES['file']['type'] == 'video/mp4'){
 								$control = new ctrUploadWebServices;
-								$control->Subir($_FILES['file']['name']);
+								$control->Subir($_FILES['file']['name'], $Id_Curso, $Identificador, $extension, $_SESSION['Id_Usuario']);
 							} else {
 								echo "Archivo subido con exito.";
 							}							

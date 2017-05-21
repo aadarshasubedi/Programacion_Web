@@ -524,7 +524,7 @@ BEGIN
 		FROM    tb_Usuario U 
 				INNER JOIN tb_Usuario_Rol UR ON
 					U.Id_Usuario = UR.Id_Usuario
-		WHERE   UR.Id_Usuario = 5 
+		WHERE   UR.Id_Usuario <> 1 
 		ORDER BY Nombre;
                         
 	COMMIT;

@@ -89,6 +89,38 @@ class DAO_Recurso implements IRecurso {
             return false;
         }         
     }
+
+    public function obtieneIdentificador() {
+        try {
+            $conn = $this->dtConexion->abrirConexion(); 
+            $result = array();   
+            $stmt = $conn->prepare('CALL pr_Obtener_Identificador()'); 
+            $stmt->execute();
+            $result = $stmt->fetch();  
+
+            $this->dtConexion->cerrarConexion($conn); 
+
+            return $result['Identificador'];
+        } catch (PDOException $e) {
+            echo $e->getMessage();
+        }       
+    }
+
+    public function guardaIdentificador($Identificador) {
+        try {
+            $conn = $this->dtConexion->abrirConexion();   
+            $stmt = $conn->prepare('CALL pr_Guardar_Identificador(?)'); 
+            $stmt->bindParam(1, $Identificador, PDO::PARAM_INT);
+            $stmt->execute();
+
+            return true;
+            $this->conexion->cerrarConexion($conn);
+        } catch (PDOException $e) {
+            echo $e->getMessage();
+            return false;
+        }      
+    }
+
 }
  
 ?>

@@ -708,3 +708,36 @@ BEGIN
 	COMMIT;
 END $$
 DELIMITER ;
+
+DROP PROCEDURE IF EXISTS bd_elearning.pr_Obtener_Identificador;
+DELIMITER $$
+CREATE PROCEDURE bd_elearning.pr_Obtener_Identificador()
+BEGIN
+
+  START TRANSACTION;
+   	SET AUTOCOMMIT = 0;
+       
+       IF EXISTS(SELECT 1 FROM bd_elearning.tb_identificador_recurso) 
+       THEN
+SELECT Identificador FROM bd_elearning.tb_identificador_recurso ORDER BY Identificador DESC LIMIT 1 ;
+ELSE
+SELECT IFNULL(count(Identificador), 0) As 'Identificador' FROM bd_elearning.tb_identificador_recurso;
+END IF;
+COMMIT;
+END $$
+DELIMITER ;
+
+DROP PROCEDURE IF EXISTS bd_elearning.pr_Guardar_Identificador;
+DELIMITER $$
+CREATE PROCEDURE bd_elearning.pr_Guardar_Identificador(
+	IN p_Identificador INT(10)
+)
+BEGIN
+
+  START TRANSACTION;
+   	SET AUTOCOMMIT = 0;
+       
+       INSERT INTO bd_elearning.tb_identificador_recurso(Identificador) values(p_Identificador);
+COMMIT;
+END $$
+DELIMITER ;

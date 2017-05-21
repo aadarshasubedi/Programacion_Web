@@ -70,6 +70,19 @@
 			}
 		}
 
+		public function obtieneIdentificador(){
+				$result = $this -> BL_daoRecurso -> obtieneIdentificador();
+				echo $result;
+		}
+
+		public function guardaIdentificador(){
+				if (isset($_POST['Identificador'])){
+				$Identificador = $_POST['Identificador'];
+				$result = $this -> BL_daoRecurso -> guardaIdentificador($Identificador);
+				echo $result;
+				}
+		}		
+
 	}
 
 	if($_POST != null){
@@ -82,6 +95,10 @@
 		 	$control->totalSemanas();
 		} else if($op == 3){
 		 	$control->eliminarRecurso();
+		} else if($op == 4){
+		 	$control->obtieneIdentificador();
+		} else if($op == 5){
+		 	$control->guardaIdentificador();
 		} 
 	}
 ?>

@@ -376,6 +376,16 @@ CREATE TABLE IF NOT EXISTS `bd_elearning`.`tb_Curso_Usuario` (
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
+-- -----------------------------------------------------
+-- Table `bd_elearning`.`tb_identificador_recurso`
+-- -----------------------------------------------------
+
+DROP TABLE IF EXISTS `bd_elearning`.`tb_identificador_recurso` ;
+      
+CREATE TABLE `bd_elearning`.`tb_identificador_recurso`(
+Identificador INT
+);
+
 
 SET SQL_MODE=@OLD_SQL_MODE;
 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;

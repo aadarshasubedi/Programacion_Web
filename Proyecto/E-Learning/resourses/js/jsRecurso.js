@@ -1,6 +1,6 @@
 var totalSemanasDinamico = 0;
 var sortableSemanasDinamico = "#semana1";
-var identificadorId = 0;
+var identificadorId=0;
 var tempIdSelect;
 
 function cargarRecursosCurso(Id_Curso){  
@@ -85,6 +85,7 @@ function totalSemanas() {
         type: 'POST',
         data: {Id_Curso:Id_Curso, opcion:2},
         success: function(data) {
+            console.log("t" + data);
             concatSortableSemanas(data);
             deferred.resolve();
         }
@@ -108,6 +109,7 @@ function dragAndDrop(){
             var id = $((ui.item)).attr('id');
             $((ui.item)).attr('identificador',id+""+identificadorId);
             identificadorId++;
+            guardaIdentificador(identificadorId);
             if(id != 3){
                 $(ui.item).attr('onclick','guardaTempRecursoSelected(this);');
                 $((ui.item).find('span')).attr('onclick','abrirModal();');
@@ -208,10 +210,40 @@ function eliminarRecursoArchivoCloud($nombre) {
     return deferred.promise();
 }
 
+function obtieneIdentificador() {
+    var deferred = new $.Deferred();
+    $.ajax({ 
+        url: '../../controller/ctrRecursos/ctrRecursos.php',
+        type: 'POST',
+        data: {opcion:4},
+        success: function(data) {  
+            identificadorId = data.trim();
+            console.log("t" + data.trim());
+            deferred.resolve();
+        }
+    });
+    return deferred.promise();
+}
+
+function guardaIdentificador(identificador) {
+    alert("guardaIdentificador " + identificador);
+    $.ajax({ 
+        url: '../../controller/ctrRecursos/ctrRecursos.php',
+        type: 'POST',
+        data: {Identificador:identificador, opcion:5},
+        success: function(data) {  
+
+        }
+    });
+}
+
+
 
 $(function() {
+    alert("identi"+identificadorId);
     var promise = totalSemanas();
     promise
+    .then(obtieneIdentificador)
     .then(dragAndDrop)
     ;
 });
@@ -219,12 +251,15 @@ $(function() {
 
 /***** CARGA DE ARCHIVOS *****/
 function cargarArchivo(){
-
+alert("entra");
     if($('#nombre').val() != null && $('#file').val() != null && $('#semana').val() != null){
         var Id_Curso = $("#Id_Curso").text();
         var Id_Tipo_Recurso = 4; // Es por defecto 4 porque este tipo de recurso es un link
         var Identificador = identificadorId;
+        console.log("cargarArchivoIdenti " + Identificador);
         identificadorId++;
+        console.log("cargarArchivoIdenti2 " + identificadorId);
+        guardaIdentificador(identificadorId);
         var secuencia = 0;
         var formData = new FormData(document.getElementById("formCargaArchivo"));   
         formData.append("opcion", 1);     

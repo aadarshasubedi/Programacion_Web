@@ -53,3 +53,10 @@ INSERT INTO `bd_elearning`.`tb_usuario_rol` (`Id_Usuario_Rol`, `Id_Usuario`, `Id
 VALUES ('4', '4', '4',  1);
 INSERT INTO `bd_elearning`.`tb_usuario_rol` (`Id_Usuario_Rol`, `Id_Usuario`, `Id_Rol`, `Estado`) 
 VALUES ('5', '5', '5',  1);
+
+
+INSERT INTO `bd_elearning`.`tb_curso_usuario` (`Id_Curso_Usuario`, `Id_Curso`, `Id_Usuario`) 
+VALUES ('1', '1', '4');
+
+INSERT INTO `bd_elearning`.`tb_curso_usuario` (`Id_Curso_Usuario`, `Id_Curso`, `Id_Usuario`) 
+VALUES ('2', '2', '1');

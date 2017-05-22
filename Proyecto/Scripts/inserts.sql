@@ -69,3 +69,6 @@ VALUES ('1', '1', '4');
 
 INSERT INTO `bd_elearning`.`tb_curso_usuario` (`Id_Curso_Usuario`, `Id_Curso`, `Id_Usuario`) 
 VALUES ('2', '2', '1');
+
+INSERT INTO `bd_elearning`.`tb_curso_usuario` (`Id_Curso_Usuario`, `Id_Curso`, `Id_Usuario`) 
+VALUES ('2', '2', '5');

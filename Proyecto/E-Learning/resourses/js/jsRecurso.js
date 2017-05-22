@@ -296,13 +296,24 @@ function reproducir(name, video){
             if(data){
                 if(esImagen(extension)){
                     $('#title').text(name);
-                    $('#imagen').attr('src', '../../controller/ctrCargaArchivo/tempUpload/'+video);
+                    $('#imagen').attr('src', '../../controller/ctrCargaArchivo/cloud/'+video);
                     $('#modalImagen').modal('show');
                 }
                 else{
-                    $('#title').text(name);
-                    $('#video').attr('src', '../../controller/ctrCargaArchivo/tempUpload/'+video);
-                    $('#modalVideo').modal('show');
+                    if(esAudio(extension)){
+                        $('#title').text(name);
+                        $('#audio').attr('src', '../../controller/ctrCargaArchivo/cloud/'+video);
+                        if(extension == 'mp3')
+                            $('#audio').attr('type', 'audio/mpeg');
+                        else
+                            $('#audio').attr('type', 'audio/ogg');
+                        $('#modalAudio').modal('show');
+                    }
+                    else{
+                        $('#title').text(name);
+                        $('#video').attr('src', '../../controller/ctrCargaArchivo/tempUpload/'+video);
+                        $('#modalVideo').modal('show');
+                    }
                 }
             }
             else{
@@ -311,6 +322,12 @@ function reproducir(name, video){
             
         }
     });
+}
+
+function esAudio(extension){
+    if(extension == 'mp3' || extension == 'ogg')
+        return true;
+    return false;
 }
 
 function esImagen(extension){

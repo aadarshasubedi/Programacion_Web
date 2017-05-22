@@ -225,7 +225,7 @@
 				<h4 id="title" class="modal-title"></h4>
 			</div>
 			<div class="modal-body">
-				<audio controls>
+				<audio id="player" controls>
 				  <source id="audio" src="" type="" >
 					El navegador no soporta este tipo de audio
 				</audio>			

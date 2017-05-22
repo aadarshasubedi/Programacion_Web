@@ -303,10 +303,14 @@ function reproducir(name, video){
                     if(esAudio(extension)){
                         $('#title').text(name);
                         $('#audio').attr('src', '../../controller/ctrCargaArchivo/cloud/'+video);
-                        if(extension == 'mp3')
+                        if(extension == 'mp3'){
                             $('#audio').attr('type', 'audio/mpeg');
-                        else
+                            $('#player').load();
+                        }
+                        else{
                             $('#audio').attr('type', 'audio/ogg');
+                            $('#player').load();
+                        }
                         $('#modalAudio').modal('show');
                     }
                     else{

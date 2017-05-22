@@ -284,6 +284,9 @@ function cargarArchivo(){
 var $videoTemp = '';
 //Carga el video a carpeta tempUploar para simular descarga
 function reproducir(name, video){
+    var res = video.split(".");
+    var extension = res[1];
+
     $videoTemp = video;
     $.ajax({
         url: '../../controller/ctrCargaArchivo/ctrCargaArchivo.php',
@@ -291,15 +294,31 @@ function reproducir(name, video){
         data: {opcion:2, nombre:video},
         success: function(data) {
             if(data){
-                $('#title').text(name);
-                $('#video').attr('src', '../../controller/ctrCargaArchivo/tempUpload/'+video);
-                $('#modalVideo').modal('show');
-            } else {
-                swal("No es posible reproducir el video.", "", "warning");
+                if(esImagen(extension)){
+                    $('#title').text(name);
+                    $('#imagen').attr('src', '../../controller/ctrCargaArchivo/tempUpload/'+video);
+                    $('#modalImagen').modal('show');
+                }
+                else{
+                    $('#title').text(name);
+                    $('#video').attr('src', '../../controller/ctrCargaArchivo/tempUpload/'+video);
+                    $('#modalVideo').modal('show');
+                }
             }
+            else{
+                swal("No es posible cargar el archivo.", "", "warning");
+            }
+            
         }
     });
 }
+
+function esImagen(extension){
+    if(extension == 'png' || extension == 'jpg' || extension == 'jpeg' || extension == 'gif')
+        return true;
+    return false;
+}
+
 
 //elimina el video de la carpeta temporal una vez cerrado el modal
 $("#modalVideo").on('hidden.bs.modal', function () {

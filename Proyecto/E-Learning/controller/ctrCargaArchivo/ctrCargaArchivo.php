@@ -20,13 +20,13 @@
 		public function cargarArchivo(){
 
 			//tipo de formato de archivo que acepta
-			$permitidos = array("jpg","jpeg","gif","png","mp3","mp4", "wma");
+			$permitidos = array("jpg","jpeg","gif","png","mp3","mp4", "ogg");
 			$extension = pathinfo($_FILES['file']['name'] , PATHINFO_EXTENSION);
 
 			//pregunta por que tipo de archivo puede subir
 			if(    ($_FILES['file']['type'] == 'video/mp4') 
 				|| ($_FILES['file']['type'] == 'audio/mp3') 
-				|| ($_FILES['file']['type'] == 'audio/wma') 
+				|| ($_FILES['file']['type'] == 'audio/ogg') 
 				|| ($_FILES['file']['type'] == 'image/jpeg') 
 				|| ($_FILES['file']['type'] == 'image/jpg') 
 				|| ($_FILES['file']['type'] == 'image/gif') 
